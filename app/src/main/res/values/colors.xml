@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="redPlayer">#FF6A6A</color>
+    <color name="bluePlayer">#5A7FFF</color>
+    <color name="yourTurnHeader">#5E81FF</color>
+    <color name="yourTurnBox">#7694FF</color>
+    <color name="waitOppHeader">#88A2FF</color>
+    <color name="waitOppBox">#BBCAFF</color>
+    <color name="lightRedPlayer">#FF9C9C</color>
+
+    <color name="darkBg">#3C3B66</color>
+    <color name="darkBox">#4B5292</color>
 </resources>
