@@ -1,14 +1,13 @@
 package com.example.dotsboxes;
 
+//Create a player/user
 public class Player {
 
     private String name;
-    private int score;
     private String color;
 
-    public Player(String name, int score, String color){
+    public Player(String name, String color){
         this.name = name;
-        this.score = score;
         this.color = color;
     }
 
@@ -19,20 +18,12 @@ public class Player {
         this.name = name;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public void setColor(String color) {
         this.color = color;
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getScore() {
-        return score;
     }
 
     public String getColor() {
