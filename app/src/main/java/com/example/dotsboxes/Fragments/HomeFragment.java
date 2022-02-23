@@ -4,14 +4,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
-import com.example.dotsboxes.R;
+import com.example.dotsboxes.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
+    FragmentHomeBinding binding;
 
     public HomeFragment(){ }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        binding = FragmentHomeBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
+//        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }
