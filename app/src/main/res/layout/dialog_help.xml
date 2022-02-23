@@ -1,43 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:paddingLeft="16dp" android:paddingRight="16dp" >
-        <View
-            android:layout_width="40dp"
-            android:layout_height="60dp"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/ic_corner" />
+    <View
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:textColor="#ff000000"
+        android:background="@drawable/ic_corner" />
 
-        <ImageView
-            android:id="@+id/btn_close"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="6dp"
-            android:src="@drawable/ic_close" />
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="6dp"
+        android:src="@drawable/ic_close" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvHowTo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tvHowTo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/how_to"
-                android:textSize="24sp" />
+            android:layout_gravity="center_horizontal"
+            android:text="@string/how_to"
+            android:textSize="28sp"
+            android:paddingTop="40dp"
+            android:paddingBottom="38dp"/>
 
-            <TextView
-                android:id="@+id/txtDesc"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:paddingStart="24dp"
-                android:paddingEnd="24dp"
-                android:text="1. Take turns drawing lines between the dots." />
+        <TextView
+            android:id="@+id/tvRules"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:textSize="24sp"
+            android:layout_marginBottom="16dp"
+            android:text="Rules:" />
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tvRules1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:text="1. Take turns drawing lines between the dots.\n\n2. Capture a box by drawing its fourth wall."
+            />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,8 +58,6 @@
         android:gravity="center_horizontal"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="12dp">
-
-
     </LinearLayout>
 
 </RelativeLayout>

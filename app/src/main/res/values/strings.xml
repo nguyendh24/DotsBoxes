@@ -6,4 +6,6 @@
     <string name="new_user">We\'ve randomly chosen a name and image for you. You can change these at any time, here or under settings.</string>
     <string name="new_game">+ New Game</string>
     <string name="how_to">How to play</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
