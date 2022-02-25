@@ -1,47 +1,34 @@
 package com.example.dotsboxes.Components;
 
-import android.graphics.Color;
-import android.graphics.Paint;
+import com.example.dotsboxes.Player;
 
 import java.util.Objects;
 
 public class Line {
-    private float x1, y1, x2, y2;
-    private Direction dir;
-    private int playerIdx;
-    private int color;
 
-    public Line() {}
+    private static int defaultColor;
+
+    private final float x1, y1, x2, y2;
+    private boolean selected;
+    private int color;
 
     public Line(float x1, float y1, float x2, float y2) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
+        this.color = defaultColor;
+        selected = false;
     }
 
-    public Line(float x1, float y1, float x2, float y2, Direction dir) {
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
-        this.dir = dir;
+    public void selectLine(Player player) {
+        selected = true;
+        this.color = player.getColor();
     }
 
-    /** Setters */
-    public void setX1(float x1) { this.x1 = x1; }
-
-    public void setY1(float y1) { this.y1 = y1; }
-
-    public void setX2(float x2) { this.x2 = x2; }
-
-    public void setY2(float y2) { this.y2 = y2; }
-
-    public void setDir(Direction dir) { this.dir = dir; }
-
-    public void setPlayerIdx(int playerIdx) { this.playerIdx = playerIdx; }
-
-    public void setColor(int color) { this.color = color; }
+    public static void setDefaultColor(int defaultColor) {
+        Line.defaultColor = defaultColor;
+    }
 
     /** Getters */
     public float getX1() { return x1; }
@@ -52,11 +39,11 @@ public class Line {
 
     public float getY2() { return y2; }
 
-    public Direction getDir() { return dir; }
-
-    public int getPlayerIdx() { return playerIdx; }
-
     public int getColor() { return color; }
+
+    public boolean isSelected() {
+        return selected;
+    }
 
     @Override
     public boolean equals(Object o) {

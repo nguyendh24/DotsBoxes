@@ -1,22 +1,14 @@
 package com.example.dotsboxes.Components;
 
+import androidx.annotation.NonNull;
+
 import java.util.Objects;
 
 public class Dot {
-    private float x;
-    private float y;
-
-    public Dot() {}
+    private final float x;
+    private final float y;
 
     public Dot(float x, float y) { this.x = x; this.y = y; }
-
-    public void setCoordinates(float x, float y) { this.x = x; this.y = y; }
-
-    public void setX(float x) { this.x = x; }
-
-    public void setY(float y) {
-        this.y = y;
-    }
 
     public float getX() {
         return x;
@@ -40,6 +32,7 @@ public class Dot {
         return Objects.hash(x, y);
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Coordinates{" +

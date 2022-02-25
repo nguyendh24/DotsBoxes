@@ -10,6 +10,11 @@
 
     <color name="redPlayer">#FF6A6A</color>
     <color name="bluePlayer">#5A7FFF</color>
+    <color name="greenPlayer">#33A62F</color>
+    <color name="pinkPlayer">#FF7AA7</color>
+    <color name="purplePlayer">#8146EA</color>
+    <color name="orangePlayer">#FF774C</color>
+    <color name="yellowPlayer">#FFEB3B</color>
     <color name="yourTurnHeader">#5E81FF</color>
     <color name="yourTurnBox">#7694FF</color>
     <color name="waitOppHeader">#88A2FF</color>
