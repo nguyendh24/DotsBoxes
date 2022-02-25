@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
 import com.example.dotsboxes.Fragments.GameFragment;
 import com.example.dotsboxes.Fragments.HomeFragment;
 import com.example.dotsboxes.Fragments.SettingsFragment;
@@ -17,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     public static float deviceHeight;
     public static float deviceWidth;
-    public final static int PARTITIONS = 6; // Used for sizing grid
     private final static HomeFragment homeFragment = new HomeFragment();
     private final static GameFragment gameFragment = new GameFragment();
     private final static SettingsFragment settingsFragment = new SettingsFragment();
