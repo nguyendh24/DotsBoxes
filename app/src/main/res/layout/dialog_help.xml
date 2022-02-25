@@ -20,44 +20,49 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+
         <TextView
             android:id="@+id/tvHowTo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/how_to"
-            android:textSize="28sp"
-            android:paddingTop="40dp"
-            android:paddingBottom="38dp"/>
-
-        <TextView
-            android:id="@+id/tvRules"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
             android:textSize="24sp"
-            android:layout_marginBottom="16dp"
-            android:text="Rules:" />
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"/>
 
         <TextView
-            android:id="@+id/tvRules1"
+            android:id="@+id/ruleOne"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textSize="14sp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
-            android:text="1. Take turns drawing lines between the dots.\n\n2. Capture a box by drawing its fourth wall."
-            />
-    </LinearLayout>
+            android:textSize="17dp"
+            android:text="1. Take turns drawing lines between the dots." />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="12dp">
-    </LinearLayout>
+        <TextView
+            android:id="@+id/ruleTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:textSize="17dp"
+            android:text="2. Complete a box by drawing its fourth wall." />
 
+        <TextView
+            android:id="@+id/ruleThree"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:textSize="17dp"
+            android:text="3. You take another turn after completing a box." />
+    </LinearLayout>
 </RelativeLayout>

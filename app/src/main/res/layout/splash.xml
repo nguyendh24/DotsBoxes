@@ -6,21 +6,36 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/logo"
-        android:layout_width="385dp"
-        android:layout_height="337dp"
-        android:layout_marginTop="104dp"
+        android:id="@+id/blueCircle"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_marginTop="164dp"
         android:contentDescription="logo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/ic_circle"
+        app:tint="@color/bluePlayer" />
+
+    <ImageView
+        android:id="@+id/redCircle"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_marginTop="164dp"
+        android:contentDescription="logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.105"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_circle"
+        app:tint="@color/redPlayer" />
 
     <Button
         android:id="@+id/playButton"
         android:layout_width="103dp"
         android:layout_height="61dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginBottom="172dp"
         android:backgroundTint="@color/redPlayer"
         android:fontFamily="sans-serif-light"
         android:text="PLAY!"
