@@ -188,6 +188,9 @@ public class GameView extends View {
                             && xPos >= verticalLine.getX1() - LINE_OFFSET
                             && xPos <= verticalLine.getX2() + LINE_OFFSET;
                     if (lineTapped) {
+                        if (verticalLine.isSelected()) {
+                            return false;
+                        }
                         verticalLine.selectLine(gameState.getCurrentPlayer());
                         if (j > 0) {
                             squares[i][j-1].addSide(gameState.getCurrentPlayer());
@@ -205,6 +208,9 @@ public class GameView extends View {
                             && yPos >= horizontalLine.getY1() - LINE_OFFSET
                             && yPos <= horizontalLine.getY2() + LINE_OFFSET;
                     if (lineTapped) {
+                        if (horizontalLine.isSelected()) {
+                            return false;
+                        }
                         horizontalLine.selectLine(gameState.getCurrentPlayer());
                         if (i > 0) {
                             squares[i-1][j].addSide(gameState.getCurrentPlayer());
