@@ -5,10 +5,29 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/tvHomePlaceHolder"
+        android:id="@+id/playerName"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home" />
+        android:text="PlayerName"
+        android:textSize="25dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="339dp"
+        android:layout_height="500dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="65dp"/>
+
+    <Button
+        android:id="@+id/homeStartGame"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="+ Start a New Game"
+        android:textSize="20dp"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/redPlayer"
+        android:layout_marginTop="600dp"/>
+
 </FrameLayout>
