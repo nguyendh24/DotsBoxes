@@ -23,4 +23,6 @@
 
     <color name="darkBg">#3C3B66</color>
     <color name="darkBox">#4B5292</color>
+    <color name="finalDarkBg">#222577</color>
+    <color name="darkGround">#131660</color>
 </resources>

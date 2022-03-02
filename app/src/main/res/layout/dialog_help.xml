@@ -27,42 +27,112 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="@string/how_to"
-            android:textSize="24sp"
             android:paddingTop="24dp"
-            android:paddingBottom="24dp"/>
+            android:paddingBottom="24dp"
+
+            android:text="How to Play"
+            android:fontFamily="@font/abel"
+            android:textSize="30sp"
+            android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/ruleOne"
+            android:id="@+id/tvRules"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:paddingLeft="24dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+
+            android:text="Rules:"
+            android:fontFamily="@font/abel"
+            android:textSize="25sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvRuleOne"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
+            android:gravity="left"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
-            android:textSize="17dp"
-            android:text="1. Take turns drawing lines between the dots." />
+            android:paddingBottom="10dp"
+
+            android:text="1. Take turns drawing lines between the dots."
+            android:fontFamily="@font/abel"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/ruleTwo"
+            android:id="@+id/tvRuleTwo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
+            android:gravity="left"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
-            android:textSize="17dp"
-            android:text="2. Complete a box by drawing its fourth wall." />
+            android:paddingBottom="10dp"
+
+            android:text="2. Complete a box by drawing its fourth wall."
+            android:fontFamily="@font/abel"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:id="@+id/ivHelpBoxes"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_help_box_light" />
 
         <TextView
-            android:id="@+id/ruleThree"
+            android:id="@+id/tvRuleThree"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
+            android:gravity="left"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
-            android:textSize="17dp"
-            android:text="3. You take another turn after completing a box." />
+            android:paddingBottom="10dp"
+
+            android:text="3. You take another turn after completing a box."
+            android:fontFamily="@font/abel"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="25dp"
+
+            android:text="Goal:"
+            android:fontFamily="@font/abel"
+            android:textSize="25dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvGoalText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+
+            android:text="Player with most boxes at the end of the game wins."
+            android:fontFamily="@font/abel"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
+
     </LinearLayout>
 </RelativeLayout>

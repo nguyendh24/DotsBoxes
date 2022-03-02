@@ -6,11 +6,26 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/thirdCircle"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_marginTop="72dp"
+        android:alpha="0.7"
+        android:contentDescription="logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_circle"
+        app:tint="@color/purplePlayer" />
+
+    <ImageView
         android:id="@+id/blueCircle"
         android:layout_width="260dp"
         android:layout_height="260dp"
         android:layout_marginTop="164dp"
         android:contentDescription="logo"
+        android:alpha="0.7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.894"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +39,7 @@
         android:layout_height="260dp"
         android:layout_marginTop="164dp"
         android:contentDescription="logo"
+        android:alpha="0.8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
