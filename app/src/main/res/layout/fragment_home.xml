@@ -21,7 +21,7 @@
         android:layout_marginTop="65dp"/>
 
     <Button
-        android:id="@+id/homeStartGame"
+        android:id="@+id/btnStartGame"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:text="+ Start a New Game"
