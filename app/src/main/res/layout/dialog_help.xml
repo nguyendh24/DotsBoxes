@@ -7,7 +7,7 @@
         android:layout_width="40dp"
         android:layout_height="60dp"
         android:layout_alignParentEnd="true"
-        android:textColor="white"
+        android:textColor="@color/white"
         android:background="@drawable/ic_corner" />
 
     <ImageView
