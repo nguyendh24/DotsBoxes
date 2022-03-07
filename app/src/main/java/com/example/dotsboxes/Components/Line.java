@@ -2,13 +2,16 @@ package com.example.dotsboxes.Components;
 
 import com.example.dotsboxes.Player;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Line {
 
     private static int defaultColor;
 
     private final float x1, y1, x2, y2;
+    private final Set<Square> adjacentSquares;
     private boolean selected;
     private int color;
 
@@ -18,12 +21,16 @@ public class Line {
         this.x2 = x2;
         this.y2 = y2;
         this.color = defaultColor;
+        adjacentSquares = new HashSet<>();
         selected = false;
     }
 
     public void selectLine(Player player) {
         selected = true;
         this.color = player.getColor();
+        for (Square square : adjacentSquares) {
+            square.addSide(player);
+        }
     }
 
     public static void setDefaultColor(int defaultColor) {
@@ -43,6 +50,10 @@ public class Line {
 
     public boolean isSelected() {
         return selected;
+    }
+
+    public void addAdjacentSquare(Square square) {
+        adjacentSquares.add(square);
     }
 
     @Override

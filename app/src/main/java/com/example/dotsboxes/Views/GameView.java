@@ -162,7 +162,7 @@ public class GameView extends View {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN && gameState.isAllowClick()) {
             double xPos = event.getX();
             double yPos = event.getY();
             if (findTappedLine(xPos, yPos)) {
@@ -177,7 +177,6 @@ public class GameView extends View {
 
         Line[][] horizontalLines = gameState.getHorizontalLines();
         Line[][] verticalLines = gameState.getVerticalLines();
-        Square[][] squares = gameState.getSquares();
 
         for (int i = 0 ; i <= BOARD_HEIGHT ; i++) {
             for (int j = 0 ; j <= BOARD_WIDTH ; j++) {
@@ -192,12 +191,6 @@ public class GameView extends View {
                             return false;
                         }
                         verticalLine.selectLine(gameState.getCurrentPlayer());
-                        if (j > 0) {
-                            squares[i][j-1].addSide(gameState.getCurrentPlayer());
-                        }
-                        if (j < BOARD_WIDTH) {
-                            squares[i][j].addSide(gameState.getCurrentPlayer());
-                        }
                         return true;
                     }
                 }
@@ -212,12 +205,6 @@ public class GameView extends View {
                             return false;
                         }
                         horizontalLine.selectLine(gameState.getCurrentPlayer());
-                        if (i > 0) {
-                            squares[i-1][j].addSide(gameState.getCurrentPlayer());
-                        }
-                        if (i < BOARD_HEIGHT) {
-                            squares[i][j].addSide(gameState.getCurrentPlayer());
-                        }
                         return true;
                     }
                 }
@@ -231,7 +218,7 @@ public class GameView extends View {
                                TextView p1Name,
                                TextView p2Name,
                                TextView statusDisplay) {
-        gameState.setUpTextViews(p1Score, p2Score, p1Name, p2Name, statusDisplay);
+        gameState.setUpTextViews(this, p1Score, p2Score, p1Name, p2Name, statusDisplay);
     }
 
     public void setPlayComputer(boolean playComputer) {
