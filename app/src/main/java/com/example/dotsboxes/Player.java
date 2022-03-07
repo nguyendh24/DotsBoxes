@@ -3,7 +3,7 @@ package com.example.dotsboxes;
 //Create a player/user
 public class Player {
 
-    private final String name;
+    private String name;
     private final int color;
     private int score;
     private boolean goAgain;
@@ -26,6 +26,10 @@ public class Player {
 
     public void resetGoAgain() {
         goAgain = false;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {

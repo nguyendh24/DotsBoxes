@@ -233,4 +233,8 @@ public class GameView extends View {
                                TextView statusDisplay) {
         gameState.setUpTextViews(p1Score, p2Score, p1Name, p2Name, statusDisplay);
     }
+
+    public void setPlayComputer(boolean playComputer) {
+        gameState.setPlayComputer(playComputer);
+    }
 }

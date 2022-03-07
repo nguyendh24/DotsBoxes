@@ -24,6 +24,7 @@ public class GameState {
     private final Line[][] verticalLines;
     private final Square[][] squares;
     private int turn;
+    private boolean playComputer;
 
     public GameState(Player[] players, int boardWidth, int boardHeight) {
         this.players = players;
@@ -149,5 +150,12 @@ public class GameState {
             }
         }
         return "Game is a tie!";
+    }
+
+    public void setPlayComputer(boolean playComputer) {
+        this.playComputer = playComputer;
+        if (playComputer) {
+            players[1].setName("Computer");
+        }
     }
 }
