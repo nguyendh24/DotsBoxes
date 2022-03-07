@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -85,10 +86,6 @@ public class GameView extends View {
         }
 
         gameState = new GameState(players, BOARD_WIDTH, BOARD_HEIGHT);
-    }
-
-    private void setLineColor(int color) {
-        paint.setColor(color);
     }
 
     /** 5x5 Grid, 25 dots, 40 edges, 16 boxes */
@@ -213,15 +210,29 @@ public class GameView extends View {
         return false;
     }
 
-    public void setUpTextViews(TextView p1Score,
-                               TextView p2Score,
-                               TextView p1Name,
-                               TextView p2Name,
-                               TextView statusDisplay) {
-        gameState.setUpTextViews(this, p1Score, p2Score, p1Name, p2Name, statusDisplay);
+    public void setUpReferences(TextView p1Score,
+                                TextView p2Score,
+                                TextView p1Name,
+                                TextView p2Name,
+                                TextView statusDisplay,
+                                Button btnPlayAgain) {
+        gameState.setUpReferences(
+                this,
+                p1Score,
+                p2Score,
+                p1Name,
+                p2Name,
+                statusDisplay,
+                btnPlayAgain
+        );
     }
 
     public void setPlayComputer(boolean playComputer) {
         gameState.setPlayComputer(playComputer);
+    }
+
+    public void resetGame() {
+        gameState.resetGame();
+        this.postInvalidate();
     }
 }

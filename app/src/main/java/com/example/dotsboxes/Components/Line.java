@@ -75,4 +75,9 @@ public class Line {
     public int hashCode() {
         return Objects.hash(x1, y1, x2, y2);
     }
+
+    public void reset() {
+        selected = false;
+        color = defaultColor;
+    }
 }

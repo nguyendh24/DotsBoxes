@@ -8,4 +8,5 @@
     <string name="how_to">How to play</string>
     <string name="play_person">Play another person</string>
     <string name="play_computer">Play the computer</string>
+    <string name="play_again">Play again</string>
 </resources>

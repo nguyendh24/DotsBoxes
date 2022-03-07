@@ -3,6 +3,8 @@ package com.example.dotsboxes;
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.dotsboxes.Components.Dot;
@@ -24,6 +26,7 @@ public class GameState {
     private TextView statusDisplay;
     private TextView p1Score;
     private TextView p2Score;
+    private Button btnPlayAgain;
 
     private final int numPlayers;
     private final int boardWidth;
@@ -119,10 +122,11 @@ public class GameState {
         }
         if (statusDisplay != null && gameOver()) {
             statusDisplay.setText(getResultsString());
+            btnPlayAgain.setVisibility(View.VISIBLE);
         } else if (statusDisplay != null) {
             statusDisplay.setText(players[turn].getName() + "'s Turn");
         }
-        if (playComputer && turn == COMPUTER_PLAYER) {
+        if (playComputer && turn == COMPUTER_PLAYER && !gameOver()) {
             computerTurn();
         }
     }
@@ -178,17 +182,19 @@ public class GameState {
     }
 
     @SuppressLint("SetTextI18n")
-    public void setUpTextViews(GameView view,
-                               TextView p1Score,
-                               TextView p2Score,
-                               TextView p1Name,
-                               TextView p2Name,
-                               TextView statusDisplay) {
+    public void setUpReferences(GameView view,
+                                TextView p1Score,
+                                TextView p2Score,
+                                TextView p1Name,
+                                TextView p2Name,
+                                TextView statusDisplay,
+                                Button btnPlayAgain) {
         this.view = view;
         statusDisplay.setText(players[0].getName() + "'s Turn");
         this.statusDisplay = statusDisplay;
         this.p1Score = p1Score;
         this.p2Score = p2Score;
+        this.btnPlayAgain = btnPlayAgain;
         p1Name.setText(players[0].getName());
         p1Name.setTextColor(players[0].getColor());
         p2Name.setText(players[1].getName());
@@ -238,5 +244,34 @@ public class GameState {
 
     public boolean isAllowClick() {
         return allowClick;
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void resetGame() {
+        turn = 0;
+        allowClick = true;
+        for (Player player : players) {
+            player.resetGoAgain();
+            player.resetScore();
+        }
+        for (Square[] row : squares) {
+            for (Square square : row) {
+                square.reset();
+            }
+        }
+        for (Line[] row : horizontalLines) {
+            for (Line line : row) {
+                line.reset();
+            }
+        }
+        for (Line[] row : verticalLines) {
+            for (Line line : row) {
+                line.reset();
+            }
+        }
+        p1Score.setText(Integer.toString(players[0].getScore()));
+        p2Score.setText(Integer.toString(players[1].getScore()));
+        statusDisplay.setText(players[turn].getName() + "'s Turn");
+        btnPlayAgain.setVisibility(View.INVISIBLE);
     }
 }
