@@ -67,4 +67,10 @@ public class Square {
     public int hashCode() {
         return Objects.hash(x, y);
     }
+
+    public void reset() {
+        sides = 0;
+        filled = false;
+        color = defaultColor;
+    }
 }

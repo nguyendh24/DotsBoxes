@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.setReorderingAllowed(true);
             // Replace whatever is in the fragment_container view with this fragment
-            transaction.replace(R.id.frame_layout, new GameFragment(), null);
+            transaction.replace(R.id.frame_layout, new GameTypeFragment(), null);
             // Commit the transaction
             transaction.commit();
         });
