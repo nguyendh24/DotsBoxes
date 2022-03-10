@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.Home) { replaceFragment(homeFragment); }
-            else if (item.getItemId() == R.id.Help) { replaceFragment(gameFragment); } // showHelpDialog(); goes here
+            else if (item.getItemId() == R.id.Help) { showHelpDialog(); } //  goes here
             else { replaceFragment(settingsFragment); }
 
             return true;
