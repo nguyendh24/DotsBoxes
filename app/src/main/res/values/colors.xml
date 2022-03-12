@@ -25,4 +25,6 @@
     <color name="darkBox">#4B5292</color>
     <color name="finalDarkBg">#222577</color>
     <color name="darkGround">#131660</color>
+    <color name="iconNight">#FFFFFF</color>
+    <color name="textNight">#FFFFFF</color>
 </resources>
