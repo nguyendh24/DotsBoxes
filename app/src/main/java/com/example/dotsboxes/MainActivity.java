@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         dialog.show();
         dialog.getWindow().setAttributes(lp);
-        ImageView btnClose = dialog.findViewById(R.id.btn_close);
+        ImageView btnClose = dialog.findViewById(R.id.close_corner);
         btnClose.setOnClickListener(view -> dialog.dismiss());
     }
 

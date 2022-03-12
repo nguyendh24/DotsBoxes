@@ -20,12 +20,12 @@ import com.example.dotsboxes.R;
 
 public class GameView extends View {
 
-    private static final int UNFILLED_SQUARE_COLOR = Color.WHITE;
-    private static final int UNFILLED_SQUARE_OPACITY = 255;
+    private static final int UNFILLED_SQUARE_COLOR = Color.TRANSPARENT;
+    private static final int UNFILLED_SQUARE_OPACITY = 0;
     private static final int FILLED_SQUARE_OPACITY = 100;
 
-    private static final int DOT_COLOR = Color.BLACK;
-    private static final int DOT_OPACITY = 200;
+    private static final int DOT_COLOR = Color.WHITE;
+    private static final int DOT_OPACITY = 255;
     private static final int DOT_RADIUS = 20;
 
     private static final int UNSELECTED_LINE_COLOR = Color.BLACK;
@@ -147,7 +147,6 @@ public class GameView extends View {
     private void drawDots(Canvas canvas) {
         paint.setColor(DOT_COLOR);
         paint.setAlpha(DOT_OPACITY);
-        paint.setShadowLayer(10, 4, 4, Color.GRAY);
         for (Dot[] row : gameState.getDots()) {
             for (Dot dot : row) {
                 canvas.drawCircle(dot.getX(), dot.getY(), DOT_RADIUS, paint);
