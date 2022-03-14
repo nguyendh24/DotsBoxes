@@ -24,14 +24,13 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/ivP1BG"
+            android:id="@+id/cvP1"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="48dp"
             android:layout_marginBottom="3dp"
-            android:backgroundTint="@color/redPlayer"
             app:cardCornerRadius="50dp"
             app:layout_constraintBottom_toTopOf="@+id/tvP1Name"
             app:layout_constraintEnd_toStartOf="@+id/tvP1Score"
@@ -48,14 +47,13 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/ivP2BG"
+            android:id="@+id/cvP2"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="48dp"
             android:layout_marginBottom="3dp"
-            android:backgroundTint="@color/bluePlayer"
             app:cardCornerRadius="50dp"
             app:layout_constraintBottom_toTopOf="@+id/tvP2Name"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +79,7 @@
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toStartOf="@+id/tvHyphen"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/ivP1BG"
+            app:layout_constraintStart_toEndOf="@+id/cvP1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -92,7 +90,7 @@
             android:layout_marginBottom="61dp"
             android:text="0"
             app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintEnd_toStartOf="@+id/ivP2BG"
+            app:layout_constraintEnd_toStartOf="@+id/cvP2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tvHyphen"
             app:layout_constraintTop_toTopOf="parent" />
@@ -118,10 +116,10 @@
             android:layout_marginBottom="24dp"
             android:text="TextView"
             app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintEnd_toEndOf="@+id/ivP1BG"
+            app:layout_constraintEnd_toEndOf="@+id/cvP1"
             app:layout_constraintHorizontal_bias="0.636"
-            app:layout_constraintStart_toStartOf="@+id/ivP1BG"
-            app:layout_constraintTop_toBottomOf="@+id/ivP1BG" />
+            app:layout_constraintStart_toStartOf="@+id/cvP1"
+            app:layout_constraintTop_toBottomOf="@+id/cvP1" />
 
         <TextView
             android:id="@+id/tvP2Name"
@@ -131,10 +129,10 @@
             android:layout_marginBottom="24dp"
             android:text="TextView2"
             app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintEnd_toEndOf="@+id/ivP2BG"
+            app:layout_constraintEnd_toEndOf="@+id/cvP2"
             app:layout_constraintHorizontal_bias="0.636"
-            app:layout_constraintStart_toStartOf="@+id/ivP2BG"
-            app:layout_constraintTop_toBottomOf="@+id/ivP2BG" />
+            app:layout_constraintStart_toStartOf="@+id/cvP2"
+            app:layout_constraintTop_toBottomOf="@+id/cvP2" />
 
         <TextView
             android:id="@+id/tvCurrentTurn"

@@ -1,15 +1,21 @@
 package com.example.dotsboxes;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
+import com.example.dotsboxes.Fragments.HomeFragment;
+import com.example.dotsboxes.Fragments.SettingsFragment;
 import com.example.dotsboxes.Views.GameView;
 
 import java.util.ArrayList;
@@ -164,7 +170,6 @@ public class GameState {
         return players[turn];
     }
 
-
     public Dot[][] getDots() {
         return dots;
     }
@@ -195,10 +200,24 @@ public class GameState {
         this.p1Score = p1Score;
         this.p2Score = p2Score;
         this.btnPlayAgain = btnPlayAgain;
-        p1Name.setText(players[0].getName());
-        p1Name.setTextColor(players[0].getColor());
-        p2Name.setText(players[1].getName());
-        p2Name.setTextColor(players[1].getColor());
+        p1Name.setText(HomeFragment.getTvPlayerName());
+        p2Name.setText(HomeFragment.getTvPlayerName() + "'s Friend");
+        setTvPlayerNames(p1Name, p2Name);
+    }
+
+    private void setTvPlayerNames(TextView p1Name, TextView p2Name) {
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        String playerColor = sharedPreferences.getString("playerColor", "");
+        if (playerColor.equals("RB")) {
+            p1Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , R.color.redPlayer));
+            p2Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , R.color.bluePlayer));
+        } else if (playerColor.equals("PG")) {
+            p1Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , R.color.purplePlayer));
+            p2Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , R.color.greenPlayer));
+        } else {
+            p1Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , R.color.pinkPlayer));
+            p2Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , R.color.yellowPlayer));
+        }
     }
 
     private boolean gameOver() {

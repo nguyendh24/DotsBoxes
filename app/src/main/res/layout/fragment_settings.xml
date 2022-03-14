@@ -68,7 +68,6 @@
                     android:background="@drawable/btn_selector"
                     android:button="@null"
                     android:buttonTint="@color/white"
-                    android:checked="true"
                     android:gravity="center"
                     android:text="4 x 4"
                     android:textColor="@color/white" />
@@ -143,7 +142,6 @@
                     android:layout_weight="33"
                     android:background="@drawable/btn_selector"
                     android:button="@null"
-                    android:checked="true"
                     android:drawableStart="@drawable/ic_circle"
                     android:gravity="center"
                     android:paddingLeft="30dp" />
@@ -181,14 +179,14 @@
             android:layout_height="wrap_content"
             android:text="@string/player_color"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/radioPlayerColor"
+            app:layout_constraintBottom_toTopOf="@+id/playerColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vertices" />
 
         <LinearLayout
-            android:id="@+id/radioPlayerColor"
+            android:id="@+id/playerColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="25dp"
@@ -202,24 +200,20 @@
             app:layout_constraintTop_toBottomOf="@+id/tvPlayerColor">
 
             <RadioGroup
-                android:id="@+id/rbColorRB"
+                android:id="@+id/radioPlayerColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation='horizontal'>
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/rbColorRB"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_margin="10dp"
                     android:layout_weight="33"
                     android:background="@drawable/btn_color_rb_selector"
-                    android:button="@null"
-                    android:checked="true">
-
-                </RadioButton>
-
+                    android:button="@null" />
 
                 <RadioButton
                     android:id="@+id/rbColorPY"

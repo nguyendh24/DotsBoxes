@@ -1,9 +1,14 @@
 package com.example.dotsboxes.Views;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,10 +16,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
+import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.Player;
 import com.example.dotsboxes.R;
 
@@ -27,6 +36,7 @@ public class GameView extends View {
     private static final int DOT_COLOR = Color.WHITE;
     private static final int DOT_OPACITY = 255;
     private static final int DOT_RADIUS = 20;
+    private static final int BITMAP_WIDTH = 30;
 
     private static final int UNSELECTED_LINE_COLOR = Color.BLACK;
     private static final int UNSELECTED_LINE_OPACITY = 50;
@@ -81,14 +91,28 @@ public class GameView extends View {
                 getResources().getColor(R.color.pinkPlayer)
         };
 
-        for (int i = 0 ; i < NUM_PLAYERS ; i++) {
-            players[i] = new Player("Player " + (i + 1), colors[i % (colors.length - 1)]);
+        /** Temporarily replacing commented out code below to update line colors according settings (since only 2 player implemented) */
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        String playerColor = sharedPreferences.getString("playerColor", "");
+        if (playerColor.equals("RB")) {
+            players[0] = new Player("Player " + 1, getResources().getColor(R.color.redPlayer));
+            players[1] = new Player("Player " + 1, getResources().getColor(R.color.bluePlayer));
+        } else if (playerColor.equals("PG")) {
+            players[0] = new Player("Player " + 1, getResources().getColor(R.color.purplePlayer));
+            players[1] = new Player("Player " + 1, getResources().getColor(R.color.greenPlayer));
+        } else {
+            players[0] = new Player("Player " + 1, getResources().getColor(R.color.pinkPlayer));
+            players[1] = new Player("Player " + 1, getResources().getColor(R.color.yellowPlayer));
         }
+        /*******************************************************************************************/
+//        for (int i = 0 ; i < NUM_PLAYERS ; i++) {
+//            players[i] = new Player("Player " + (i + 1), colors[i % (colors.length - 1)]);
+//        }
 
         gameState = new GameState(players, BOARD_WIDTH, BOARD_HEIGHT);
     }
 
-    /** 5x5 Grid, 25 dots, 40 edges, 16 boxes */
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -147,12 +171,35 @@ public class GameView extends View {
     private void drawDots(Canvas canvas) {
         paint.setColor(DOT_COLOR);
         paint.setAlpha(DOT_OPACITY);
+
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        String vertex = sharedPreferences.getString("vertex", "");
+        Bitmap triangle = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_triangle);
+        Bitmap star = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_star);
+
         for (Dot[] row : gameState.getDots()) {
             for (Dot dot : row) {
-                canvas.drawCircle(dot.getX(), dot.getY(), DOT_RADIUS, paint);
+                if (vertex.equals("dot")) {
+                    canvas.drawCircle(dot.getX(), dot.getY(), DOT_RADIUS, paint);
+                } else if (vertex.equals("triangle")) {
+                    canvas.drawBitmap(triangle, dot.getX() - BITMAP_WIDTH, dot.getY() - BITMAP_WIDTH, paint);
+                } else {
+                    canvas.drawBitmap(star, dot.getX() - BITMAP_WIDTH, dot.getY() - BITMAP_WIDTH, paint);
+                }
             }
         }
         paint.clearShadowLayer();
+    }
+
+    private Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, BITMAP_WIDTH * 2, BITMAP_WIDTH * 2, true);
+        Canvas canvas = new Canvas(resizedBitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        bitmap.recycle(); // to avoid memory leaks
+        return resizedBitmap;
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -234,4 +281,5 @@ public class GameView extends View {
         gameState.resetGame();
         this.postInvalidate();
     }
+
 }
