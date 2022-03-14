@@ -6,4 +6,11 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/abel</item>
     </style>
+    <style name="Widget.App.ButtonStyle"
+        parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/ButtonThemeOverlay</item>
+    </style>
+    <style name="ButtonThemeOverlay">
+        <item name="colorPrimary">@color/btnCustom</item>
+    </style>
 </resources>

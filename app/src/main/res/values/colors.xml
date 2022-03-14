@@ -27,4 +27,6 @@
     <color name="darkGround">#131660</color>
     <color name="iconNight">#FFFFFF</color>
     <color name="textNight">#FFFFFF</color>
+    <color name="btnCustom">#614CDF</color>
+    <color name="settingsBtnBg">#2A26A6</color>
 </resources>
