@@ -96,13 +96,13 @@ public class GameView extends View {
         String playerColor = sharedPreferences.getString("playerColor", "");
         if (playerColor.equals("RB")) {
             players[0] = new Player("Player " + 1, getResources().getColor(R.color.redPlayer));
-            players[1] = new Player("Player " + 1, getResources().getColor(R.color.bluePlayer));
+            players[1] = new Player("Player " + 2, getResources().getColor(R.color.bluePlayer));
         } else if (playerColor.equals("PG")) {
             players[0] = new Player("Player " + 1, getResources().getColor(R.color.purplePlayer));
-            players[1] = new Player("Player " + 1, getResources().getColor(R.color.greenPlayer));
+            players[1] = new Player("Player " + 2, getResources().getColor(R.color.greenPlayer));
         } else {
             players[0] = new Player("Player " + 1, getResources().getColor(R.color.pinkPlayer));
-            players[1] = new Player("Player " + 1, getResources().getColor(R.color.yellowPlayer));
+            players[1] = new Player("Player " + 2, getResources().getColor(R.color.yellowPlayer));
         }
         /*******************************************************************************************/
 //        for (int i = 0 ; i < NUM_PLAYERS ; i++) {
