@@ -29,7 +29,7 @@
         android:text="+ Start a New Game"
         android:textSize="20sp"
         android:layout_gravity="center_horizontal"
-        android:backgroundTint="@color/redPlayer"
+        android:backgroundTint="@color/darkBox"
         android:layout_marginTop="600dp"/>
 
 </FrameLayout>
