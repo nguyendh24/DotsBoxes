@@ -4,10 +4,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.widget.RadioButton;
 
 import com.example.dotsboxes.Fragments.GameFragment;
 import com.example.dotsboxes.Fragments.HomeFragment;
@@ -15,27 +18,48 @@ import com.example.dotsboxes.Fragments.SettingsFragment;
 import com.example.dotsboxes.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    ActivityMainBinding binding;
+    private ActivityMainBinding binding;
     public static float deviceHeight;
     public static float deviceWidth;
-    private final static HomeFragment homeFragment = new HomeFragment();
-    private final static GameFragment gameFragment = new GameFragment();
-    private final static SettingsFragment settingsFragment = new SettingsFragment();
+    private static boolean isFirstTime;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    private final HomeFragment homeFragment = new HomeFragment();
+    private final SettingsFragment settingsFragment = new SettingsFragment();
+
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MainActivity.context = getApplicationContext();
         hideActionBar();
         setDeviceDimensions();
+        fetchStoredData();
         setBinding();
 
-        replaceFragment(homeFragment);
+        if (isFirstTime) {
+            startActivity(new Intent(this, Onboard.class));
+            editor.putInt("boardSize", 4);
+            editor.putString("vertex", "dot");
+            editor.putString("playerColor", "RB");
+            editor.putBoolean("isFirstTime", false);
+            editor.commit();
+        } else {
+            /** DELETE LATER, JUST SO NO ONE HAS TO WIPE DATA ON EMULATOR */
+            editor.putInt("boardSize", 4);
+            editor.putString("vertex", "dot");
+            editor.putString("playerColor", "RB");
+            editor.putBoolean("isFirstTime", false);
+            editor.putString("playerName", "User");
+            editor.commit();
+        }
 
+        replaceFragment(homeFragment);
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.Home) { replaceFragment(homeFragment); }
             else if (item.getItemId() == R.id.Help) { showHelpDialog(); } //  goes here
             else { replaceFragment(settingsFragment); }
-
             return true;
         });
     }
@@ -55,15 +79,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void showHelpDialog() {
         Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_help);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        dialog.setContentView(R.layout.dialog_help);
         lp.copyFrom(dialog.getWindow().getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        dialog.show();
-        dialog.getWindow().setAttributes(lp);
-        ImageView btnClose = dialog.findViewById(R.id.close_corner);
-        btnClose.setOnClickListener(view -> dialog.dismiss());
+        dialog.show(); dialog.getWindow().setAttributes(lp);
+        dialog.findViewById(R.id.close_corner).setOnClickListener(view -> dialog.dismiss());
     }
 
     private void setDeviceDimensions() {
@@ -76,5 +98,14 @@ public class MainActivity extends AppCompatActivity {
     private void hideActionBar() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
+
+    private void fetchStoredData() {
+        sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
+    }
+
+    public static Context getContext() { return MainActivity.context; }
+
 
 }
