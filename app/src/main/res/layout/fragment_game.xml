@@ -43,7 +43,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_p_icon_baby" />
+                android:src="@drawable/ic_baby" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -66,7 +66,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_p_icon_boy_with_bangs" />
+                android:src="@drawable/ic_boy_with_bangs" />
         </androidx.cardview.widget.CardView>
 
         <TextView
