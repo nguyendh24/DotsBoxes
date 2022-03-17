@@ -211,6 +211,39 @@
         android:src="@drawable/ic_star_background" />
 
     <ImageView
+        android:id="@+id/star22"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="680dp"
+        android:layout_marginLeft="300dp"
+        android:src="@drawable/ic_star_background" />
+
+    <ImageView
+        android:id="@+id/star23"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="650dp"
+        android:layout_marginLeft="200dp"
+        android:src="@drawable/ic_star_background" />
+
+    <ImageView
+        android:id="@+id/star24"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="680dp"
+        android:layout_marginLeft="80dp"
+        android:src="@drawable/ic_star_background" />
+
+    <ImageView
+        android:id="@+id/star25"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginLeft="200dp"
+        android:src="@drawable/ic_star_background" />
+
+    <!--
+    <ImageView
         android:id="@+id/circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -222,9 +255,9 @@
         android:id="@+id/person"
         android:layout_width="38dp"
         android:layout_height="47dp"
-        android:layout_marginLeft="200dp"
+        android:layout_marginLeft="185dp"
         android:layout_marginTop="535dp"
         android:src="@drawable/ic_person_splash"
         app:tint="@color/darkGround" />
-
+    -->
 </RelativeLayout>
