@@ -31,6 +31,9 @@ public class SettingsFragment extends Fragment {
     private RadioButton rbDot;
     private RadioButton rbTriangle;
     private RadioButton rbStar;
+//    private RadioButton rbCloud;
+//    private RadioButton rbMoon;
+//    private RadioButton rbSun;
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -53,6 +56,9 @@ public class SettingsFragment extends Fragment {
             if (btnID == R.id.rbDot) { editor.putString("vertex", "dot"); }
             else if (btnID == R.id.rbTriangle) { editor.putString("vertex", "triangle"); }
             else { editor.putString("vertex", "star"); }
+//            else if (btnID == R.id.rbCloud) { editor.putString("vertex", "cloud"); }
+//            else if (btnID == R.id.rbMoon) { editor.putString("vertex", "moon"); }
+//            else (btnID == R.id.rbSun) { editor.putString("vertex", "sun"); }
             editor.apply();
         });
 
@@ -82,11 +88,17 @@ public class SettingsFragment extends Fragment {
         rbDot = settingsView.findViewById(R.id.rbDot);
         rbTriangle = settingsView.findViewById(R.id.rbTriangle);
         rbStar = settingsView.findViewById(R.id.rbStar);
+//        rbCloud = settingsView.findViewById(R.id.rbCloud);
+//        rbMoon = settingsView.findViewById(R.id.rbMoon);
+//        rbSun = settingsView.findViewById(R.id.rbSun);
 
         String vertex = sharedPreferences.getString("vertex", "");
         if (vertex.equals("dot")) { rbDot.setChecked(true); }
         else if (vertex.equals("triangle")) { rbTriangle.setChecked(true); }
         else { rbStar.setChecked(true); }
+//        else if (vertex.equals("cloud")) { rbCloud.setChecked(true); }
+//        else if (vertex.equals("moon")) { rbMoon.setChecked(true); }
+//        else (vertex.equals("sun")) { rbSun.setChecked(true); }
     }
 
     private void setRadioPlayerColor(View settingsView) {
