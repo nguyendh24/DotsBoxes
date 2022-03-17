@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="150dp"
         android:text="@string/dots_boxes"
         android:fontFamily="@font/sawarabi_mincho"
         android:textSize="50dp" />
@@ -203,12 +203,28 @@
         android:src="@drawable/ic_star_background" />
 
     <ImageView
+        android:id="@+id/star21"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="580dp"
+        android:layout_marginLeft="400dp"
+        android:src="@drawable/ic_star_background" />
+
+    <ImageView
         android:id="@+id/circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="550dp"
+        android:layout_marginTop="570dp"
         android:src="@drawable/ic_half_circle"
         app:tint="@color/darkGround" />
 
+    <ImageView
+        android:id="@+id/person"
+        android:layout_width="38dp"
+        android:layout_height="47dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="535dp"
+        android:src="@drawable/ic_person_splash"
+        app:tint="@color/darkGround" />
 
 </RelativeLayout>
