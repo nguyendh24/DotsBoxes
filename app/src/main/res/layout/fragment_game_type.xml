@@ -18,17 +18,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.365" />
+        app:layout_constraintVertical_bias="0.24" />
 
     <Button
         android:id="@+id/btnPlayComputer"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginBottom="256dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="228dp"
+        android:background="@drawable/btn_rounded_corners"
         android:drawableLeft="@drawable/ic_computer"
         android:text="@string/play_computer"
         android:textSize="20sp"
-        android:background="@drawable/btn_rounded_corners"
         app:backgroundTint="@color/darkGround"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,12 +38,12 @@
     <Button
         android:id="@+id/btnPlayPerson"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginBottom="64dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/btn_rounded_corners"
         android:drawableLeft="@drawable/ic_person"
         android:text="@string/play_person"
         android:textSize="20sp"
-        android:background="@drawable/btn_rounded_corners"
         app:backgroundTint="@color/darkGround"
         app:layout_constraintBottom_toTopOf="@+id/btnPlayComputer"
         app:layout_constraintEnd_toEndOf="parent"

@@ -70,7 +70,7 @@
                     android:buttonTint="@color/white"
                     android:gravity="center"
                     android:text="4 x 4"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"/>
 
                 <RadioButton
                     android:id="@+id/rbGrid5"
