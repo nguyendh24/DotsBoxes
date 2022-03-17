@@ -49,7 +49,7 @@ public class GameFragment extends Fragment {
             gameView.resetGame();
         });
 
-        if (playComputer) { ImageView ivP2 = myView.findViewById(R.id.ivP2); ivP2.setImageResource(R.drawable.btn_computer_icon); }
+        if (playComputer) { ImageView ivP2 = myView.findViewById(R.id.ivP2); ivP2.setImageResource(R.drawable.ic_computer); }
         gameView.setPlayComputer(playComputer);
         gameView.setUpReferences(p1Score, p2Score, p1Name, p2Name, statusDisplay, btnPlayAgain);
         return myView;

@@ -174,6 +174,9 @@ public class GameView extends View {
         String vertex = sharedPreferences.getString("vertex", "");
         Bitmap triangle = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_triangle);
         Bitmap star = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_star);
+//        Bitmap cloud = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_cloud);
+//        Bitmap moon = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_moon);
+//        Bitmap sun = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_sun);
 
         for (Dot[] row : gameState.getDots()) {
             for (Dot dot : row) {
@@ -184,6 +187,13 @@ public class GameView extends View {
                 } else {
                     canvas.drawBitmap(star, dot.getX() - BITMAP_WIDTH, dot.getY() - BITMAP_WIDTH, paint);
                 }
+//              else if (vertex.equals("cloud")) {
+//                  canvas.drawBitmap(cloud, dot.getX() - BITMAP_WIDTH, dot.getY() - BITMAP_WIDTH, paint);
+//              } else if (vertex.equals("moon")) {
+//                  canvas.drawBitmap(moon, dot.getX() - BITMAP_WIDTH, dot.getY() - BITMAP_WIDTH, paint);
+//              } else (vertex.equals("sun")) {
+//                  canvas.drawBitmap(sun, dot.getX() - BITMAP_WIDTH, dot.getY() - BITMAP_WIDTH, paint);
+//              }
             }
         }
         paint.clearShadowLayer();
