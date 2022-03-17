@@ -15,4 +15,5 @@
     <string name="board_size">Board Size</string>
     <string name="vertices">Vertices</string>
     <string name="player_color">Player Color</string>
+    <string name="color_for_player">Color for Player</string>
 </resources>

@@ -5,20 +5,15 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
@@ -26,6 +21,7 @@ import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.Player;
 import com.example.dotsboxes.R;
+import java.util.HashMap;
 
 public class GameView extends View {
 
@@ -81,30 +77,32 @@ public class GameView extends View {
         Line.setDefaultColor(UNSELECTED_LINE_COLOR);
 
         Player[] players = new Player[NUM_PLAYERS];
-        int[] colors = new int[] {
-                getResources().getColor(R.color.redPlayer),
-                getResources().getColor(R.color.bluePlayer),
-                getResources().getColor(R.color.greenPlayer),
-                getResources().getColor(R.color.yellowPlayer),
-                getResources().getColor(R.color.purplePlayer),
-                getResources().getColor(R.color.orangePlayer),
-                getResources().getColor(R.color.pinkPlayer)
-        };
 
         /** Temporarily replacing commented out code below to update line colors according settings (since only 2 player implemented) */
+        HashMap<String, Integer> colorMap = new HashMap<String, Integer>() {{
+            put("blue", getResources().getColor(R.color.bluePlayer));
+            put("red", getResources().getColor(R.color.redPlayer));
+            put("yellow", getResources().getColor(R.color.yellowPlayer));
+            put("pink", getResources().getColor(R.color.pinkPlayer));
+            put("green", getResources().getColor(R.color.greenPlayer));
+            put("purple", getResources().getColor(R.color.purplePlayer));
+        }};
+
         SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        String playerColor = sharedPreferences.getString("playerColor", "");
-        if (playerColor.equals("RB")) {
-            players[0] = new Player("Player " + 1, getResources().getColor(R.color.redPlayer));
-            players[1] = new Player("Player " + 2, getResources().getColor(R.color.bluePlayer));
-        } else if (playerColor.equals("PG")) {
-            players[0] = new Player("Player " + 1, getResources().getColor(R.color.purplePlayer));
-            players[1] = new Player("Player " + 2, getResources().getColor(R.color.greenPlayer));
-        } else {
-            players[0] = new Player("Player " + 1, getResources().getColor(R.color.pinkPlayer));
-            players[1] = new Player("Player " + 2, getResources().getColor(R.color.yellowPlayer));
-        }
+        String playerColor1 = sharedPreferences.getString("playerColor1", "");
+        String playerColor2 = sharedPreferences.getString("playerColor2", "");
+        players[0] = new Player("Player " + 1, colorMap.get(playerColor1));
+        players[1] = new Player("Player " + 2, colorMap.get(playerColor2));
         /*******************************************************************************************/
+//        int[] colors = new int[] {
+//                getResources().getColor(R.color.redPlayer),
+//                getResources().getColor(R.color.bluePlayer),
+//                getResources().getColor(R.color.greenPlayer),
+//                getResources().getColor(R.color.yellowPlayer),
+//                getResources().getColor(R.color.purplePlayer),
+//                getResources().getColor(R.color.orangePlayer),
+//                getResources().getColor(R.color.pinkPlayer)
+//        };
 //        for (int i = 0 ; i < NUM_PLAYERS ; i++) {
 //            players[i] = new Player("Player " + (i + 1), colors[i % (colors.length - 1)]);
 //        }

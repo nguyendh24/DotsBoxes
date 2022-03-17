@@ -9,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.Views.GameView;
 import com.example.dotsboxes.databinding.FragmentGameBinding;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GameFragment extends Fragment {
     private boolean playComputer;
@@ -46,6 +49,7 @@ public class GameFragment extends Fragment {
             gameView.resetGame();
         });
 
+        if (playComputer) { ImageView ivP2 = myView.findViewById(R.id.ivP2); ivP2.setImageResource(R.drawable.ic_computer); }
         gameView.setPlayComputer(playComputer);
         gameView.setUpReferences(p1Score, p2Score, p1Name, p2Name, statusDisplay, btnPlayAgain);
         return myView;
@@ -53,17 +57,22 @@ public class GameFragment extends Fragment {
 
     private void setCardViews(CardView cvP1, CardView cvP2) {
         SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        String playerColor = sharedPreferences.getString("playerColor", "");
-        if (playerColor.equals("RB")) {
-            cvP1.setCardBackgroundColor(getResources().getColor(R.color.redPlayer));
-            cvP2.setCardBackgroundColor(getResources().getColor(R.color.bluePlayer));
-        } else if (playerColor.equals("PG")) {
-            cvP1.setCardBackgroundColor(getResources().getColor(R.color.purplePlayer));
-            cvP2.setCardBackgroundColor(getResources().getColor(R.color.greenPlayer));
-        } else {
-            cvP1.setCardBackgroundColor(getResources().getColor(R.color.pinkPlayer));
-            cvP2.setCardBackgroundColor(getResources().getColor(R.color.yellowPlayer));
-        }
+        String playerColor1 = sharedPreferences.getString("playerColor1", "");
+        String playerColor2 = sharedPreferences.getString("playerColor2", "");
+
+        Map<String, Integer> colorMap = new HashMap<String, Integer>() {{
+            put("blue", getResources().getColor(R.color.bluePlayer));
+            put("red", getResources().getColor(R.color.redPlayer));
+            put("yellow", getResources().getColor(R.color.yellowPlayer));
+            put("pink", getResources().getColor(R.color.pinkPlayer));
+            put("green", getResources().getColor(R.color.greenPlayer));
+            put("purple", getResources().getColor(R.color.purplePlayer));
+
+        }};
+
+        cvP1.setCardBackgroundColor(colorMap.get(playerColor1));
+        cvP2.setCardBackgroundColor(colorMap.get(playerColor2));
+
     }
 
 }

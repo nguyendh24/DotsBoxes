@@ -10,9 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-import android.widget.RadioButton;
-
-import com.example.dotsboxes.Fragments.GameFragment;
+import com.example.dotsboxes.Fragments.GameTypeFragment;
 import com.example.dotsboxes.Fragments.HomeFragment;
 import com.example.dotsboxes.Fragments.SettingsFragment;
 import com.example.dotsboxes.databinding.ActivityMainBinding;
@@ -42,19 +40,22 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, Onboard.class));
             editor.putInt("boardSize", 4);
             editor.putString("vertex", "dot");
-            editor.putString("playerColor", "RB");
+            editor.putString("playerColor1", "blue");
+            editor.putString("playerColor2", "red");
             editor.putBoolean("isFirstTime", false);
             editor.commit();
         } else {
             /** DELETE LATER, JUST SO NO ONE HAS TO WIPE DATA ON EMULATOR */
             editor.putInt("boardSize", 4);
             editor.putString("vertex", "dot");
-            editor.putString("playerColor", "RB");
+            editor.putString("playerColor1", "blue");
+            editor.putString("playerColor2", "red");
             editor.putBoolean("isFirstTime", false);
-            editor.putString("playerName", "User");
+            editor.putString("playerName", "user");
             editor.commit();
         }
 
+//        gameTypeFragment();
         replaceFragment(homeFragment);
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             if (item.getItemId() == R.id.Home) { replaceFragment(homeFragment); }
@@ -62,12 +63,24 @@ public class MainActivity extends AppCompatActivity {
             else { replaceFragment(settingsFragment); }
             return true;
         });
+
+    }
+
+    private void gameTypeFragment() {
+        // Create new fragment and transaction
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setReorderingAllowed(true);
+        // Replace whatever is in the fragment_container view with this fragment
+        transaction.replace(R.id.frame_layout, new GameTypeFragment(), null);
+        // Commit the transaction
+        transaction.commit();
     }
 
     private void setBinding() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.bottomNavigationView.setItemIconTintList(null); // Removes icon highlight
+//        binding.bottomNavigationView.setItemIconTintList(null); // Removes icon highlight
     }
 
     private void replaceFragment(Fragment fragment) {
@@ -106,6 +119,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static Context getContext() { return MainActivity.context; }
-
 
 }
