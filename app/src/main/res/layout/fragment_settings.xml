@@ -55,57 +55,51 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvBoardSize">
 
-
                 <RadioGroup
                     android:id="@+id/radioGrid"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:orientation='vertical'>
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    android:orientation='horizontal'>
+
+                    <RadioButton
+                        android:id="@+id/rbGrid4"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
-                        <RadioButton
-                            android:id="@+id/rbGrid4"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:layout_weight="33"
-                            android:background="@drawable/btn_selector"
-                            android:button="@null"
-                            android:buttonTint="@color/white"
-                            android:gravity="center"
-                            android:text="4 x 4"
-                            android:textColor="@color/white" />
+                        android:layout_margin="10dp"
+                        android:layout_weight="33"
+                        android:background="@drawable/btn_selector"
+                        android:button="@null"
+                        android:buttonTint="@color/white"
+                        android:gravity="center"
+                        android:text="4 x 4"
+                        android:textColor="@color/white" />
 
-                        <RadioButton
-                            android:id="@+id/rbGrid5"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:layout_weight="33"
-                            android:background="@drawable/btn_selector"
-                            android:button="@null"
-                            android:buttonTint="@color/white"
-                            android:gravity="center"
-                            android:text="5 x 5"
-                            android:textColor="@color/white" />
+                    <RadioButton
+                        android:id="@+id/rbGrid5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="33"
+                        android:background="@drawable/btn_selector"
+                        android:button="@null"
+                        android:buttonTint="@color/white"
+                        android:gravity="center"
+                        android:text="5 x 5"
+                        android:textColor="@color/white" />
 
-                        <RadioButton
-                            android:id="@+id/rbGrid6"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:layout_weight="33"
-                            android:background="@drawable/btn_selector"
-                            android:button="@null"
-                            android:buttonTint="@color/white"
-                            android:gravity="center"
-                            android:text="6 x 6"
-                            android:textColor="@color/white" />
-                    </LinearLayout>
-
+                    <RadioButton
+                        android:id="@+id/rbGrid6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_weight="33"
+                        android:background="@drawable/btn_selector"
+                        android:button="@null"
+                        android:buttonTint="@color/white"
+                        android:gravity="center"
+                        android:text="6 x 6"
+                        android:textColor="@color/white" />
                 </RadioGroup>
             </LinearLayout>
 
