@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
+import com.example.dotsboxes.Components.Player;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.Views.GameView;
 import java.util.ArrayList;

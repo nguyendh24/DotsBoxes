@@ -1,7 +1,5 @@
 package com.example.dotsboxes.Components;
 
-import com.example.dotsboxes.Player;
-
 import java.util.Objects;
 
 public class Square {

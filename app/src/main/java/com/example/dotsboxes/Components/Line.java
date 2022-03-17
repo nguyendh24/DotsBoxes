@@ -1,7 +1,5 @@
 package com.example.dotsboxes.Components;
 
-import com.example.dotsboxes.Player;
-
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;

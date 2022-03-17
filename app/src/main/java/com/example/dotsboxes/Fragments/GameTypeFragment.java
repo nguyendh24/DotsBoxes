@@ -47,8 +47,6 @@ public class GameTypeFragment extends Fragment {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setReorderingAllowed(true);
         // Replace whatever is in the fragment_container view with this fragment
-        transaction.replace(R.id.frame_layout, new GameFragment(playComputer), null);
-        // Commit the transaction
-        transaction.commit();
+        transaction.replace(R.id.frame_layout, new GameFragment(playComputer)).addToBackStack(null).commit();
     }
 }

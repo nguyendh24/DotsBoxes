@@ -19,7 +19,7 @@ import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.MainActivity;
-import com.example.dotsboxes.Player;
+import com.example.dotsboxes.Components.Player;
 import com.example.dotsboxes.R;
 import java.util.HashMap;
 
