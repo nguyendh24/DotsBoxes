@@ -1,5 +1,4 @@
 package com.example.dotsboxes;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,20 +7,14 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.core.content.ContextCompat;
-
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
-import com.example.dotsboxes.Fragments.HomeFragment;
-import com.example.dotsboxes.Fragments.SettingsFragment;
 import com.example.dotsboxes.Views.GameView;
-
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GameState {
 
@@ -200,24 +193,34 @@ public class GameState {
         this.p1Score = p1Score;
         this.p2Score = p2Score;
         this.btnPlayAgain = btnPlayAgain;
-        p1Name.setText(HomeFragment.getTvPlayerName());
-        p2Name.setText(HomeFragment.getTvPlayerName() + "'s Friend");
+        p1Name.setText(getPlayerName());
+        if (!playComputer) { p2Name.setText(getPlayerName() + "'s friend"); }
+        else { p2Name.setText("computer"); }
+
         setTvPlayerNames(p1Name, p2Name);
+    }
+
+    private String getPlayerName() {
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("playerName", "");
     }
 
     private void setTvPlayerNames(TextView p1Name, TextView p2Name) {
         SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        String playerColor = sharedPreferences.getString("playerColor", "");
-        if (playerColor.equals("RB")) {
-            p1Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , R.color.redPlayer));
-            p2Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , R.color.bluePlayer));
-        } else if (playerColor.equals("PG")) {
-            p1Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , R.color.purplePlayer));
-            p2Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , R.color.greenPlayer));
-        } else {
-            p1Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , R.color.pinkPlayer));
-            p2Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , R.color.yellowPlayer));
-        }
+        String playerColor1 = sharedPreferences.getString("playerColor1", "");
+        String playerColor2 = sharedPreferences.getString("playerColor2", "");
+
+        Map<String, Integer> colorMap = new HashMap<String, Integer>() {{
+            put("blue", R.color.bluePlayer);
+            put("red", R.color.redPlayer);
+            put("yellow", R.color.yellowPlayer);
+            put("pink", R.color.pinkPlayer);
+            put("green", R.color.greenPlayer);
+            put("purple", R.color.purplePlayer);
+        }};
+
+        p1Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , colorMap.get(playerColor1)));
+        p2Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , colorMap.get(playerColor2)));
     }
 
     private boolean gameOver() {
