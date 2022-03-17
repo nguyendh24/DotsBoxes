@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.databinding.FragmentSettingsBinding;
@@ -41,7 +44,9 @@ public class SettingsFragment extends Fragment {
         sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         settingsView = binding.getRoot();
+        Button btnBack = settingsView.findViewById(R.id.btnBack);
         isPlayer2 = ((SwitchCompat) settingsView.findViewById(R.id.switchColor)).isChecked();
+
         setRadioGrid();
         setRadioVertices();
         setRadioPlayerColor();
@@ -52,9 +57,15 @@ public class SettingsFragment extends Fragment {
         radioColorA.setOnCheckedChangeListener(getListenerRadioColorA);
         radioColorB.setOnCheckedChangeListener(getListenerRadioColorB);
         switchPlayer.setOnCheckedChangeListener(getListenerSwitchPlayer);
+        btnBack.setOnClickListener(getListenerBtnBack);
 
         return settingsView;
     }
+
+    private final View.OnClickListener getListenerBtnBack = view -> {
+        FragmentManager fragmentManager = getParentFragmentManager();
+        fragmentManager.popBackStack();
+    };
 
     private final RadioGroup.OnCheckedChangeListener getListenerRadioGrid = new RadioGroup.OnCheckedChangeListener() {
         @Override

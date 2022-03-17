@@ -6,19 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.SettingsFragment">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="141dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/ic_arrow_back"
+        android:text="back"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:iconPadding="-10dp"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <!-- TODO: Update blank fragment layout -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:paddingBottom="64dp">
 
             <!-- Header -->
             <TextView
                 android:id="@+id/tvSettingsHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:padding="32dp"
                 android:text="Personalize Your Game!"
                 android:textSize="32sp"
@@ -58,14 +78,14 @@
                 <RadioGroup
                     android:id="@+id/radioGrid"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="90dp"
                     android:gravity="center_horizontal"
                     android:orientation='horizontal'>
 
                     <RadioButton
                         android:id="@+id/rbGrid4"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="33"
                         android:background="@drawable/btn_selector"
@@ -78,7 +98,7 @@
                     <RadioButton
                         android:id="@+id/rbGrid5"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="33"
                         android:background="@drawable/btn_selector"
@@ -91,7 +111,7 @@
                     <RadioButton
                         android:id="@+id/rbGrid6"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="33"
                         android:background="@drawable/btn_selector"
@@ -133,14 +153,14 @@
                 <RadioGroup
                     android:id="@+id/radioVertices"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="90dp"
                     android:gravity="center_horizontal"
                     android:orientation='horizontal'>
 
                     <RadioButton
                         android:id="@+id/rbDot"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="33"
                         android:background="@drawable/btn_selector"
@@ -152,7 +172,7 @@
                     <RadioButton
                         android:id="@+id/rbTriangle"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="33"
                         android:background="@drawable/btn_selector"
@@ -164,7 +184,7 @@
                     <RadioButton
                         android:id="@+id/rbStar"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="33"
                         android:background="@drawable/btn_selector"
@@ -222,46 +242,49 @@
                 <RadioGroup
                     android:id="@+id/radioColorA"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="90dp"
                     android:gravity="center_horizontal"
                     android:orientation='horizontal'>
-                        <RadioButton
-                            android:id="@+id/rbColorBlue"
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_margin="10dp"
-                            android:layout_weight="33"
-                            android:background="@drawable/btn_blue_selector"
-                            android:button="@null" />
 
-                        <RadioButton
-                            android:id="@+id/rbColorRed"
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_margin="10dp"
-                            android:layout_weight="33"
-                            android:background="@drawable/btn_red_selector"
-                            android:button="@null" />
+                    <RadioButton
+                        android:id="@+id/rbColorBlue"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="33"
+                        android:background="@drawable/btn_blue_selector"
+                        android:button="@null" />
 
-                        <RadioButton
-                            android:id="@+id/rbColorYellow"
-                            android:layout_width="0dp"
-                            android:layout_height="50dp"
-                            android:layout_margin="10dp"
-                            android:layout_weight="33"
-                            android:background="@drawable/btn_yellow_selector"
-                            android:button="@null" />
+                    <RadioButton
+                        android:id="@+id/rbColorRed"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="33"
+                        android:background="@drawable/btn_red_selector"
+                        android:button="@null" />
+
+                    <RadioButton
+                        android:id="@+id/rbColorYellow"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="33"
+                        android:background="@drawable/btn_yellow_selector"
+                        android:button="@null" />
                 </RadioGroup>
+
                 <RadioGroup
                     android:id="@+id/radioColorB"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="90dp"
                     android:gravity="center_horizontal"
                     android:orientation='horizontal'>
+
                     <RadioButton
                         android:id="@+id/rbColorPink"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="33"
                         android:background="@drawable/btn_pink_selector"
@@ -270,7 +293,7 @@
                     <RadioButton
                         android:id="@+id/rbColorGreen"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="33"
                         android:background="@drawable/btn_green_selector"
@@ -279,7 +302,7 @@
                     <RadioButton
                         android:id="@+id/rbColorPurple"
                         android:layout_width="0dp"
-                        android:layout_height="50dp"
+                        android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_weight="33"
                         android:background="@drawable/btn_purple_selector"

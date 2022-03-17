@@ -56,40 +56,23 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("playerName", "user");
             editor.commit();
         }
+        replaceFragment(new GameTypeFragment());
 
-//        gameTypeFragment();
-        replaceFragment(homeFragment);
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.Home) { replaceFragment(homeFragment); }
-            else if (item.getItemId() == R.id.Help) { showHelpDialog(); } //  goes here
-            else { replaceFragment(settingsFragment); }
-            return true;
-        });
+        binding.btnHelp.setOnClickListener(view -> showHelpDialog());
 
-    }
+        binding.btnSettings.setOnClickListener(view -> replaceFragment(settingsFragment));
 
-    private void gameTypeFragment() {
-        // Create new fragment and transaction
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.setReorderingAllowed(true);
-        // Replace whatever is in the fragment_container view with this fragment
-        transaction.replace(R.id.frame_layout, new GameTypeFragment(), null);
-        // Commit the transaction
-        transaction.commit();
     }
 
     private void setBinding() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//        binding.bottomNavigationView.setItemIconTintList(null); // Removes icon highlight
     }
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.replace(R.id.frame_layout, fragment).setReorderingAllowed(true).addToBackStack(null).commit();
     }
 
     private void showHelpDialog() {
