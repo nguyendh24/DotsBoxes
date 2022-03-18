@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,12 +42,18 @@ public class GameFragment extends Fragment {
         TextView p2Name = myView.findViewById(R.id.tvP2Name);
         TextView statusDisplay = myView.findViewById(R.id.tvCurrentTurn);
         Button btnPlayAgain = myView.findViewById(R.id.btnPlayAgain);
+        Button btnBack = myView.findViewById(R.id.btnBack);
         CardView cvP1 = myView.findViewById(R.id.cvP1);
         CardView cvP2 = myView.findViewById(R.id.cvP2);
         setCardViews(cvP1, cvP2);
 
         btnPlayAgain.setOnClickListener(view -> {
             gameView.resetGame();
+        });
+
+        btnBack.setOnClickListener(view -> {
+            FragmentManager fragmentManager = getParentFragmentManager();
+            fragmentManager.popBackStack();
         });
 
         if (playComputer) { ImageView ivP2 = myView.findViewById(R.id.ivP2); ivP2.setImageResource(R.drawable.ic_computer); }

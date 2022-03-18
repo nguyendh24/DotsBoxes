@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.GameFragment">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="141dp"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/ic_arrow_back"
+        android:text="back"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:iconPadding="-10dp"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,11 +35,9 @@
             android:background="?android:attr/listDivider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.206" />
-
+            app:layout_constraintVertical_bias="0.258" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvP1"
@@ -29,6 +45,7 @@
             android:layout_height="70dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="48dp"
             android:layout_marginBottom="3dp"
             app:cardCornerRadius="50dp"
@@ -53,6 +70,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginTop="48dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="3dp"
             app:cardCornerRadius="50dp"
             app:layout_constraintBottom_toTopOf="@+id/tvP2Name"
@@ -80,7 +98,8 @@
             app:layout_constraintEnd_toStartOf="@+id/tvHyphen"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/cvP1"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.205" />
 
         <TextView
             android:id="@+id/tvP2Score"
@@ -93,7 +112,8 @@
             app:layout_constraintEnd_toStartOf="@+id/cvP2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tvHyphen"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.205" />
 
         <com.example.dotsboxes.Views.GameView
             android:id="@+id/gameView"
@@ -115,9 +135,10 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             android:text="TextView"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="@+id/cvP1"
-            app:layout_constraintHorizontal_bias="0.636"
+            app:layout_constraintHorizontal_bias="0.466"
             app:layout_constraintStart_toStartOf="@+id/cvP1"
             app:layout_constraintTop_toBottomOf="@+id/cvP1" />
 
@@ -128,6 +149,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             android:text="TextView2"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="@+id/cvP2"
             app:layout_constraintHorizontal_bias="0.636"
@@ -138,7 +160,7 @@
             android:id="@+id/tvCurrentTurn"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="TextView"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -156,14 +178,14 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tvP1Score"
             app:layout_constraintTop_toBottomOf="@+id/tvCurrentTurn"
-            app:layout_constraintVertical_bias="0.246" />
+            app:layout_constraintVertical_bias="0.178" />
 
         <Button
             android:id="@+id/btnPlayAgain"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/redPlayer"
+            android:backgroundTint="@color/darkGround"
             android:text="@string/play_again"
             android:textSize="20sp"
             android:visibility="invisible"
@@ -171,7 +193,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.518"
             app:layout_constraintStart_toStartOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

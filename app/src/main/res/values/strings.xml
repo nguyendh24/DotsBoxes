@@ -16,4 +16,6 @@
     <string name="vertices">Vertices</string>
     <string name="player_color">Player Color</string>
     <string name="color_for_player">Color for Player</string>
+    <string name="settings_button">settings button</string>
+    <string name="help_button">help button</string>
 </resources>
