@@ -1,22 +1,23 @@
 package com.example.dotsboxes.Components;
 
+import android.graphics.Color;
+
 import java.util.Objects;
 
 public class Square {
 
     private static float size;
-    private static int defaultColor;
+    private static final int DEFAULT_COLOR = Color.TRANSPARENT;
 
     private final float x, y;
-    private int color;
 
     private int sides;
     private boolean filled;
+    private Player player;
 
     public Square(float x, float y) {
         this.x = x;
         this.y = y;
-        this.color = defaultColor;
         sides = 0;
         filled = false;
     }
@@ -27,7 +28,7 @@ public class Square {
             sides++;
             if (sides == 4) {
                 filled = true;
-                this.color = player.getColor();
+                this.player = player;
                 player.incrementScore();
             }
         }
@@ -42,15 +43,16 @@ public class Square {
 
     public float getY() { return y; }
 
-    public static void setDefaultColor(int defaultColor) {
-        Square.defaultColor = defaultColor;
-    }
-
     public static void setSize(float size) { Square.size = size; }
 
     public static float getSize() { return size; }
 
-    public int getColor() { return color; }
+    public int getColor() {
+        if (filled && player != null) {
+            return player.getColor();
+        }
+        return DEFAULT_COLOR;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -69,6 +71,6 @@ public class Square {
     public void reset() {
         sides = 0;
         filled = false;
-        color = defaultColor;
+        player = null;
     }
 }

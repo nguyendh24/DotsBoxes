@@ -25,7 +25,6 @@ import java.util.HashMap;
 
 public class GameView extends View {
 
-    private static final int UNFILLED_SQUARE_COLOR = Color.TRANSPARENT;
     private static final int UNFILLED_SQUARE_OPACITY = 0;
     private static final int FILLED_SQUARE_OPACITY = 100;
 
@@ -34,7 +33,6 @@ public class GameView extends View {
     private static final int DOT_RADIUS = 20;
     private static final int BITMAP_WIDTH = 30;
 
-    private static final int UNSELECTED_LINE_COLOR = Color.BLACK;
     private static final int UNSELECTED_LINE_OPACITY = 50;
     private static final int SELECTED_LINE_OPACITY = 255;
     private static final int LINE_WIDTH = 12;
@@ -72,9 +70,6 @@ public class GameView extends View {
     private void init(@Nullable AttributeSet set) {
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-        Square.setDefaultColor(UNFILLED_SQUARE_COLOR);
-        Line.setDefaultColor(UNSELECTED_LINE_COLOR);
 
         Player[] players = new Player[NUM_PLAYERS];
 
