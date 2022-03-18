@@ -22,9 +22,9 @@ public class Onboard extends AppCompatActivity {
 
         btnLetsGo.setOnClickListener(
                 view -> {
-                    SharedPreferences sh = getApplicationContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                    SharedPreferences sh = getApplicationContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sh.edit();
-                    editor.putString("playerName", etPlayerName.getText().toString());
+                    editor.putString(PrefUtility.PLAYER_NAME, etPlayerName.getText().toString());
                     editor.apply();
                     finish();
                 });

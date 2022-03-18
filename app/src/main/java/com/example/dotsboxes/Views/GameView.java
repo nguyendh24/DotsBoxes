@@ -14,18 +14,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.Components.Player;
+import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.R;
-import java.util.HashMap;
 
 public class GameView extends View {
 
-    private static final int UNFILLED_SQUARE_COLOR = Color.TRANSPARENT;
     private static final int UNFILLED_SQUARE_OPACITY = 0;
     private static final int FILLED_SQUARE_OPACITY = 100;
 
@@ -34,15 +35,14 @@ public class GameView extends View {
     private static final int DOT_RADIUS = 20;
     private static final int BITMAP_WIDTH = 30;
 
-    private static final int UNSELECTED_LINE_COLOR = Color.BLACK;
     private static final int UNSELECTED_LINE_OPACITY = 50;
     private static final int SELECTED_LINE_OPACITY = 255;
     private static final int LINE_WIDTH = 12;
     private static final int LINE_OFFSET = 50;
 
     private static final int NUM_PLAYERS = 2;
-    private static final int BOARD_WIDTH = 4;
-    private static final int BOARD_HEIGHT = 4;
+    private static int boardWidth;
+    private static int boardHeight;
 
     private Paint paint;
 
@@ -73,41 +73,17 @@ public class GameView extends View {
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        Square.setDefaultColor(UNFILLED_SQUARE_COLOR);
-        Line.setDefaultColor(UNSELECTED_LINE_COLOR);
-
         Player[] players = new Player[NUM_PLAYERS];
 
-        /** Temporarily replacing commented out code below to update line colors according settings (since only 2 player implemented) */
-        HashMap<String, Integer> colorMap = new HashMap<String, Integer>() {{
-            put("blue", getResources().getColor(R.color.bluePlayer));
-            put("red", getResources().getColor(R.color.redPlayer));
-            put("yellow", getResources().getColor(R.color.yellowPlayer));
-            put("pink", getResources().getColor(R.color.pinkPlayer));
-            put("green", getResources().getColor(R.color.greenPlayer));
-            put("purple", getResources().getColor(R.color.purplePlayer));
-        }};
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
+        String playerColor2 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
+        players[0] = new Player("Player " + 1, getResources().getColor(PrefUtility.getColor(playerColor1)));
+        players[1] = new Player("Player " + 2, getResources().getColor(PrefUtility.getColor(playerColor2)));
 
-        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        String playerColor1 = sharedPreferences.getString("playerColor1", "");
-        String playerColor2 = sharedPreferences.getString("playerColor2", "");
-        players[0] = new Player("Player " + 1, colorMap.get(playerColor1));
-        players[1] = new Player("Player " + 2, colorMap.get(playerColor2));
-        /*******************************************************************************************/
-//        int[] colors = new int[] {
-//                getResources().getColor(R.color.redPlayer),
-//                getResources().getColor(R.color.bluePlayer),
-//                getResources().getColor(R.color.greenPlayer),
-//                getResources().getColor(R.color.yellowPlayer),
-//                getResources().getColor(R.color.purplePlayer),
-//                getResources().getColor(R.color.orangePlayer),
-//                getResources().getColor(R.color.pinkPlayer)
-//        };
-//        for (int i = 0 ; i < NUM_PLAYERS ; i++) {
-//            players[i] = new Player("Player " + (i + 1), colors[i % (colors.length - 1)]);
-//        }
-
-        gameState = new GameState(players, BOARD_WIDTH, BOARD_HEIGHT);
+        boardWidth = sharedPreferences.getInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
+        boardHeight = sharedPreferences.getInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
+        gameState = new GameState(players, boardWidth, boardHeight);
     }
 
 
@@ -170,8 +146,8 @@ public class GameView extends View {
         paint.setColor(DOT_COLOR);
         paint.setAlpha(DOT_OPACITY);
 
-        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        String vertex = sharedPreferences.getString("vertex", "");
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String vertex = sharedPreferences.getString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
         Bitmap triangle = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_triangle);
         Bitmap star = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_star);
 //        Bitmap cloud = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_cloud);
@@ -229,9 +205,9 @@ public class GameView extends View {
         Line[][] horizontalLines = gameState.getHorizontalLines();
         Line[][] verticalLines = gameState.getVerticalLines();
 
-        for (int i = 0 ; i <= BOARD_HEIGHT ; i++) {
-            for (int j = 0 ; j <= BOARD_WIDTH ; j++) {
-                if (i < BOARD_HEIGHT) {
+        for (int i = 0; i <= boardHeight; i++) {
+            for (int j = 0; j <= boardWidth; j++) {
+                if (i < boardHeight) {
                     Line verticalLine = verticalLines[i][j];
                     boolean lineTapped = yPos >= verticalLine.getY1() + LINE_OFFSET
                             && yPos <= verticalLine.getY2() - LINE_OFFSET
@@ -245,7 +221,7 @@ public class GameView extends View {
                         return true;
                     }
                 }
-                if (j < BOARD_WIDTH) {
+                if (j < boardWidth) {
                     Line horizontalLine = horizontalLines[i][j];
                     boolean lineTapped = xPos >= horizontalLine.getX1() + LINE_OFFSET
                             && xPos <= horizontalLine.getX2() - LINE_OFFSET

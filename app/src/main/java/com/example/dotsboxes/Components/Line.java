@@ -1,38 +1,35 @@
 package com.example.dotsboxes.Components;
 
+import android.graphics.Color;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 public class Line {
 
-    private static int defaultColor;
+    private static final int DEFAULT_COLOR = Color.BLACK;;
 
     private final float x1, y1, x2, y2;
     private final Set<Square> adjacentSquares;
     private boolean selected;
-    private int color;
+    private Player player;
 
     public Line(float x1, float y1, float x2, float y2) {
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
-        this.color = defaultColor;
         adjacentSquares = new HashSet<>();
         selected = false;
     }
 
     public void selectLine(Player player) {
         selected = true;
-        this.color = player.getColor();
+        this.player = player;
         for (Square square : adjacentSquares) {
             square.addSide(player);
         }
-    }
-
-    public static void setDefaultColor(int defaultColor) {
-        Line.defaultColor = defaultColor;
     }
 
     /** Getters */
@@ -44,7 +41,12 @@ public class Line {
 
     public float getY2() { return y2; }
 
-    public int getColor() { return color; }
+    public int getColor() {
+        if (selected && player != null) {
+            return player.getColor();
+        }
+        return DEFAULT_COLOR;
+    }
 
     public boolean isSelected() {
         return selected;
@@ -76,6 +78,6 @@ public class Line {
 
     public void reset() {
         selected = false;
-        color = defaultColor;
+        player = null;
     }
 }

@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.Views.GameView;
 import com.example.dotsboxes.databinding.FragmentGameBinding;
-import java.util.HashMap;
-import java.util.Map;
 
 public class GameFragment extends Fragment {
     private boolean playComputer;
@@ -63,22 +63,12 @@ public class GameFragment extends Fragment {
     }
 
     private void setCardViews(CardView cvP1, CardView cvP2) {
-        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        String playerColor1 = sharedPreferences.getString("playerColor1", "");
-        String playerColor2 = sharedPreferences.getString("playerColor2", "");
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
+        String playerColor2 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
 
-        Map<String, Integer> colorMap = new HashMap<String, Integer>() {{
-            put("blue", getResources().getColor(R.color.bluePlayer));
-            put("red", getResources().getColor(R.color.redPlayer));
-            put("yellow", getResources().getColor(R.color.yellowPlayer));
-            put("pink", getResources().getColor(R.color.pinkPlayer));
-            put("green", getResources().getColor(R.color.greenPlayer));
-            put("purple", getResources().getColor(R.color.purplePlayer));
-
-        }};
-
-        cvP1.setCardBackgroundColor(colorMap.get(playerColor1));
-        cvP2.setCardBackgroundColor(colorMap.get(playerColor2));
+        cvP1.setCardBackgroundColor(getResources().getColor(PrefUtility.getColor(playerColor1)));
+        cvP2.setCardBackgroundColor(getResources().getColor(PrefUtility.getColor(playerColor2)));
 
     }
 
