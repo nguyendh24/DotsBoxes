@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private static boolean isFirstTime;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private final HomeFragment homeFragment = new HomeFragment();
     private final SettingsFragment settingsFragment = new SettingsFragment();
 
     private static Context context;
@@ -40,20 +39,20 @@ public class MainActivity extends AppCompatActivity {
 
         if (isFirstTime) {
             startActivity(new Intent(this, Onboard.class));
-            editor.putInt("boardSize", 4);
-            editor.putString("vertex", "dot");
-            editor.putString("playerColor1", "blue");
-            editor.putString("playerColor2", "red");
-            editor.putBoolean("isFirstTime", false);
+            editor.putInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
+            editor.putString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
+            editor.putString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
+            editor.putString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
+            editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
             editor.commit();
         } else {
             /** DELETE LATER, JUST SO NO ONE HAS TO WIPE DATA ON EMULATOR */
-            editor.putInt("boardSize", 4);
-            editor.putString("vertex", "dot");
-            editor.putString("playerColor1", "blue");
-            editor.putString("playerColor2", "red");
-            editor.putBoolean("isFirstTime", false);
-            editor.putString("playerName", "user");
+            editor.putInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
+            editor.putString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
+            editor.putString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
+            editor.putString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
+            editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
+            editor.putString(PrefUtility.PLAYER_NAME, PrefUtility.DEFAULT_PLAYER_NAME);
             editor.commit();
         }
         replaceFragment(new GameTypeFragment());
@@ -98,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchStoredData() {
-        sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(PrefUtility.SHARED_PREF_NAME, MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
+        isFirstTime = sharedPreferences.getBoolean(PrefUtility.IS_FIRST_TIME, true);
     }
 
     public static Context getContext() { return MainActivity.context; }

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.databinding.FragmentHomeBinding;
 
@@ -17,7 +19,7 @@ public class HomeFragment extends Fragment {
     FragmentHomeBinding binding;
     Button btnStartGame;
     static TextView tvPlayerName;
-    static SharedPreferences sh;
+    static SharedPreferences sharedPreferences;
 
     public HomeFragment(){ }
 
@@ -43,11 +45,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void setTvPlayerName() {
-        sh = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        tvPlayerName.setText(sh.getString("playerName", ""));
+        sharedPreferences = getActivity().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        tvPlayerName.setText(sharedPreferences.getString(PrefUtility.PLAYER_NAME, PrefUtility.DEFAULT_PLAYER_NAME));
     }
 
     public static String getTvPlayerName() {
-        return sh.getString("playerName", "");
+        return sharedPreferences.getString(PrefUtility.PLAYER_NAME, PrefUtility.DEFAULT_PLAYER_NAME);
     }
 }

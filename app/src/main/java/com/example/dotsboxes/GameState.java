@@ -14,8 +14,6 @@ import com.example.dotsboxes.Components.Player;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.Views.GameView;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class GameState {
 
@@ -202,26 +200,17 @@ public class GameState {
     }
 
     private String getPlayerName() {
-        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("playerName", "");
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(PrefUtility.PLAYER_NAME, PrefUtility.DEFAULT_PLAYER_NAME);
     }
 
     private void setTvPlayerNames(TextView p1Name, TextView p2Name) {
-        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        String playerColor1 = sharedPreferences.getString("playerColor1", "");
-        String playerColor2 = sharedPreferences.getString("playerColor2", "");
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
+        String playerColor2 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
 
-        Map<String, Integer> colorMap = new HashMap<String, Integer>() {{
-            put("blue", R.color.bluePlayer);
-            put("red", R.color.redPlayer);
-            put("yellow", R.color.yellowPlayer);
-            put("pink", R.color.pinkPlayer);
-            put("green", R.color.greenPlayer);
-            put("purple", R.color.purplePlayer);
-        }};
-
-        p1Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , colorMap.get(playerColor1)));
-        p2Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , colorMap.get(playerColor2)));
+        p1Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , PrefUtility.getColor(playerColor1)));
+        p2Name.setTextColor(ContextCompat.getColor(MainActivity.getContext() , PrefUtility.getColor(playerColor2)));
     }
 
     private boolean gameOver() {

@@ -14,14 +14,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.Components.Player;
+import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.R;
-import java.util.HashMap;
 
 public class GameView extends View {
 
@@ -73,36 +75,14 @@ public class GameView extends View {
 
         Player[] players = new Player[NUM_PLAYERS];
 
-        /** Temporarily replacing commented out code below to update line colors according settings (since only 2 player implemented) */
-        HashMap<String, Integer> colorMap = new HashMap<String, Integer>() {{
-            put("blue", getResources().getColor(R.color.bluePlayer));
-            put("red", getResources().getColor(R.color.redPlayer));
-            put("yellow", getResources().getColor(R.color.yellowPlayer));
-            put("pink", getResources().getColor(R.color.pinkPlayer));
-            put("green", getResources().getColor(R.color.greenPlayer));
-            put("purple", getResources().getColor(R.color.purplePlayer));
-        }};
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
+        String playerColor2 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
+        players[0] = new Player("Player " + 1, getResources().getColor(PrefUtility.getColor(playerColor1)));
+        players[1] = new Player("Player " + 2, getResources().getColor(PrefUtility.getColor(playerColor2)));
 
-        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        String playerColor1 = sharedPreferences.getString("playerColor1", "");
-        String playerColor2 = sharedPreferences.getString("playerColor2", "");
-        players[0] = new Player("Player " + 1, colorMap.get(playerColor1));
-        players[1] = new Player("Player " + 2, colorMap.get(playerColor2));
-        /*******************************************************************************************/
-//        int[] colors = new int[] {
-//                getResources().getColor(R.color.redPlayer),
-//                getResources().getColor(R.color.bluePlayer),
-//                getResources().getColor(R.color.greenPlayer),
-//                getResources().getColor(R.color.yellowPlayer),
-//                getResources().getColor(R.color.purplePlayer),
-//                getResources().getColor(R.color.orangePlayer),
-//                getResources().getColor(R.color.pinkPlayer)
-//        };
-//        for (int i = 0 ; i < NUM_PLAYERS ; i++) {
-//            players[i] = new Player("Player " + (i + 1), colors[i % (colors.length - 1)]);
-//        }
-        boardWidth = sharedPreferences.getInt("boardSize", 4);
-        boardHeight = sharedPreferences.getInt("boardSize", 4);
+        boardWidth = sharedPreferences.getInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
+        boardHeight = sharedPreferences.getInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
         gameState = new GameState(players, boardWidth, boardHeight);
     }
 
@@ -166,8 +146,8 @@ public class GameView extends View {
         paint.setColor(DOT_COLOR);
         paint.setAlpha(DOT_OPACITY);
 
-        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        String vertex = sharedPreferences.getString("vertex", "");
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String vertex = sharedPreferences.getString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
         Bitmap triangle = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_triangle);
         Bitmap star = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_star);
 //        Bitmap cloud = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_cloud);

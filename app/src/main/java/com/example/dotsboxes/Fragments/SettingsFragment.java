@@ -12,6 +12,8 @@ import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.databinding.FragmentSettingsBinding;
@@ -40,7 +42,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSettingsBinding.inflate(getLayoutInflater());
-        sharedPreferences = MainActivity.getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         settingsView = binding.getRoot();
         Button btnBack = settingsView.findViewById(R.id.btnBack);
@@ -81,7 +83,7 @@ public class SettingsFragment extends Fragment {
                 put(R.id.rbGrid6, 6);
             }};
 
-            editor.putInt("boardSize", boardMap.get(btnID));
+            editor.putInt(PrefUtility.BOARD_SIZE, boardMap.get(btnID));
             editor.apply();
         }
     };
@@ -93,12 +95,12 @@ public class SettingsFragment extends Fragment {
             int btnID = radioGroup.getCheckedRadioButtonId();
 
             HashMap<Integer, String> vertexMap = new HashMap<Integer, String>() {{
-                put(R.id.rbDot, "dot");
-                put(R.id.rbTriangle, "triangle");
-                put(R.id.rbStar, "star");
+                put(R.id.rbDot, PrefUtility.DOT);
+                put(R.id.rbTriangle, PrefUtility.TRIANGLE);
+                put(R.id.rbStar, PrefUtility.STAR);
             }};
 
-            editor.putString("vertex", vertexMap.get(btnID));
+            editor.putString(PrefUtility.VERTEX, vertexMap.get(btnID));
             editor.apply();
         }
     };
@@ -112,13 +114,13 @@ public class SettingsFragment extends Fragment {
                 radioColorB.setOnCheckedChangeListener(getListenerRadioColorB); //reset the listener
             }
 
-            String player = (isPlayer2) ? "playerColor2" : "playerColor1";
+            String player = (isPlayer2) ? PrefUtility.PLAYER_COLOR_2 : PrefUtility.PLAYER_COLOR_1;
             int btnID = radioGroup.getCheckedRadioButtonId();
 
             HashMap<Integer, String> colorMap = new HashMap<Integer, String>() {{
-                put(R.id.rbColorBlue, "blue");
-                put(R.id.rbColorRed, "red");
-                put(R.id.rbColorYellow, "yellow");
+                put(R.id.rbColorBlue, PrefUtility.BLUE);
+                put(R.id.rbColorRed, PrefUtility.RED);
+                put(R.id.rbColorYellow, PrefUtility.YELLOW);
             }};
 
             editor.putString(player, colorMap.get(btnID));
@@ -136,13 +138,13 @@ public class SettingsFragment extends Fragment {
                 radioColorA.setOnCheckedChangeListener(getListenerRadioColorA);
             }
 
-            String player = (isPlayer2) ? "playerColor2" : "playerColor1";
+            String player = (isPlayer2) ? PrefUtility.PLAYER_COLOR_2 : PrefUtility.PLAYER_COLOR_1;
             int btnID = radioGroup.getCheckedRadioButtonId();
 
             HashMap<Integer, String> colorMap = new HashMap<Integer, String>() {{
-                put(R.id.rbColorPink, "pink");
-                put(R.id.rbColorGreen, "green");
-                put(R.id.rbColorPurple, "purple");
+                put(R.id.rbColorPink, PrefUtility.PINK);
+                put(R.id.rbColorGreen, PrefUtility.GREEN);
+                put(R.id.rbColorPurple, PrefUtility.PURPLE);
             }};
 
             editor.putString(player, colorMap.get(btnID));
@@ -174,7 +176,7 @@ public class SettingsFragment extends Fragment {
         RadioButton rbGrid5 = settingsView.findViewById(R.id.rbGrid5);
         RadioButton rbGrid6 = settingsView.findViewById(R.id.rbGrid6);
 
-        int boardSize = sharedPreferences.getInt("boardSize", 0);
+        int boardSize = sharedPreferences.getInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
         if (boardSize == 4) { rbGrid4.setChecked(true); }
         else if (boardSize == 5) { rbGrid5.setChecked(true); }
         else { rbGrid6.setChecked(true); }
@@ -186,10 +188,10 @@ public class SettingsFragment extends Fragment {
         RadioButton rbTriangle = settingsView.findViewById(R.id.rbTriangle);
         RadioButton  rbStar = settingsView.findViewById(R.id.rbStar);
 
-        String vertex = sharedPreferences.getString("vertex", "");
+        String vertex = sharedPreferences.getString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
 
-        if (vertex.equals("dot")) { rbDot.setChecked(true); }
-        else if (vertex.equals("triangle")) { rbTriangle.setChecked(true); }
+        if (vertex.equals(PrefUtility.DOT)) { rbDot.setChecked(true); }
+        else if (vertex.equals(PrefUtility.TRIANGLE)) { rbTriangle.setChecked(true); }
         else { rbStar.setChecked(true); }
     }
 
@@ -197,24 +199,24 @@ public class SettingsFragment extends Fragment {
         setToggle();
         radioColorA = settingsView.findViewById(R.id.radioColorA);
         radioColorB = settingsView.findViewById(R.id.radioColorB);
-        RadioButton rbColorBlue = settingsView.findViewById(R.id.rbColorBlue);
-        RadioButton rbColorRed = settingsView.findViewById(R.id.rbColorRed);
-        RadioButton  rbColorYellow = settingsView.findViewById(R.id.rbColorYellow);
-        RadioButton  rbColorPink = settingsView.findViewById(R.id.rbColorPink);
-        RadioButton  rbColorGreen = settingsView.findViewById(R.id.rbColorGreen);
-        RadioButton  rbColorPurple = settingsView.findViewById(R.id.rbColorPurple);
 
-        String player = (isPlayer2) ? "playerColor2" : "playerColor1";
-        String playerColor = sharedPreferences.getString(player, "");
+        String playerColor = (isPlayer2)
+                ? sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2)
+                : sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
+
+        RadioButton rb;
 
         switch (playerColor) {
-            case "blue": rbColorBlue.setChecked(true); break;
-            case "red": rbColorRed.setChecked(true); break;
-            case "yellow": rbColorYellow.setChecked(true); break;
-            case "pink": rbColorPink.setChecked(true); break;
-            case "green": rbColorGreen.setChecked(true); break;
-            default: rbColorPurple.setChecked(true); break;
+            case PrefUtility.BLUE: rb = settingsView.findViewById(R.id.rbColorBlue); break;
+            case PrefUtility.RED: rb = settingsView.findViewById(R.id.rbColorRed); break;
+            case PrefUtility.YELLOW: rb = settingsView.findViewById(R.id.rbColorYellow); break;
+            case PrefUtility.PINK: rb = settingsView.findViewById(R.id.rbColorPink); break;
+            case PrefUtility.GREEN: rb = settingsView.findViewById(R.id.rbColorGreen); break;
+            default: rb = settingsView.findViewById(R.id.rbColorPurple); break;
         }
+
+        rb.setChecked(true);
+
     }
 
     private void setToggle() {
