@@ -39,8 +39,8 @@ public class GameView extends View {
     private static final int LINE_OFFSET = 50;
 
     private static final int NUM_PLAYERS = 2;
-    private static final int BOARD_WIDTH = 4;
-    private static final int BOARD_HEIGHT = 4;
+    private static int boardWidth;
+    private static int boardHeight;
 
     private Paint paint;
 
@@ -101,8 +101,9 @@ public class GameView extends View {
 //        for (int i = 0 ; i < NUM_PLAYERS ; i++) {
 //            players[i] = new Player("Player " + (i + 1), colors[i % (colors.length - 1)]);
 //        }
-
-        gameState = new GameState(players, BOARD_WIDTH, BOARD_HEIGHT);
+        boardWidth = sharedPreferences.getInt("boardSize", 4);
+        boardHeight = sharedPreferences.getInt("boardSize", 4);
+        gameState = new GameState(players, boardWidth, boardHeight);
     }
 
 
@@ -224,9 +225,9 @@ public class GameView extends View {
         Line[][] horizontalLines = gameState.getHorizontalLines();
         Line[][] verticalLines = gameState.getVerticalLines();
 
-        for (int i = 0 ; i <= BOARD_HEIGHT ; i++) {
-            for (int j = 0 ; j <= BOARD_WIDTH ; j++) {
-                if (i < BOARD_HEIGHT) {
+        for (int i = 0; i <= boardHeight; i++) {
+            for (int j = 0; j <= boardWidth; j++) {
+                if (i < boardHeight) {
                     Line verticalLine = verticalLines[i][j];
                     boolean lineTapped = yPos >= verticalLine.getY1() + LINE_OFFSET
                             && yPos <= verticalLine.getY2() - LINE_OFFSET
@@ -240,7 +241,7 @@ public class GameView extends View {
                         return true;
                     }
                 }
-                if (j < BOARD_WIDTH) {
+                if (j < boardWidth) {
                     Line horizontalLine = horizontalLines[i][j];
                     boolean lineTapped = xPos >= horizontalLine.getX1() + LINE_OFFSET
                             && xPos <= horizontalLine.getX2() - LINE_OFFSET
