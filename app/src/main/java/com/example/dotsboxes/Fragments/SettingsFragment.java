@@ -9,15 +9,16 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.databinding.FragmentSettingsBinding;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.HashMap;
 
 public class SettingsFragment extends Fragment {
@@ -34,8 +35,6 @@ public class SettingsFragment extends Fragment {
 
     private boolean isPlayer2;
 
-    private SwitchCompat switchPlayer;
-
     public SettingsFragment(){ }
 
     @Override
@@ -45,8 +44,11 @@ public class SettingsFragment extends Fragment {
         editor = sharedPreferences.edit();
         settingsView = binding.getRoot();
         Button btnBack = settingsView.findViewById(R.id.btnBack);
-        isPlayer2 = ((SwitchCompat) settingsView.findViewById(R.id.switchColor)).isChecked();
+        MaterialButtonToggleGroup btnToggle = settingsView.findViewById(R.id.btnToggle);
+        MaterialButton btnPlayer2 = settingsView.findViewById(R.id.btnPlayer2);
+        isPlayer2 = btnPlayer2.isChecked();
 
+        hideFloatingBtn(true);
         setRadioGrid();
         setRadioVertices();
         setRadioPlayerColor();
@@ -56,14 +58,15 @@ public class SettingsFragment extends Fragment {
         radioVertices.setOnCheckedChangeListener(getListenerRadioVertices);
         radioColorA.setOnCheckedChangeListener(getListenerRadioColorA);
         radioColorB.setOnCheckedChangeListener(getListenerRadioColorB);
-        switchPlayer.setOnCheckedChangeListener(getListenerSwitchPlayer);
         btnBack.setOnClickListener(getListenerBtnBack);
+        btnToggle.addOnButtonCheckedListener(getListenerBtnToggle);
 
         return settingsView;
     }
 
     private final View.OnClickListener getListenerBtnBack = view -> {
         FragmentManager fragmentManager = getParentFragmentManager();
+        hideFloatingBtn(false);
         fragmentManager.popBackStack();
     };
 
@@ -156,6 +159,15 @@ public class SettingsFragment extends Fragment {
         }
     };
 
+    private final MaterialButtonToggleGroup.OnButtonCheckedListener getListenerBtnToggle = new MaterialButtonToggleGroup.OnButtonCheckedListener() {
+        @Override
+        public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
+            int btnID = group.getCheckedButtonId();
+            isPlayer2 = btnID == R.id.btnPlayer2;
+            setRadioPlayerColor();
+        }
+    };
+
     private void setRadioGrid() {
         radioGrid = settingsView.findViewById(R.id.radioGrid);
         RadioButton rbGrid4 = settingsView.findViewById(R.id.rbGrid4);
@@ -182,7 +194,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setRadioPlayerColor() {
-        setSwitchPlayer();
+        setToggle();
         radioColorA = settingsView.findViewById(R.id.radioColorA);
         radioColorB = settingsView.findViewById(R.id.radioColorB);
         RadioButton rbColorBlue = settingsView.findViewById(R.id.rbColorBlue);
@@ -196,30 +208,31 @@ public class SettingsFragment extends Fragment {
         String playerColor = sharedPreferences.getString(player, "");
 
         switch (playerColor) {
-            case "blue":
-                rbColorBlue.setChecked(true);
-                break;
-            case "red":
-                rbColorRed.setChecked(true);
-                break;
-            case "yellow":
-                rbColorYellow.setChecked(true);
-                break;
-            case "pink":
-                rbColorPink.setChecked(true);
-                break;
-            case "green":
-                rbColorGreen.setChecked(true);
-                break;
-            default:
-                rbColorPurple.setChecked(true);
-                break;
+            case "blue": rbColorBlue.setChecked(true); break;
+            case "red": rbColorRed.setChecked(true); break;
+            case "yellow": rbColorYellow.setChecked(true); break;
+            case "pink": rbColorPink.setChecked(true); break;
+            case "green": rbColorGreen.setChecked(true); break;
+            default: rbColorPurple.setChecked(true); break;
         }
     }
 
-    private void setSwitchPlayer() {
-        switchPlayer = settingsView.findViewById(R.id.switchColor);
-        TextView tvPlayerColor = settingsView.findViewById(R.id.tvPlayerColor);
-        if (isPlayer2) { tvPlayerColor.setText("Color for Player 2"); } else { tvPlayerColor.setText("Color for Player 1");}
+    private void setToggle() {
+        MaterialButton btnPlayer1 = settingsView.findViewById(R.id.btnPlayer1);
+        MaterialButton btnPlayer2 = settingsView.findViewById(R.id.btnPlayer2);
+        if (isPlayer2) { btnPlayer2.setChecked(true); } else { btnPlayer1.setChecked(true); }
+    }
+
+    private void hideFloatingBtn(boolean isHide) {
+        FloatingActionButton fabHelp = (FloatingActionButton)getActivity().findViewById(R.id.btnHelp);
+        FloatingActionButton fabSettings = (FloatingActionButton)getActivity().findViewById(R.id.btnSettings);
+        if (isHide) {
+            fabHelp.hide();
+            fabSettings.hide();
+        } else {
+            fabHelp.show();
+            fabSettings.show();
+        }
+
     }
 }
