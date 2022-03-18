@@ -9,12 +9,9 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.databinding.FragmentSettingsBinding;
@@ -37,8 +34,6 @@ public class SettingsFragment extends Fragment {
     private View settingsView;
 
     private boolean isPlayer2;
-
-    private SwitchCompat switchPlayer;
 
     public SettingsFragment(){ }
 
@@ -63,7 +58,6 @@ public class SettingsFragment extends Fragment {
         radioVertices.setOnCheckedChangeListener(getListenerRadioVertices);
         radioColorA.setOnCheckedChangeListener(getListenerRadioColorA);
         radioColorB.setOnCheckedChangeListener(getListenerRadioColorB);
-//        switchPlayer.setOnCheckedChangeListener(getListenerSwitchPlayer);
         btnBack.setOnClickListener(getListenerBtnBack);
         btnToggle.addOnButtonCheckedListener(getListenerBtnToggle);
 
@@ -214,24 +208,12 @@ public class SettingsFragment extends Fragment {
         String playerColor = sharedPreferences.getString(player, "");
 
         switch (playerColor) {
-            case "blue":
-                rbColorBlue.setChecked(true);
-                break;
-            case "red":
-                rbColorRed.setChecked(true);
-                break;
-            case "yellow":
-                rbColorYellow.setChecked(true);
-                break;
-            case "pink":
-                rbColorPink.setChecked(true);
-                break;
-            case "green":
-                rbColorGreen.setChecked(true);
-                break;
-            default:
-                rbColorPurple.setChecked(true);
-                break;
+            case "blue": rbColorBlue.setChecked(true); break;
+            case "red": rbColorRed.setChecked(true); break;
+            case "yellow": rbColorYellow.setChecked(true); break;
+            case "pink": rbColorPink.setChecked(true); break;
+            case "green": rbColorGreen.setChecked(true); break;
+            default: rbColorPurple.setChecked(true); break;
         }
     }
 
@@ -253,9 +235,4 @@ public class SettingsFragment extends Fragment {
         }
 
     }
-//    private void setSwitchPlayer() {
-////        switchPlayer = settingsView.findViewById(R.id.switchColor);
-//        TextView tvPlayerColor = settingsView.findViewById(R.id.tvPlayerColor);
-//        if (isPlayer2) { tvPlayerColor.setText("90dpr 2"); } else { tvPlayerColor.setText("Color for Player 1");}
-//    }
 }
