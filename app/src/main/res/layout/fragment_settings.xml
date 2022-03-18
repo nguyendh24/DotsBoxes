@@ -46,9 +46,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <!-- Board Size -->
+
             <TextView
                 android:id="@+id/tvBoardSize"
                 android:layout_width="wrap_content"
@@ -57,7 +59,7 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/boardSize"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.117"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvSettingsHeader" />
 
@@ -124,6 +126,7 @@
             </LinearLayout>
 
             <!-- Vertices -->
+
             <TextView
                 android:id="@+id/tvVertices"
                 android:layout_width="wrap_content"
@@ -132,7 +135,7 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/vertices"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.112"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/boardSize" />
 
@@ -196,33 +199,34 @@
             </LinearLayout>
 
             <!-- Player Color -->
+
+            <!--            <androidx.appcompat.widget.SwitchCompat-->
+<!--                android:id="@+id/switchColor"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="27dp"-->
+<!--                android:layout_marginBottom="21dp"-->
+<!--                android:scaleX=".8"-->
+<!--                android:scaleY=".8"-->
+<!--                android:textColor="@color/white"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/playerColor"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.33"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/tvPlayerColor"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/vertices"-->
+<!--                app:layout_constraintVertical_bias="0.6" />-->
+
             <TextView
                 android:id="@+id/tvPlayerColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/color_for_player"
+                android:text="Color"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/playerColor"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.107"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/vertices" />
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/switchColor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="27dp"
-                android:layout_marginBottom="21dp"
-                android:scaleX=".8"
-                android:scaleY=".8"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/playerColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.33"
-                app:layout_constraintStart_toEndOf="@+id/tvPlayerColor"
-                app:layout_constraintTop_toBottomOf="@+id/vertices"
-                app:layout_constraintVertical_bias="0.6" />
 
             <LinearLayout
                 android:id="@+id/playerColor"
@@ -310,6 +314,45 @@
                 </RadioGroup>
 
             </LinearLayout>
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/btnToggle"
+                android:layout_width="175dp"
+                android:layout_height="47dp"
+                app:layout_constraintBottom_toTopOf="@+id/playerColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.86"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vertices"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPlayer1"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:insetLeft="10dp"
+                    android:insetTop="6dp"
+                    android:insetBottom="6dp"
+                    android:text="Player 1"
+                    android:textColor="@color/white"
+                    android:textSize="10dp"
+                    tools:layout_editor_absoluteX="142dp"
+                    tools:layout_editor_absoluteY="560dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPlayer2"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:insetRight="10dp"
+                    android:text="Player 2"
+                    android:textColor="@color/white"
+                    android:textSize="10dp"
+                    tools:layout_editor_absoluteX="55dp"
+                    tools:layout_editor_absoluteY="560dp" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
