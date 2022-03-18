@@ -5,18 +5,29 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".Fragments.GameTypeFragment">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:text="@string/dots_boxes"
-        android:fontFamily="@font/sawarabi_mincho"
-        android:textSize="50dp" />
+    <!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="150dp"-->
+<!--        android:text="@string/dots_boxes"-->
+<!--        android:fontFamily="@font/sawarabi_mincho"-->
+<!--        android:textSize="50dp" />-->
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="280dp"
+        android:layout_height="303dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="61dp"
+        android:layout_marginEnd="71dp"
+        android:layout_marginBottom="379dp"
+        android:src="@drawable/logo">
+    </androidx.appcompat.widget.AppCompatImageView>
 
     <Button
         android:id="@+id/btnPlayPerson"
@@ -28,7 +39,7 @@
         android:drawableLeft="@drawable/ic_person"
         android:text="@string/play_person"
         android:textSize="20sp"
-        app:backgroundTint="@color/darkGround"/>
+        app:backgroundTint="@color/primaryBtn"/>
 
     <Button
         android:id="@+id/btnPlayComputer"
@@ -40,7 +51,7 @@
         android:drawableLeft="@drawable/ic_computer"
         android:text="@string/play_computer"
         android:textSize="20sp"
-        app:backgroundTint="@color/darkGround" />
+        app:backgroundTint="@color/primaryBtn" />
 
     <ImageView
         android:id="@+id/star1"

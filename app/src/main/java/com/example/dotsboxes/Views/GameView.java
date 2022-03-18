@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-
 import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
@@ -22,8 +21,6 @@ import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.Components.Player;
-import com.example.dotsboxes.PrefUtility;
-import com.example.dotsboxes.R;
 
 public class GameView extends View {
 
@@ -32,7 +29,6 @@ public class GameView extends View {
 
     private static final int DOT_COLOR = Color.WHITE;
     private static final int DOT_OPACITY = 255;
-    private static final int DOT_RADIUS = 20;
     private static final int BITMAP_WIDTH = 30;
 
     private static final int UNSELECTED_LINE_OPACITY = 50;
@@ -148,28 +144,11 @@ public class GameView extends View {
 
         SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         String vertex = sharedPreferences.getString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
-        Bitmap triangle = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_triangle);
-        Bitmap star = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_star);
-//        Bitmap cloud = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_cloud);
-//        Bitmap moon = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_moon);
-//        Bitmap sun = getBitmapFromVectorDrawable(MainActivity.getContext(), R.drawable.ic_sun);
+        Bitmap bitmap = getBitmapFromVectorDrawable(MainActivity.getContext(), PrefUtility.getVertex(vertex));
 
         for (Dot[] row : gameState.getDots()) {
             for (Dot dot : row) {
-                if (vertex.equals("dot")) {
-                    canvas.drawCircle(dot.getX(), dot.getY(), DOT_RADIUS, paint);
-                } else if (vertex.equals("triangle")) {
-                    canvas.drawBitmap(triangle, dot.getX() - BITMAP_WIDTH, dot.getY() - BITMAP_WIDTH, paint);
-                } else {
-                    canvas.drawBitmap(star, dot.getX() - BITMAP_WIDTH, dot.getY() - BITMAP_WIDTH, paint);
-                }
-//              else if (vertex.equals("cloud")) {
-//                  canvas.drawBitmap(cloud, dot.getX() - BITMAP_WIDTH, dot.getY() - BITMAP_WIDTH, paint);
-//              } else if (vertex.equals("moon")) {
-//                  canvas.drawBitmap(moon, dot.getX() - BITMAP_WIDTH, dot.getY() - BITMAP_WIDTH, paint);
-//              } else (vertex.equals("sun")) {
-//                  canvas.drawBitmap(sun, dot.getX() - BITMAP_WIDTH, dot.getY() - BITMAP_WIDTH, paint);
-//              }
+                canvas.drawBitmap(bitmap, dot.getX() - BITMAP_WIDTH, dot.getY() - BITMAP_WIDTH, paint);
             }
         }
         paint.clearShadowLayer();
@@ -179,9 +158,12 @@ public class GameView extends View {
         Drawable drawable = ContextCompat.getDrawable(context, drawableId);
         Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
         Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, BITMAP_WIDTH * 2, BITMAP_WIDTH * 2, true);
+
         Canvas canvas = new Canvas(resizedBitmap);
+
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
+
         bitmap.recycle(); // to avoid memory leaks
         return resizedBitmap;
     }

@@ -1,5 +1,7 @@
 package com.example.dotsboxes;
 
+import android.graphics.Bitmap;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +18,9 @@ public class PrefUtility {
     public static final String DOT = "dot";
     public static final String TRIANGLE = "triangle";
     public static final String STAR = "star";
+    public static final String SUN = "sun";
+    public static final String MOON = "moon";
+    public static final String CLOUD = "cloud";
 
     public static final String BLUE = "blue";
     public static final String RED = "red";
@@ -38,6 +43,21 @@ public class PrefUtility {
         put(GREEN, R.color.greenPlayer);
         put(PURPLE, R.color.purplePlayer);
     }};
+
+    private static final Map<String, Integer> vertexMap = new HashMap<String, Integer>() {{
+        put(DOT, R.drawable.ic_circle);
+        put(TRIANGLE, R.drawable.ic_triangle);
+        put(STAR, R.drawable.ic_star);
+        put(SUN, R.drawable.ic_sun);
+        put(MOON, R.drawable.ic_moon);
+        put(CLOUD, R.drawable.ic_cloud);
+    }};
+
+    public static int getVertex(String vertex) {
+        if (vertexMap.containsKey(vertex))
+            return vertexMap.get(vertex);
+        return 0;
+    }
 
     public static int getColor(String color) {
         if (colorMap.containsKey(color)) {

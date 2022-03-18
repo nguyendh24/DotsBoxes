@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
@@ -27,7 +25,8 @@ public class SettingsFragment extends Fragment {
     private FragmentSettingsBinding binding;
 
     private RadioGroup radioGrid;
-    private RadioGroup radioVertices;
+    private RadioGroup radioVerticesA;
+    private RadioGroup radioVerticesB;
     private RadioGroup radioColorA;
     private RadioGroup radioColorB;
 
@@ -45,7 +44,6 @@ public class SettingsFragment extends Fragment {
         sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         settingsView = binding.getRoot();
-        Button btnBack = settingsView.findViewById(R.id.btnBack);
         MaterialButtonToggleGroup btnToggle = settingsView.findViewById(R.id.btnToggle);
         MaterialButton btnPlayer2 = settingsView.findViewById(R.id.btnPlayer2);
         isPlayer2 = btnPlayer2.isChecked();
@@ -57,20 +55,15 @@ public class SettingsFragment extends Fragment {
         editor.apply();
 
         radioGrid.setOnCheckedChangeListener(getListenerRadioGrid);
-        radioVertices.setOnCheckedChangeListener(getListenerRadioVertices);
+        radioVerticesA.setOnCheckedChangeListener(getListenerRadioVerticesA);
+        radioVerticesB.setOnCheckedChangeListener(getListenerRadioVerticesB);
         radioColorA.setOnCheckedChangeListener(getListenerRadioColorA);
         radioColorB.setOnCheckedChangeListener(getListenerRadioColorB);
-        btnBack.setOnClickListener(getListenerBtnBack);
         btnToggle.addOnButtonCheckedListener(getListenerBtnToggle);
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         return settingsView;
     }
-
-    private final View.OnClickListener getListenerBtnBack = view -> {
-        FragmentManager fragmentManager = getParentFragmentManager();
-        hideFloatingBtn(false);
-        fragmentManager.popBackStack();
-    };
 
     private final RadioGroup.OnCheckedChangeListener getListenerRadioGrid = new RadioGroup.OnCheckedChangeListener() {
         @Override
@@ -88,10 +81,25 @@ public class SettingsFragment extends Fragment {
         }
     };
 
+    /** Custom back navigation for showing FAB */
+    private final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            FragmentManager fragmentManager = getParentFragmentManager();
+            hideFloatingBtn(false);
+            fragmentManager.popBackStack();
+        }
+    };
 
-    private final RadioGroup.OnCheckedChangeListener getListenerRadioVertices = new RadioGroup.OnCheckedChangeListener() {
+    private final RadioGroup.OnCheckedChangeListener getListenerRadioVerticesA = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+            if (checkedId != -1) {
+                radioVerticesB.setOnCheckedChangeListener(null);
+                radioVerticesB.clearCheck();
+                radioVerticesB.setOnCheckedChangeListener(getListenerRadioVerticesB);
+            }
+
             int btnID = radioGroup.getCheckedRadioButtonId();
 
             HashMap<Integer, String> vertexMap = new HashMap<Integer, String>() {{
@@ -102,9 +110,34 @@ public class SettingsFragment extends Fragment {
 
             editor.putString(PrefUtility.VERTEX, vertexMap.get(btnID));
             editor.apply();
+            setRadioVertices();
         }
     };
 
+    private final RadioGroup.OnCheckedChangeListener getListenerRadioVerticesB = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+            if (checkedId != -1) {
+                radioVerticesA.setOnCheckedChangeListener(null);
+                radioVerticesA.clearCheck();
+                radioVerticesA.setOnCheckedChangeListener(getListenerRadioVerticesA);
+            }
+
+            int btnID = radioGroup.getCheckedRadioButtonId();
+
+            HashMap<Integer, String> vertexMap = new HashMap<Integer, String>() {{
+                put(R.id.rbSun, PrefUtility.SUN);
+                put(R.id.rbMoon, PrefUtility.MOON);
+                put(R.id.rbCloud, PrefUtility.CLOUD);
+            }};
+
+            editor.putString(PrefUtility.VERTEX, vertexMap.get(btnID));
+            editor.apply();
+            setRadioVertices();
+        }
+    };
+
+    /** Color */
     private final RadioGroup.OnCheckedChangeListener getListenerRadioColorA = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -153,14 +186,6 @@ public class SettingsFragment extends Fragment {
         }
     };
 
-    private final CompoundButton.OnCheckedChangeListener getListenerSwitchPlayer = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-            isPlayer2 = b;
-            setRadioPlayerColor();
-        }
-    };
-
     private final MaterialButtonToggleGroup.OnButtonCheckedListener getListenerBtnToggle = new MaterialButtonToggleGroup.OnButtonCheckedListener() {
         @Override
         public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
@@ -183,16 +208,23 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setRadioVertices() {
-        radioVertices = settingsView.findViewById(R.id.radioVertices);
-        RadioButton rbDot = settingsView.findViewById(R.id.rbDot);
-        RadioButton rbTriangle = settingsView.findViewById(R.id.rbTriangle);
-        RadioButton  rbStar = settingsView.findViewById(R.id.rbStar);
+        radioVerticesA = settingsView.findViewById(R.id.radioVerticesA);
+        radioVerticesB = settingsView.findViewById(R.id.radioVerticesB);
 
         String vertex = sharedPreferences.getString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
 
-        if (vertex.equals(PrefUtility.DOT)) { rbDot.setChecked(true); }
-        else if (vertex.equals(PrefUtility.TRIANGLE)) { rbTriangle.setChecked(true); }
-        else { rbStar.setChecked(true); }
+        RadioButton rb;
+
+        switch (vertex) {
+            case PrefUtility.DOT: rb = settingsView.findViewById(R.id.rbDot); break;
+            case PrefUtility.TRIANGLE: rb = settingsView.findViewById(R.id.rbTriangle); break;
+            case PrefUtility.STAR: rb = settingsView.findViewById(R.id.rbStar); break;
+            case PrefUtility.SUN: rb = settingsView.findViewById(R.id.rbSun); break;
+            case PrefUtility.MOON: rb = settingsView.findViewById(R.id.rbMoon); break;
+            default: rb = settingsView.findViewById(R.id.rbCloud); break;
+        }
+
+        rb.setChecked(true);
     }
 
     private void setRadioPlayerColor() {
@@ -216,7 +248,6 @@ public class SettingsFragment extends Fragment {
         }
 
         rb.setChecked(true);
-
     }
 
     private void setToggle() {
