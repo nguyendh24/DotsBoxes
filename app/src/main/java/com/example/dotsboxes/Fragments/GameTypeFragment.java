@@ -3,11 +3,9 @@ package com.example.dotsboxes.Fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,16 +29,11 @@ public class GameTypeFragment extends Fragment {
         sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         View homeView = binding.getRoot();
-        Button btnPlayPerson = homeView.findViewById(R.id.btnPlayPerson);
-        Button btnPlayComputer = homeView.findViewById(R.id.btnPlayComputer);
 
-        btnPlayPerson.setOnClickListener(view -> {
-            newGame(false);
-        });
-
-        btnPlayComputer.setOnClickListener(view -> {
-            newGame(true);
-        });
+        btnPlayPerson = homeView.findViewById(R.id.btnPlayPerson);
+        btnPlayComputer = homeView.findViewById(R.id.btnPlayComputer);
+        btnPlayPerson.setOnClickListener(view -> newGame(false));
+        btnPlayComputer.setOnClickListener(view -> newGame(true));
 
         return homeView;
     }

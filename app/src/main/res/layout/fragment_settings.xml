@@ -6,24 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.SettingsFragment">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="141dp"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/ic_arrow_back"
-        android:text="back"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:iconPadding="-10dp"
-        app:layout_constraintBottom_toTopOf="@+id/divider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -146,6 +128,7 @@
                 android:layout_margin="25dp"
                 android:background="@drawable/settings_btn_bg"
                 android:gravity="center_horizontal"
+                android:orientation="vertical"
                 android:padding="20dp"
                 app:layout_constraintBottom_toTopOf="@+id/tvPlayerColor"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +137,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvVertices">
 
                 <RadioGroup
-                    android:id="@+id/radioVertices"
+                    android:id="@+id/radioVerticesA"
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
                     android:gravity="center_horizontal"
@@ -196,26 +179,53 @@
                         android:gravity="center"
                         android:paddingLeft="30dp" />
                 </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/radioVerticesB"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:gravity="center_horizontal"
+                    android:orientation='horizontal'>
+
+                    <RadioButton
+                        android:id="@+id/rbSun"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="33"
+                        android:background="@drawable/btn_selector"
+                        android:button="@null"
+                        android:drawableStart="@drawable/ic_sun"
+                        android:gravity="center"
+                        android:paddingLeft="30dp" />
+
+                    <RadioButton
+                        android:id="@+id/rbMoon"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="33"
+                        android:background="@drawable/btn_selector"
+                        android:button="@null"
+                        android:drawableStart="@drawable/ic_moon"
+                        android:gravity="center"
+                        android:paddingLeft="30dp" />
+
+                    <RadioButton
+                        android:id="@+id/rbCloud"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:layout_weight="33"
+                        android:background="@drawable/btn_selector"
+                        android:button="@null"
+                        android:drawableStart="@drawable/ic_cloud"
+                        android:gravity="center"
+                        android:paddingLeft="30dp" />
+                </RadioGroup>
             </LinearLayout>
 
             <!-- Player Color -->
-
-            <!--            <androidx.appcompat.widget.SwitchCompat-->
-<!--                android:id="@+id/switchColor"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="27dp"-->
-<!--                android:layout_marginBottom="21dp"-->
-<!--                android:scaleX=".8"-->
-<!--                android:scaleY=".8"-->
-<!--                android:textColor="@color/white"-->
-<!--                app:layout_constraintBottom_toTopOf="@+id/playerColor"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHorizontal_bias="0.33"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/tvPlayerColor"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/vertices"-->
-<!--                app:layout_constraintVertical_bias="0.6" />-->
-
             <TextView
                 android:id="@+id/tvPlayerColor"
                 android:layout_width="wrap_content"
@@ -234,7 +244,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"
                 android:background="@drawable/settings_btn_bg"
-                android:gravity="center_vertical"
+                android:gravity="center_horizontal"
                 android:orientation="vertical"
                 android:padding="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
