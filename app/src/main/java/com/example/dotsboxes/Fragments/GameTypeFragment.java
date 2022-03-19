@@ -19,7 +19,6 @@ import com.example.dotsboxes.databinding.FragmentGameTypeBinding;
 
 public class GameTypeFragment extends Fragment {
 
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
     public GameTypeFragment() {}
@@ -27,7 +26,7 @@ public class GameTypeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         com.example.dotsboxes.databinding.FragmentGameTypeBinding binding = FragmentGameTypeBinding.inflate(getLayoutInflater());
-        sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         View homeView = binding.getRoot();
 

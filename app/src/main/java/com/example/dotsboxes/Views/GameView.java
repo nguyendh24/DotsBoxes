@@ -22,8 +22,6 @@ import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.MainActivity;
-import com.example.dotsboxes.R;
-import com.example.dotsboxes.Components.Player;
 
 public class GameView extends View {
 

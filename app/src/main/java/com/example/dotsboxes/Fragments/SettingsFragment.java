@@ -22,7 +22,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.HashMap;
 
 public class SettingsFragment extends Fragment {
-    private FragmentSettingsBinding binding;
 
     private RadioGroup radioGrid;
     private RadioGroup radioVerticesA;
@@ -40,7 +39,7 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentSettingsBinding.inflate(getLayoutInflater());
+        com.example.dotsboxes.databinding.FragmentSettingsBinding binding = FragmentSettingsBinding.inflate(getLayoutInflater());
         sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         settingsView = binding.getRoot();

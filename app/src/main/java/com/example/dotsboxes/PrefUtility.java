@@ -1,7 +1,5 @@
 package com.example.dotsboxes;
 
-import android.graphics.Bitmap;
-
 import java.util.HashMap;
 import java.util.Map;
 

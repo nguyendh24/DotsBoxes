@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import com.example.dotsboxes.Fragments.GameTypeFragment;
-import com.example.dotsboxes.Fragments.HomeFragment;
 import com.example.dotsboxes.Fragments.SettingsFragment;
 import com.example.dotsboxes.databinding.ActivityMainBinding;
 
@@ -21,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     public static float deviceHeight;
     public static float deviceWidth;
     private static boolean isFirstTime;
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private final SettingsFragment settingsFragment = new SettingsFragment();
 
@@ -99,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchStoredData() {
-        sharedPreferences = getSharedPreferences(PrefUtility.SHARED_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(PrefUtility.SHARED_PREF_NAME, MODE_PRIVATE);
         editor = sharedPreferences.edit();
         isFirstTime = sharedPreferences.getBoolean(PrefUtility.IS_FIRST_TIME, true);
     }

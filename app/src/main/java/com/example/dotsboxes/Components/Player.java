@@ -1,6 +1,5 @@
 package com.example.dotsboxes.Components;
 
-//Create a player/user
 public class Player {
 
     private String name;
