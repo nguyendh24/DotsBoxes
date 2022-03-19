@@ -34,8 +34,6 @@ public class GameFragment extends Fragment {
         CardView cvP2 = myView.findViewById(R.id.cvP2);
         setCardViews(cvP1, cvP2);
 
-        btnPlayAgain.setOnClickListener(view -> gameView.resetGame());
-
         SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
         

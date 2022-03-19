@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.R;
@@ -30,8 +31,8 @@ public class GameTypeFragment extends Fragment {
         editor = sharedPreferences.edit();
         View homeView = binding.getRoot();
 
-        btnPlayPerson = homeView.findViewById(R.id.btnPlayPerson);
-        btnPlayComputer = homeView.findViewById(R.id.btnPlayComputer);
+        Button btnPlayPerson = homeView.findViewById(R.id.btnPlayPerson);
+        Button btnPlayComputer = homeView.findViewById(R.id.btnPlayComputer);
         btnPlayPerson.setOnClickListener(view -> newGame(false));
         btnPlayComputer.setOnClickListener(view -> newGame(true));
 
@@ -41,6 +42,7 @@ public class GameTypeFragment extends Fragment {
     private void newGame(boolean playComputer) {
         editor.putBoolean(PrefUtility.IS_PLAY_COMPUTER, playComputer);
         editor.apply();
+        GameState.getInstance().resetGame();
         // Create new fragment and transaction
         FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
