@@ -18,7 +18,6 @@ import com.example.dotsboxes.databinding.FragmentSettingsBinding;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.HashMap;
 
 public class SettingsFragment extends Fragment {
@@ -44,8 +43,6 @@ public class SettingsFragment extends Fragment {
         editor = sharedPreferences.edit();
         settingsView = binding.getRoot();
         MaterialButtonToggleGroup btnToggle = settingsView.findViewById(R.id.btnToggle);
-        MaterialButton btnPlayer2 = settingsView.findViewById(R.id.btnPlayer2);
-        isPlayer2 = btnPlayer2.isChecked();
 
         hideFloatingBtn(true);
         setRadioGrid();
