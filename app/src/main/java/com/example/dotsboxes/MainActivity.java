@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
             editor.putString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
             editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
+            editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
             editor.commit();
         } else {
             /** DELETE LATER, JUST SO NO ONE HAS TO WIPE DATA ON EMULATOR */
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
             editor.putString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
             editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
+            editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
             editor.putString(PrefUtility.PLAYER_NAME, PrefUtility.DEFAULT_PLAYER_NAME);
             editor.commit();
         }

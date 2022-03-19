@@ -4,7 +4,7 @@ package com.example.dotsboxes.Components;
 public class Player {
 
     private String name;
-    private final int color;
+    private int color;
     private int score;
     private boolean goAgain;
 
@@ -34,6 +34,10 @@ public class Player {
 
     public String getName() {
         return name;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     public int getColor() {

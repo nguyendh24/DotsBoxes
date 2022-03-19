@@ -54,7 +54,6 @@ public class SettingsFragment extends Fragment {
         setRadioGrid();
         setRadioVertices();
         setRadioPlayerColor();
-        editor.apply();
 
         radioGrid.setOnCheckedChangeListener(getListenerRadioGrid);
         radioVertices.setOnCheckedChangeListener(getListenerRadioVertices);

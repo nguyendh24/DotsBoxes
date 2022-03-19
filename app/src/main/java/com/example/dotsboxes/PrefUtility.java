@@ -11,6 +11,8 @@ public class PrefUtility {
     public static final String PLAYER_COLOR_1 = "playerColor1";
     public static final String PLAYER_COLOR_2 = "playerColor2";
     public static final String IS_FIRST_TIME = "isFirstTime";
+    public static final String IS_GAME_SAVED = "isGameSaved";
+    public static final String IS_PLAY_COMPUTER = "isPlayComputer";
     public static final String PLAYER_NAME = "playerName";
 
     public static final String DOT = "dot";

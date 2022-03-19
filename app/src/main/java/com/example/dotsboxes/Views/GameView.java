@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,8 +23,6 @@ import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.MainActivity;
-import com.example.dotsboxes.Components.Player;
-import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.R;
 
 public class GameView extends View {
@@ -40,11 +40,18 @@ public class GameView extends View {
     private static final int LINE_WIDTH = 12;
     private static final int LINE_OFFSET = 50;
 
-    private static final int NUM_PLAYERS = 2;
     private static int boardWidth;
     private static int boardHeight;
 
+    private TextView statusDisplay;
+    private TextView p1Score;
+    private TextView p2Score;
+    private Button btnPlayAgain;
+
     private Paint paint;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     private GameState gameState;
 
@@ -70,20 +77,28 @@ public class GameView extends View {
 
     /** If we create a new instance of CustomView and is included in a new layout file for code optimization */
     private void init(@Nullable AttributeSet set) {
-
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
-        Player[] players = new Player[NUM_PLAYERS];
+        int size = sharedPreferences.getInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
+        boardWidth = size;
+        boardHeight = size;
 
-        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        gameState = GameState.getInstance();
+        gameState.setUpBoard(size);
+
+        boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
+        gameState.setPlayComputer(playComputer);
+
+        String p1Name = sharedPreferences.getString(PrefUtility.PLAYER_NAME, PrefUtility.DEFAULT_PLAYER_NAME);
+        gameState.setP1Name(p1Name);
+        if (!playComputer) gameState.setP2Name(p1Name + "'s Friend");
+
         String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
         String playerColor2 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
-        players[0] = new Player("Player " + 1, getResources().getColor(PrefUtility.getColor(playerColor1)));
-        players[1] = new Player("Player " + 2, getResources().getColor(PrefUtility.getColor(playerColor2)));
-
-        boardWidth = sharedPreferences.getInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
-        boardHeight = sharedPreferences.getInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
-        gameState = new GameState(players, boardWidth, boardHeight);
+        gameState.setP1Color(getResources().getColor(PrefUtility.getColor(playerColor1)));
+        gameState.setP2Color(getResources().getColor(PrefUtility.getColor(playerColor2)));
     }
 
 
@@ -194,10 +209,39 @@ public class GameView extends View {
             double yPos = event.getY();
             if (findTappedLine(xPos, yPos)) {
                 gameState.advanceTurn();
+                updateDisplays();
                 this.postInvalidate(); // forces view to call onDraw
+                if (gameState.isComputerTurn()) {
+                    runComputerTurn();
+                }
             }
         }
         return true;
+    }
+
+    private void runComputerTurn() {
+        // Short delay to improve user experience
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            gameState.computerTurn();
+            updateDisplays();
+            this.postInvalidate(); // forces view to call onDraw
+            if (gameState.isComputerTurn()) {
+                runComputerTurn();
+            }
+        }, 500);
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void updateDisplays() {
+        p1Score.setText(Integer.toString(gameState.getP1Score()));
+        p2Score.setText(Integer.toString(gameState.getP2Score()));
+        if (gameState.gameOver()) {
+            statusDisplay.setText(gameState.getResultsString());
+            btnPlayAgain.setVisibility(View.VISIBLE);
+        } else {
+            statusDisplay.setText(gameState.getCurrentPlayer().getName() + "'s Turn");
+            btnPlayAgain.setVisibility(View.INVISIBLE);
+        }
     }
 
     private boolean findTappedLine(double xPos, double yPos) {
@@ -246,23 +290,19 @@ public class GameView extends View {
                                 TextView p2Name,
                                 TextView statusDisplay,
                                 Button btnPlayAgain) {
-        gameState.setUpReferences(
-                this,
-                p1Score,
-                p2Score,
-                p1Name,
-                p2Name,
-                statusDisplay,
-                btnPlayAgain
-        );
+        this.p1Score = p1Score;
+        this.p2Score = p2Score;
+        p1Name.setText(gameState.getP1Name());
+        p2Name.setText(gameState.getP2Name());
+        this.statusDisplay = statusDisplay;
+        this.btnPlayAgain = btnPlayAgain;
+        btnPlayAgain.setOnClickListener(view -> resetGame());
+        updateDisplays();
     }
 
-    public void setPlayComputer(boolean playComputer) {
-        gameState.setPlayComputer(playComputer);
-    }
-
-    public void resetGame() {
+    private void resetGame() {
         gameState.resetGame();
+        updateDisplays();
         this.postInvalidate();
     }
 

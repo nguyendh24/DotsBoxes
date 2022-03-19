@@ -20,22 +20,12 @@ import com.example.dotsboxes.Views.GameView;
 import com.example.dotsboxes.databinding.FragmentGameBinding;
 
 public class GameFragment extends Fragment {
-    private boolean playComputer;
-    private GameView gameView;
-
-    public GameFragment() {
-        this(false);
-    }
-
-    public GameFragment(boolean playComputer) {
-        this.playComputer = playComputer;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         com.example.dotsboxes.databinding.FragmentGameBinding binding = FragmentGameBinding.inflate(getLayoutInflater());
         View myView = binding.getRoot();
-        gameView = myView.findViewById(R.id.gameView);
+        GameView gameView = myView.findViewById(R.id.gameView);
         TextView p1Score = myView.findViewById(R.id.tvP1Score);
         TextView p2Score = myView.findViewById(R.id.tvP2Score);
         TextView p1Name = myView.findViewById(R.id.tvP1Name);
@@ -47,17 +37,15 @@ public class GameFragment extends Fragment {
         CardView cvP2 = myView.findViewById(R.id.cvP2);
         setCardViews(cvP1, cvP2);
 
-        btnPlayAgain.setOnClickListener(view -> {
-            gameView.resetGame();
-        });
-
         btnBack.setOnClickListener(view -> {
             FragmentManager fragmentManager = getParentFragmentManager();
             fragmentManager.popBackStack();
         });
 
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
         if (playComputer) { ImageView ivP2 = myView.findViewById(R.id.ivP2); ivP2.setImageResource(R.drawable.ic_computer); }
-        gameView.setPlayComputer(playComputer);
+
         gameView.setUpReferences(p1Score, p2Score, p1Name, p2Name, statusDisplay, btnPlayAgain);
         return myView;
     }
