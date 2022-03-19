@@ -9,39 +9,39 @@
         android:id="@+id/btnLetsPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
+        android:backgroundTint="@color/primaryBtn"
         android:text="@string/lets_play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvIntroduction" />
+        app:layout_constraintTop_toBottomOf="@+id/ptUsername"
+        app:layout_constraintVertical_bias="0.491" />
 
     <TextView
         android:id="@+id/tvIntroduction"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
+        android:layout_width="347dp"
+        android:layout_height="76dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="40dp"
         android:gravity="center"
-        android:textSize="18sp"
         android:text="@string/new_user"
-        app:layout_constraintBottom_toTopOf="@+id/btnLetsPlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ptUsername" />
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@+id/ptUsername"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/ptUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
         android:ems="10"
+        android:gravity="center"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="randomGeneratedUser"
-        app:layout_constraintBottom_toTopOf="@+id/tvIntroduction"
+        android:text="what\'s your name?"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

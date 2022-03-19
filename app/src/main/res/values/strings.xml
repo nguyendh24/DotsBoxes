@@ -3,7 +3,7 @@
     <string name="get_started">Get Started!</string>
     <string name="welcome">Welcome to Dots &amp; Boxes</string>
     <string name="lets_play">Let\'s Play!</string>
-    <string name="new_user">We\'ve randomly chosen a name and image for you. You can change these at any time, here or under settings.</string>
+    <string name="new_user">Looks like you\'re new here. What\'s your name?</string>
     <string name="new_game">+ New Game</string>
     <string name="how_to">How to play</string>
     <string name="play_person">Play another person</string>
