@@ -18,4 +18,5 @@
     <string name="color_for_player">Color for Player</string>
     <string name="settings_button">settings button</string>
     <string name="help_button">help button</string>
+    <string name="board_warning">Changing the board size will result in any game progress being lost.\nDo you want to continue?</string>
 </resources>

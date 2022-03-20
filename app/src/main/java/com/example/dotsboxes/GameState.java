@@ -149,6 +149,10 @@ public class GameState {
         unfilledLines.get(move).selectLine(players[COMPUTER_PLAYER]);
     }
 
+    public int getTurn() {
+        return turn;
+    }
+
     public Player getCurrentPlayer() {
         return players[turn];
     }

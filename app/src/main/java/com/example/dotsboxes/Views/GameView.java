@@ -13,9 +13,12 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import com.example.dotsboxes.Fragments.GameFragment;
 import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
@@ -43,6 +46,8 @@ public class GameView extends View {
     private TextView statusDisplay;
     private TextView p1Score;
     private TextView p2Score;
+    private ImageView p1Turn;
+    private ImageView p2Turn;
     private Button btnPlayAgain;
 
     private Paint paint;
@@ -222,6 +227,9 @@ public class GameView extends View {
             statusDisplay.setText(gameState.getResultsString());
             btnPlayAgain.setVisibility(View.VISIBLE);
         } else {
+            if (gameState.getTurn() == 0) { GameFragment.animateTurn(p1Turn, p2Turn); }
+            else { GameFragment.animateTurn(p2Turn, p1Turn); }
+
             statusDisplay.setText(gameState.getCurrentPlayer().getName() + "'s Turn");
             btnPlayAgain.setVisibility(View.INVISIBLE);
         }
@@ -272,13 +280,17 @@ public class GameView extends View {
                                 TextView p1Name,
                                 TextView p2Name,
                                 TextView statusDisplay,
-                                Button btnPlayAgain) {
+                                Button btnPlayAgain,
+                                ImageView p1Turn,
+                                ImageView p2Turn) {
         this.p1Score = p1Score;
         this.p2Score = p2Score;
         p1Name.setText(gameState.getP1Name());
         p2Name.setText(gameState.getP2Name());
         this.statusDisplay = statusDisplay;
         this.btnPlayAgain = btnPlayAgain;
+        this.p1Turn = p1Turn;
+        this.p2Turn = p2Turn;
         btnPlayAgain.setOnClickListener(view -> resetGame());
         updateDisplays();
     }
