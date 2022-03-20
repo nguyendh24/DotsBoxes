@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.example.dotsboxes.PrefUtility;
@@ -60,30 +61,17 @@ public class SettingsFragment extends Fragment {
         return settingsView;
     }
 
-    private final RadioGroup.OnCheckedChangeListener getListenerRadioGrid = new RadioGroup.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-            int btnID = radioGroup.getCheckedRadioButtonId();
+    /** Listeners */
+    private final RadioGroup.OnCheckedChangeListener getListenerRadioGrid = (radioGroup, checkedId) -> {
+        int btnID = radioGroup.getCheckedRadioButtonId();
+        HashMap<Integer, Integer> boardMap = new HashMap<Integer, Integer>() {{
+            put(R.id.rbGrid4, 4);
+            put(R.id.rbGrid5, 5);
+            put(R.id.rbGrid6, 6);
+        }};
 
-            HashMap<Integer, Integer> boardMap = new HashMap<Integer, Integer>() {{
-                put(R.id.rbGrid4, 4);
-                put(R.id.rbGrid5, 5);
-                put(R.id.rbGrid6, 6);
-            }};
+        gridChangeDialog(boardMap.get(btnID));
 
-            editor.putInt(PrefUtility.BOARD_SIZE, boardMap.get(btnID));
-            editor.apply();
-        }
-    };
-
-    /** Custom back navigation for showing FAB */
-    private final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
-        @Override
-        public void handleOnBackPressed() {
-            FragmentManager fragmentManager = getParentFragmentManager();
-            hideFloatingBtn(false);
-            fragmentManager.popBackStack();
-        }
     };
 
     private final RadioGroup.OnCheckedChangeListener getListenerRadioVerticesA = new RadioGroup.OnCheckedChangeListener() {
@@ -132,7 +120,6 @@ public class SettingsFragment extends Fragment {
         }
     };
 
-    /** Color */
     private final RadioGroup.OnCheckedChangeListener getListenerRadioColorA = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -190,16 +177,30 @@ public class SettingsFragment extends Fragment {
         }
     };
 
+    /** Custom back navigation for showing FAB */
+    private final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            FragmentManager fragmentManager = getParentFragmentManager();
+            hideFloatingBtn(false);
+            fragmentManager.popBackStack();
+        }
+    };
+
+    /** Display Setters */
     private void setRadioGrid() {
         radioGrid = settingsView.findViewById(R.id.radioGrid);
-        RadioButton rbGrid4 = settingsView.findViewById(R.id.rbGrid4);
-        RadioButton rbGrid5 = settingsView.findViewById(R.id.rbGrid5);
-        RadioButton rbGrid6 = settingsView.findViewById(R.id.rbGrid6);
-
         int boardSize = sharedPreferences.getInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
-        if (boardSize == 4) { rbGrid4.setChecked(true); }
-        else if (boardSize == 5) { rbGrid5.setChecked(true); }
-        else { rbGrid6.setChecked(true); }
+
+        RadioButton rb;
+
+        switch (boardSize) {
+            case 4: rb = settingsView.findViewById(R.id.rbGrid4); break;
+            case 5: rb = settingsView.findViewById(R.id.rbGrid5); break;
+            default: rb = settingsView.findViewById(R.id.rbGrid6); break;
+        }
+
+        rb.setChecked(true);
     }
 
     private void setRadioVertices() {
@@ -252,8 +253,8 @@ public class SettingsFragment extends Fragment {
     }
 
     private void hideFloatingBtn(boolean isHide) {
-        FloatingActionButton fabHelp = (FloatingActionButton)getActivity().findViewById(R.id.btnHelp);
-        FloatingActionButton fabSettings = (FloatingActionButton)getActivity().findViewById(R.id.btnSettings);
+        FloatingActionButton fabHelp = getActivity().findViewById(R.id.btnHelp);
+        FloatingActionButton fabSettings = getActivity().findViewById(R.id.btnSettings);
         if (isHide) {
             fabHelp.hide();
             fabSettings.hide();
@@ -261,6 +262,20 @@ public class SettingsFragment extends Fragment {
             fabHelp.show();
             fabSettings.show();
         }
+    }
 
+    private void gridChangeDialog(Integer newBoardSize) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),  R.style.AlertDialogStyle);
+        builder
+                .setMessage(getResources().getString(R.string.board_warning))
+                .setPositiveButton("Continue", (dialog, id) -> {
+                    editor.putInt(PrefUtility.BOARD_SIZE, newBoardSize);
+                    editor.apply();
+                })
+                .setNeutralButton("Cancel", (dialog, id) -> {
+                    radioGrid.setOnCheckedChangeListener(null); //
+                    setRadioGrid();
+                    radioGrid.setOnCheckedChangeListener(getListenerRadioGrid);
+                }).setCancelable(false).show();
     }
 }

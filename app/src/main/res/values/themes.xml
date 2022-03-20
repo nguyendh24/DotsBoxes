@@ -13,4 +13,9 @@
     <style name="ButtonThemeOverlay">
         <item name="colorPrimary">@color/btnCustom</item>
     </style>
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:background">@color/finalDarkBg</item>
+        <item name="android:textColorPrimary">@color/pinkPlayer</item>
+<!--        <item name="android:textAlignment">center</item>-->
+    </style>
 </resources>
