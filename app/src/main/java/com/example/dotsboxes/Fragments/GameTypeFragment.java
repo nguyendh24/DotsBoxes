@@ -31,7 +31,15 @@ public class GameTypeFragment extends Fragment {
         View homeView = binding.getRoot();
 
         Button btnPlayPerson = homeView.findViewById(R.id.btnPlayPerson);
+        //add sliding animation to buttons
+        btnPlayPerson.setAlpha(0f);
+        btnPlayPerson.setTranslationY(50);
+        btnPlayPerson.animate().alpha(1f).translationYBy(-50).setDuration(1500);
         Button btnPlayComputer = homeView.findViewById(R.id.btnPlayComputer);
+        //add sliding animation to buttons
+        btnPlayComputer.setAlpha(0f);
+        btnPlayComputer.setTranslationY(50);
+        btnPlayComputer.animate().alpha(1f).translationYBy(-50).setDuration(1500);
         btnPlayPerson.setOnClickListener(view -> newGame(false));
         btnPlayComputer.setOnClickListener(view -> newGame(true));
 

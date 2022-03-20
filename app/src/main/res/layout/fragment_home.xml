@@ -33,11 +33,5 @@
         android:backgroundTint="@color/darkBox"
         android:layout_marginTop="600dp"/>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="344dp"
-        android:layout_height="496dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/dotsandboxeslogomain" />
 
 </FrameLayout>
