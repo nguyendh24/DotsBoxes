@@ -9,6 +9,26 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="364dp"
+        android:src="@drawable/ic_gpa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.864"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_incoming_speech_bubble"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.649"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="124dp"
         android:src="@drawable/ic_baby"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,10 +39,10 @@
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/ic_speech_bubble"
+        android:layout_marginTop="240dp"
+        android:src="@drawable/ic_outgoing_speech_bubble"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.649"
+        app:layout_constraintHorizontal_bias="0.227"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,14 +57,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ptUsername"
-        app:layout_constraintVertical_bias="0.491" />
+        app:layout_constraintVertical_bias="0.63" />
 
     <TextView
         android:id="@+id/tvIntroduction"
         android:layout_width="143dp"
         android:layout_height="133dp"
-        android:layout_marginEnd="88dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="140dp"
         android:gravity="center"
         android:text="@string/new_user"
         android:textSize="20sp"
@@ -53,16 +73,17 @@
 
     <EditText
         android:id="@+id/ptUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="276dp"
+        android:layout_width="160dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="312dp"
         android:ems="10"
         android:gravity="center"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="what\'s your name?"
+        android:text="@string/new_user_name_input"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.213"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

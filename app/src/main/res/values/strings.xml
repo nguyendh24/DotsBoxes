@@ -19,4 +19,5 @@
     <string name="settings_button">settings button</string>
     <string name="help_button">help button</string>
     <string name="board_warning">Changing the board size will result in any game progress being lost.\nDo you want to continue?</string>
+    <string name="new_user_name_input">My name is ...</string>
 </resources>
