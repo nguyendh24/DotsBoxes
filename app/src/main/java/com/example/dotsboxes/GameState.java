@@ -1,66 +1,69 @@
 package com.example.dotsboxes;
-
-import android.annotation.SuppressLint;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
+import com.example.dotsboxes.Components.Player;
 import com.example.dotsboxes.Components.Square;
-import com.example.dotsboxes.Views.GameView;
-
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameState {
 
     private static final int COMPUTER_PLAYER = 1;
+    private static final int NUM_PLAYERS = 2;
+    private static GameState instance;
 
-    private GameView view;
-
-    private TextView statusDisplay;
-    private TextView p1Score;
-    private TextView p2Score;
-    private Button btnPlayAgain;
-
-    private final int numPlayers;
-    private final int boardWidth;
-    private final int boardHeight;
-    private final int spacing;
+    private int boardWidth;
+    private int boardHeight;
+    private int spacing;
 
     private final Player[] players;
-    private final Dot[][] dots;
-    private final Line[][] horizontalLines;
-    private final Line[][] verticalLines;
-    private final Square[][] squares;
+    private Dot[][] dots;
+    private Line[][] horizontalLines;
+    private Line[][] verticalLines;
+    private Square[][] squares;
     private int turn;
     private boolean playComputer;
     private boolean allowClick;
 
-    public GameState(Player[] players, int boardWidth, int boardHeight) {
-        this.players = players;
-        numPlayers = players.length;
+    public static GameState getInstance() {
+        if (instance == null) {
+            instance = new GameState();
+        }
+        return instance;
+    }
+
+    private GameState() {
+
+        int p1Color = PrefUtility.getColor(PrefUtility.DEFAULT_PLAYER_COLOR_1);
+        int p2Color = PrefUtility.getColor(PrefUtility.DEFAULT_PLAYER_COLOR_2);
+
+        players = new Player[] {
+                new Player("Player 1", p1Color),
+                new Player("Player 2", p2Color)
+        };
+
         turn = 0;
-
-        this.boardWidth = boardWidth;
-        this.boardHeight = boardHeight;
-        spacing = (int) MainActivity.deviceWidth / (boardWidth + 2);
-        Square.setSize(spacing);
-
-        dots = new Dot[boardHeight + 1][boardWidth + 1];
-        horizontalLines = new Line[boardHeight + 1][boardWidth];
-        verticalLines = new Line[boardHeight][boardWidth + 1];
-        squares = new Square[boardHeight][boardWidth];
 
         allowClick = true;
 
-        createGameElements();
-        addAdjacencyReferences();
+        setUpBoard(PrefUtility.DEFAULT_BOARD_SIZE);
+    }
+
+    public void setUpBoard(int size) {
+        if (boardHeight != size || boardWidth != size) {
+            boardWidth = size;
+            boardHeight = size;
+
+            spacing = (int) MainActivity.deviceWidth / (boardWidth + 2);
+            Square.setSize(spacing);
+
+            dots = new Dot[boardHeight + 1][boardWidth + 1];
+            horizontalLines = new Line[boardHeight + 1][boardWidth];
+            verticalLines = new Line[boardHeight][boardWidth + 1];
+            squares = new Square[boardHeight][boardWidth];
+
+            createGameElements();
+            addAdjacencyReferences();
+        }
     }
 
     private void createGameElements() {
@@ -108,36 +111,22 @@ public class GameState {
         }
     }
 
-    @SuppressLint("SetTextI18n")
     public void advanceTurn() {
         if (players[turn].isGoAgain()) {
             players[turn].resetGoAgain();
         } else {
-            turn = (turn + 1) % numPlayers;
+            turn = (turn + 1) % NUM_PLAYERS;
             allowClick = !playComputer || turn != COMPUTER_PLAYER;
-        }
-        if (p1Score != null && p2Score != null) {
-            p1Score.setText(Integer.toString(players[0].getScore()));
-            p2Score.setText(Integer.toString(players[1].getScore()));
-        }
-        if (statusDisplay != null && gameOver()) {
-            statusDisplay.setText(getResultsString());
-            btnPlayAgain.setVisibility(View.VISIBLE);
-        } else if (statusDisplay != null) {
-            statusDisplay.setText(players[turn].getName() + "'s Turn");
-        }
-        if (playComputer && turn == COMPUTER_PLAYER && !gameOver()) {
-            computerTurn();
         }
     }
 
-    private void computerTurn() {
-        // Short delay to improve user experience
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            makeRandomMove();
-            view.postInvalidate();
-            advanceTurn();
-        }, 500);
+    public boolean isComputerTurn() {
+        return playComputer && turn == COMPUTER_PLAYER && !gameOver();
+    }
+
+    public void computerTurn() {
+        makeRandomMove();
+        advanceTurn();
     }
 
     private void makeRandomMove() {
@@ -160,10 +149,13 @@ public class GameState {
         unfilledLines.get(move).selectLine(players[COMPUTER_PLAYER]);
     }
 
+    public int getTurn() {
+        return turn;
+    }
+
     public Player getCurrentPlayer() {
         return players[turn];
     }
-
 
     public Dot[][] getDots() {
         return dots;
@@ -181,27 +173,7 @@ public class GameState {
         return squares;
     }
 
-    @SuppressLint("SetTextI18n")
-    public void setUpReferences(GameView view,
-                                TextView p1Score,
-                                TextView p2Score,
-                                TextView p1Name,
-                                TextView p2Name,
-                                TextView statusDisplay,
-                                Button btnPlayAgain) {
-        this.view = view;
-        statusDisplay.setText(players[0].getName() + "'s Turn");
-        this.statusDisplay = statusDisplay;
-        this.p1Score = p1Score;
-        this.p2Score = p2Score;
-        this.btnPlayAgain = btnPlayAgain;
-        p1Name.setText(players[0].getName());
-        p1Name.setTextColor(players[0].getColor());
-        p2Name.setText(players[1].getName());
-        p2Name.setTextColor(players[1].getColor());
-    }
-
-    private boolean gameOver() {
+    public boolean gameOver() {
         for (Square[] row : squares) {
             for (Square square : row) {
                 if (!square.isFilled()) {
@@ -212,7 +184,7 @@ public class GameState {
         return true;
     }
 
-    private String getResultsString() {
+    public String getResultsString() {
         int highScore = 0;
         int numWinners = 0;
         for (Player player : players) {
@@ -242,11 +214,26 @@ public class GameState {
         }
     }
 
+    public void setP1Name(String name) {
+        players[0].setName(name);
+    }
+
+    public void setP2Name(String name) {
+        players[1].setName(name);
+    }
+
+    public void setP1Color(int color) {
+        players[0].setColor(color);
+    }
+
+    public void setP2Color(int color) {
+        players[1].setColor(color);
+    }
+
     public boolean isAllowClick() {
         return allowClick;
     }
 
-    @SuppressLint("SetTextI18n")
     public void resetGame() {
         turn = 0;
         allowClick = true;
@@ -269,9 +256,22 @@ public class GameState {
                 line.reset();
             }
         }
-        p1Score.setText(Integer.toString(players[0].getScore()));
-        p2Score.setText(Integer.toString(players[1].getScore()));
-        statusDisplay.setText(players[turn].getName() + "'s Turn");
-        btnPlayAgain.setVisibility(View.INVISIBLE);
     }
+
+    public int getP1Score() {
+        return players[0].getScore();
+    }
+
+    public int getP2Score() {
+        return players[1].getScore();
+    }
+
+    public String getP1Name() {
+        return players[0].getName();
+    }
+
+    public String getP2Name() {
+        return players[1].getName();
+    }
+
 }

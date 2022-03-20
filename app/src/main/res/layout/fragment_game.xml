@@ -17,103 +17,164 @@
             android:background="?android:attr/listDivider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.258" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.206" />
+            app:layout_constraintVertical_bias="0.386">
 
-        <ImageView
-            android:id="@+id/ivP1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="64dp"
-            android:src="@drawable/ic_p_icon_baby"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="38dp"
+                tools:layout_editor_absoluteY="129dp">
 
-        <ImageView
-            android:id="@+id/ivP2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="64dp"
-            android:src="@drawable/ic_p_icon_boy_with_bangs"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvP1"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:cardCornerRadius="50dp"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="32dp">
 
-        <TextView
-            android:id="@+id/tvP1Score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="0"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintStart_toEndOf="@+id/ivP1"
-            app:layout_constraintTop_toTopOf="parent" />
+                    <ImageView
+                        android:id="@+id/ivP1"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_baby" />
+                </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/tvP2Score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="0"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintEnd_toStartOf="@+id/ivP2"
-            app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tvP1Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="TextView"
+                    android:textSize="16sp"
+                    tools:layout_editor_absoluteX="76dp"
+                    tools:layout_editor_absoluteY="129dp" />
 
-        <TextView
-            android:id="@+id/tvHyphen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintEnd_toStartOf="@+id/tvP2Score"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tvP1Score"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.492" />
+                <ImageView
+                    android:id="@+id/ivP1Turn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_arrow_up"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.199"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvP1Name" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvP1Score"
+                android:layout_width="48dp"
+                android:gravity="center_horizontal"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:text="0"
+                tools:layout_editor_absoluteX="142dp"
+                tools:layout_editor_absoluteY="62dp" />
+
+            <TextView
+                android:id="@+id/tvHyphen"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="25dp"
+                android:text="-"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="176dp"
+                tools:layout_editor_absoluteY="62dp" />
+
+            <TextView
+                android:id="@+id/tvP2Score"
+                android:layout_width="48dp"
+                android:gravity="center_horizontal"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:text="0"
+                tools:layout_editor_absoluteX="202dp"
+                tools:layout_editor_absoluteY="62dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvP2"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    app:cardCornerRadius="50dp"
+                    tools:layout_editor_absoluteX="302dp"
+                    tools:layout_editor_absoluteY="24dp">
+
+                    <ImageView
+                        android:id="@+id/ivP2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_boy_with_bangs" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tvP2Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="TextView2"
+                    android:textSize="16sp"
+                    tools:layout_editor_absoluteX="270dp"
+                    tools:layout_editor_absoluteY="129dp" />
+
+                <ImageView
+                    android:id="@+id/ivP2Turn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_arrow_up"
+                    tools:layout_editor_absoluteY="150dp" />
+            </LinearLayout>
+        </LinearLayout>
+
 
         <com.example.dotsboxes.Views.GameView
             android:id="@+id/gameView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
-            android:background="@color/white"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/btnPlayAgain"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/tvP1Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/ivP1"
-            app:layout_constraintTop_toBottomOf="@+id/ivP1" />
-
-        <TextView
-            android:id="@+id/tvP2Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="TextView"
-            app:layout_constraintEnd_toEndOf="@+id/ivP2"
-            app:layout_constraintTop_toBottomOf="@+id/ivP2" />
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
 
         <TextView
             android:id="@+id/tvCurrentTurn"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
+            android:layout_marginTop="4dp"
             android:text="TextView"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/tvHyphen"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -123,7 +184,7 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/redPlayer"
+            android:backgroundTint="@color/primaryBtn"
             android:text="@string/play_again"
             android:textSize="20sp"
             android:visibility="invisible"

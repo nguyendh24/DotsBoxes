@@ -8,7 +8,7 @@
     android:background="@color/finalDarkBg">
 
     <TextView
-        android:id="@+id/playerName"
+        android:id="@+id/tvPlayerName"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="PlayerName"
@@ -30,7 +30,7 @@
         android:text="+ Start a New Game"
         android:textSize="20sp"
         android:layout_gravity="center_horizontal"
-        android:backgroundTint="@color/redPlayer"
+        android:backgroundTint="@color/darkBox"
         android:layout_marginTop="600dp"/>
 
     <ImageView

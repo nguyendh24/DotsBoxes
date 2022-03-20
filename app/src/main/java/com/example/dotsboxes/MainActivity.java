@@ -1,69 +1,88 @@
 package com.example.dotsboxes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-import android.widget.ImageView;
-
-import com.example.dotsboxes.Fragments.GameFragment;
-import com.example.dotsboxes.Fragments.HomeFragment;
+import com.example.dotsboxes.Fragments.GameTypeFragment;
 import com.example.dotsboxes.Fragments.SettingsFragment;
 import com.example.dotsboxes.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-    ActivityMainBinding binding;
+    private ActivityMainBinding binding;
     public static float deviceHeight;
     public static float deviceWidth;
-    private final static HomeFragment homeFragment = new HomeFragment();
-    private final static GameFragment gameFragment = new GameFragment();
-    private final static SettingsFragment settingsFragment = new SettingsFragment();
+    private static boolean isFirstTime;
+    private SharedPreferences.Editor editor;
+    private final SettingsFragment settingsFragment = new SettingsFragment();
+
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        MainActivity.context = getApplicationContext();
         hideActionBar();
         setDeviceDimensions();
+        fetchStoredData();
         setBinding();
 
-        replaceFragment(homeFragment);
+        if (isFirstTime) {
+            startActivity(new Intent(this, Onboard.class));
+            editor.putInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
+            editor.putString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
+            editor.putString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
+            editor.putString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
+            editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
+            editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
+            editor.commit();
+        } else {
+            /** DELETE LATER, JUST SO NO ONE HAS TO WIPE DATA ON EMULATOR */
+            editor.putInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
+            editor.putString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
+            editor.putString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
+            editor.putString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
+            editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
+            editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
+            editor.putString(PrefUtility.PLAYER_NAME, PrefUtility.DEFAULT_PLAYER_NAME);
+            editor.commit();
+        }
+        replaceFragment(new GameTypeFragment());
 
-        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.Home) { replaceFragment(homeFragment); }
-            else if (item.getItemId() == R.id.Help) { showHelpDialog(); } //  goes here
-            else { replaceFragment(settingsFragment); }
+        binding.btnHelp.setOnClickListener(view -> showHelpDialog());
 
-            return true;
-        });
+        binding.btnSettings.setOnClickListener(view -> replaceFragment(settingsFragment));
+
     }
 
     private void setBinding() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.bottomNavigationView.setItemIconTintList(null); // Removes icon highlight
     }
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.replace(R.id.frame_layout, fragment).setReorderingAllowed(true).addToBackStack(null).commit();
     }
 
     private void showHelpDialog() {
         Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.dialog_help);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        dialog.setContentView(R.layout.dialog_help);
         lp.copyFrom(dialog.getWindow().getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        dialog.show();
-        dialog.getWindow().setAttributes(lp);
-        ImageView btnClose = dialog.findViewById(R.id.btn_close);
-        btnClose.setOnClickListener(view -> dialog.dismiss());
+        dialog.show(); dialog.getWindow().setAttributes(lp);
+        dialog.findViewById(R.id.close_corner).setOnClickListener(view -> dialog.dismiss());
     }
 
     private void setDeviceDimensions() {
@@ -76,5 +95,13 @@ public class MainActivity extends AppCompatActivity {
     private void hideActionBar() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
+
+    private void fetchStoredData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(PrefUtility.SHARED_PREF_NAME, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        isFirstTime = sharedPreferences.getBoolean(PrefUtility.IS_FIRST_TIME, true);
+    }
+
+    public static Context getContext() { return MainActivity.context; }
 
 }
