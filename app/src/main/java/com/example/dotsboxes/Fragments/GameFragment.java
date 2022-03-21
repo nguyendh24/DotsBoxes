@@ -35,19 +35,28 @@ public class GameFragment extends Fragment {
         TextView statusDisplay = myView.findViewById(R.id.tvCurrentTurn);
         ImageView p1Turn = myView.findViewById(R.id.ivP1Turn);
         ImageView p2Turn = myView.findViewById(R.id.ivP2Turn);
+        ImageView ivP1 = myView.findViewById(R.id.ivP1);
+        ImageView ivP2 = myView.findViewById(R.id.ivP2);
         Button btnPlayAgain = myView.findViewById(R.id.btnPlayAgain);
         CardView cvP1 = myView.findViewById(R.id.cvP1);
         CardView cvP2 = myView.findViewById(R.id.cvP2);
         setPlayerColors(cvP1, cvP2, p1Name, p2Name);
-//        animateTurns(p1Turn, p2Turn);
-
-        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
-        
-        if (playComputer) { ImageView ivP2 = myView.findViewById(R.id.ivP2); ivP2.setImageResource(R.drawable.ic_robot); }
+        setPlayerAvatars(ivP1, ivP2);
 
         gameView.setUpReferences(p1Score, p2Score, p1Name, p2Name, statusDisplay, btnPlayAgain, p1Turn, p2Turn);
         return myView;
+    }
+
+    private void setPlayerAvatars(ImageView ivP1, ImageView ivP2) {
+        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
+
+        String playerAvatar1 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_1, PrefUtility.DEFAULT_PLAYER_AVATAR_1);
+        String playerAvatar2 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_2, PrefUtility.DEFAULT_PLAYER_AVATAR_2);
+
+        int resID = (playComputer) ? R.drawable.ic_robot : PrefUtility.getAvatar(playerAvatar2);
+        ivP1.setImageResource(PrefUtility.getAvatar(playerAvatar1));
+        ivP2.setImageResource(resID);
     }
 
     private void setPlayerColors(CardView cvP1, CardView cvP2, TextView tvP1, TextView tvP2) {

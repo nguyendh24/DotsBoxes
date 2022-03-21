@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import androidx.activity.OnBackPressedCallback;
@@ -12,12 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.databinding.FragmentSettingsBinding;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.button.MaterialButtonToggleGroup;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.HashMap;
 
@@ -26,14 +27,15 @@ public class SettingsFragment extends Fragment {
     private RadioGroup radioGrid;
     private RadioGroup radioVerticesA;
     private RadioGroup radioVerticesB;
-    private RadioGroup radioColorA;
-    private RadioGroup radioColorB;
+
+    private MaterialCardView cvP1;
+    private MaterialCardView cvP2;
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private View settingsView;
 
-    private boolean isPlayer2;
+    private static boolean isPlayer2;
 
     public SettingsFragment(){ }
 
@@ -43,25 +45,28 @@ public class SettingsFragment extends Fragment {
         sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         settingsView = binding.getRoot();
-        MaterialButtonToggleGroup btnToggle = settingsView.findViewById(R.id.btnToggle);
 
         hideFloatingBtn(true);
+        setAvatars();
         setRadioGrid();
         setRadioVertices();
-        setRadioPlayerColor();
 
         radioGrid.setOnCheckedChangeListener(getListenerRadioGrid);
         radioVerticesA.setOnCheckedChangeListener(getListenerRadioVerticesA);
         radioVerticesB.setOnCheckedChangeListener(getListenerRadioVerticesB);
-        radioColorA.setOnCheckedChangeListener(getListenerRadioColorA);
-        radioColorB.setOnCheckedChangeListener(getListenerRadioColorB);
-        btnToggle.addOnButtonCheckedListener(getListenerBtnToggle);
+        cvP1.setOnClickListener(getListenerCvP1);
+        cvP2.setOnClickListener(getListenerCvP2);
+
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         return settingsView;
     }
 
     /** Listeners */
+    private final View.OnClickListener getListenerCvP1 = view -> { isPlayer2 = false; avatarColorDialog(); };
+
+    private final View.OnClickListener getListenerCvP2 = view -> { isPlayer2 = true; avatarColorDialog(); };
+
     private final RadioGroup.OnCheckedChangeListener getListenerRadioGrid = (radioGroup, checkedId) -> {
         int btnID = radioGroup.getCheckedRadioButtonId();
         HashMap<Integer, Integer> boardMap = new HashMap<Integer, Integer>() {{
@@ -120,74 +125,28 @@ public class SettingsFragment extends Fragment {
         }
     };
 
-    private final RadioGroup.OnCheckedChangeListener getListenerRadioColorA = new RadioGroup.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-            if (checkedId != -1) {
-                radioColorB.setOnCheckedChangeListener(null); // remove the listener before clearing so we don't throw that stackoverflow exception
-                radioColorB.clearCheck(); // clear the second RadioGroup!
-                radioColorB.setOnCheckedChangeListener(getListenerRadioColorB); //reset the listener
-            }
-
-            String player = (isPlayer2) ? PrefUtility.PLAYER_COLOR_2 : PrefUtility.PLAYER_COLOR_1;
-            int btnID = radioGroup.getCheckedRadioButtonId();
-
-            HashMap<Integer, String> colorMap = new HashMap<Integer, String>() {{
-                put(R.id.rbColorBlue, PrefUtility.BLUE);
-                put(R.id.rbColorRed, PrefUtility.RED);
-                put(R.id.rbColorYellow, PrefUtility.YELLOW);
-            }};
-
-            editor.putString(player, colorMap.get(btnID));
-            editor.apply();
-            setRadioPlayerColor();
-        }
-    };
-
-    private final RadioGroup.OnCheckedChangeListener getListenerRadioColorB = new RadioGroup.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-            if (checkedId != -1) {
-                radioColorA.setOnCheckedChangeListener(null);
-                radioColorA.clearCheck();
-                radioColorA.setOnCheckedChangeListener(getListenerRadioColorA);
-            }
-
-            String player = (isPlayer2) ? PrefUtility.PLAYER_COLOR_2 : PrefUtility.PLAYER_COLOR_1;
-            int btnID = radioGroup.getCheckedRadioButtonId();
-
-            HashMap<Integer, String> colorMap = new HashMap<Integer, String>() {{
-                put(R.id.rbColorPink, PrefUtility.PINK);
-                put(R.id.rbColorGreen, PrefUtility.GREEN);
-                put(R.id.rbColorPurple, PrefUtility.PURPLE);
-            }};
-
-            editor.putString(player, colorMap.get(btnID));
-            editor.apply();
-            setRadioPlayerColor();
-        }
-    };
-
-    private final MaterialButtonToggleGroup.OnButtonCheckedListener getListenerBtnToggle = new MaterialButtonToggleGroup.OnButtonCheckedListener() {
-        @Override
-        public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
-            int btnID = group.getCheckedButtonId();
-            isPlayer2 = btnID == R.id.btnPlayer2;
-            setRadioPlayerColor();
-        }
-    };
-
-    /** Custom back navigation for showing FAB */
-    private final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
-        @Override
-        public void handleOnBackPressed() {
-            FragmentManager fragmentManager = getParentFragmentManager();
-            hideFloatingBtn(false);
-            fragmentManager.popBackStack();
-        }
-    };
-
     /** Display Setters */
+    public void setAvatars() {
+        ImageView ivP1 = settingsView.findViewById(R.id.ivP1);
+        ImageView ivP2 = settingsView.findViewById(R.id.ivP2);
+
+        String playerAvatar1 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_1, PrefUtility.DEFAULT_PLAYER_AVATAR_1);
+        String playerAvatar2 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_2, PrefUtility.DEFAULT_PLAYER_AVATAR_2);
+        String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
+        String playerColor2 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
+        int colorP1 = getResources().getColor(PrefUtility.getColor(playerColor1));
+        int colorP2 = getResources().getColor(PrefUtility.getColor(playerColor2));
+
+        cvP1 = settingsView.findViewById(R.id.cvP1);
+        cvP2 = settingsView.findViewById(R.id.cvP2);
+
+        cvP1.setCardBackgroundColor(colorP1);
+        cvP2.setCardBackgroundColor(colorP2);
+
+        ivP1.setImageResource(PrefUtility.getAvatar(playerAvatar1));
+        ivP2.setImageResource(PrefUtility.getAvatar(playerAvatar2));
+    }
+
     private void setRadioGrid() {
         radioGrid = settingsView.findViewById(R.id.radioGrid);
         int boardSize = sharedPreferences.getInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
@@ -199,7 +158,6 @@ public class SettingsFragment extends Fragment {
             case 5: rb = settingsView.findViewById(R.id.rbGrid5); break;
             default: rb = settingsView.findViewById(R.id.rbGrid6); break;
         }
-
         rb.setChecked(true);
     }
 
@@ -223,47 +181,7 @@ public class SettingsFragment extends Fragment {
         rb.setChecked(true);
     }
 
-    private void setRadioPlayerColor() {
-        setToggle();
-        radioColorA = settingsView.findViewById(R.id.radioColorA);
-        radioColorB = settingsView.findViewById(R.id.radioColorB);
-
-        String playerColor = (isPlayer2)
-                ? sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2)
-                : sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
-
-        RadioButton rb;
-
-        switch (playerColor) {
-            case PrefUtility.BLUE: rb = settingsView.findViewById(R.id.rbColorBlue); break;
-            case PrefUtility.RED: rb = settingsView.findViewById(R.id.rbColorRed); break;
-            case PrefUtility.YELLOW: rb = settingsView.findViewById(R.id.rbColorYellow); break;
-            case PrefUtility.PINK: rb = settingsView.findViewById(R.id.rbColorPink); break;
-            case PrefUtility.GREEN: rb = settingsView.findViewById(R.id.rbColorGreen); break;
-            default: rb = settingsView.findViewById(R.id.rbColorPurple); break;
-        }
-
-        rb.setChecked(true);
-    }
-
-    private void setToggle() {
-        MaterialButton btnPlayer1 = settingsView.findViewById(R.id.btnPlayer1);
-        MaterialButton btnPlayer2 = settingsView.findViewById(R.id.btnPlayer2);
-        if (isPlayer2) { btnPlayer2.setChecked(true); } else { btnPlayer1.setChecked(true); }
-    }
-
-    private void hideFloatingBtn(boolean isHide) {
-        FloatingActionButton fabHelp = getActivity().findViewById(R.id.btnHelp);
-        FloatingActionButton fabSettings = getActivity().findViewById(R.id.btnSettings);
-        if (isHide) {
-            fabHelp.hide();
-            fabSettings.hide();
-        } else {
-            fabHelp.show();
-            fabSettings.show();
-        }
-    }
-
+    /** Dialogs */
     private void gridChangeDialog(Integer newBoardSize) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),  R.style.AlertDialogStyle);
         builder
@@ -278,4 +196,37 @@ public class SettingsFragment extends Fragment {
                     radioGrid.setOnCheckedChangeListener(getListenerRadioGrid);
                 }).setCancelable(false).show();
     }
+
+    private void avatarColorDialog() {
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        DialogFragment dialogFragment = DialogFragment.newInstance();
+        dialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogFragmentTheme);
+        dialogFragment.show(fragmentTransaction, "dialog");
+    }
+
+    /** Custom back navigation for showing FAB */
+    private final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            FragmentManager fragmentManager = getParentFragmentManager();
+            hideFloatingBtn(false);
+            fragmentManager.popBackStack();
+        }
+    };
+
+    /** Helper methods */
+    private void hideFloatingBtn(boolean isHide) {
+        FloatingActionButton fabHelp = getActivity().findViewById(R.id.btnHelp);
+        FloatingActionButton fabSettings = getActivity().findViewById(R.id.btnSettings);
+        if (isHide) {
+            fabHelp.hide();
+            fabSettings.hide();
+        } else {
+            fabHelp.show();
+            fabSettings.show();
+        }
+    }
+
+    public static boolean isPlayer2() { return isPlayer2; }
+
 }

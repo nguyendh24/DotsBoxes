@@ -6,365 +6,309 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.SettingsFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <!-- TODO: Update blank fragment layout -->
+        android:layout_height="wrap_content">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="64dp">
 
-            <!-- Header -->
-            <TextView
-                android:id="@+id/tvSettingsHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="32dp"
-                android:text="Personalize Your Game!"
-                android:textSize="32sp"
-                app:layout_constraintBottom_toTopOf="@+id/tvBoardSize"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <!-- Board Size -->
-
-            <TextView
-                android:id="@+id/tvBoardSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/board_size"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/boardSize"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.117"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvSettingsHeader" />
-
-            <LinearLayout
-                android:id="@+id/boardSize"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:background="@drawable/settings_btn_bg"
+                android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:padding="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/tvVertices"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvBoardSize">
+                android:orientation="vertical">
 
-                <RadioGroup
-                    android:id="@+id/radioGrid"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:gravity="center_horizontal"
-                    android:orientation='horizontal'>
-
-                    <RadioButton
-                        android:id="@+id/rbGrid4"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_selector"
-                        android:button="@null"
-                        android:buttonTint="@color/white"
-                        android:gravity="center"
-                        android:text="4 x 4"
-                        android:textColor="@color/white" />
-
-                    <RadioButton
-                        android:id="@+id/rbGrid5"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_selector"
-                        android:button="@null"
-                        android:buttonTint="@color/white"
-                        android:gravity="center"
-                        android:text="5 x 5"
-                        android:textColor="@color/white" />
-
-                    <RadioButton
-                        android:id="@+id/rbGrid6"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_selector"
-                        android:button="@null"
-                        android:buttonTint="@color/white"
-                        android:gravity="center"
-                        android:text="6 x 6"
-                        android:textColor="@color/white" />
-                </RadioGroup>
-            </LinearLayout>
-
-            <!-- Vertices -->
-
-            <TextView
-                android:id="@+id/tvVertices"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/vertices"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/vertices"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.112"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/boardSize" />
-
-            <LinearLayout
-                android:id="@+id/vertices"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:background="@drawable/settings_btn_bg"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/tvPlayerColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvVertices">
-
-                <RadioGroup
-                    android:id="@+id/radioVerticesA"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:gravity="center_horizontal"
-                    android:orientation='horizontal'>
-
-                    <RadioButton
-                        android:id="@+id/rbDot"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_selector"
-                        android:button="@null"
-                        android:drawableStart="@drawable/ic_circle"
-                        android:gravity="center"
-                        android:paddingLeft="30dp" />
-
-                    <RadioButton
-                        android:id="@+id/rbTriangle"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_selector"
-                        android:button="@null"
-                        android:drawableStart="@drawable/ic_triangle"
-                        android:gravity="center"
-                        android:paddingLeft="30dp" />
-
-                    <RadioButton
-                        android:id="@+id/rbStar"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_selector"
-                        android:button="@null"
-                        android:drawableStart="@drawable/ic_star"
-                        android:gravity="center"
-                        android:paddingLeft="30dp" />
-                </RadioGroup>
-
-                <RadioGroup
-                    android:id="@+id/radioVerticesB"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:gravity="center_horizontal"
-                    android:orientation='horizontal'>
-
-                    <RadioButton
-                        android:id="@+id/rbSun"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_selector"
-                        android:button="@null"
-                        android:drawableStart="@drawable/ic_sun"
-                        android:gravity="center"
-                        android:paddingLeft="30dp" />
-
-                    <RadioButton
-                        android:id="@+id/rbMoon"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_selector"
-                        android:button="@null"
-                        android:drawableStart="@drawable/ic_moon"
-                        android:gravity="center"
-                        android:paddingLeft="30dp" />
-
-                    <RadioButton
-                        android:id="@+id/rbCloud"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_selector"
-                        android:button="@null"
-                        android:drawableStart="@drawable/ic_cloud"
-                        android:gravity="center"
-                        android:paddingLeft="30dp" />
-                </RadioGroup>
-            </LinearLayout>
-
-            <!-- Player Color -->
-            <TextView
-                android:id="@+id/tvPlayerColor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Color"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/playerColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.107"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/vertices" />
-
-            <LinearLayout
-                android:id="@+id/playerColor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:background="@drawable/settings_btn_bg"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:padding="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPlayerColor">
-
-                <RadioGroup
-                    android:id="@+id/radioColorA"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:gravity="center_horizontal"
-                    android:orientation='horizontal'>
-
-                    <RadioButton
-                        android:id="@+id/rbColorBlue"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_blue_selector"
-                        android:button="@null" />
-
-                    <RadioButton
-                        android:id="@+id/rbColorRed"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_red_selector"
-                        android:button="@null" />
-
-                    <RadioButton
-                        android:id="@+id/rbColorYellow"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_yellow_selector"
-                        android:button="@null" />
-                </RadioGroup>
-
-                <RadioGroup
-                    android:id="@+id/radioColorB"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:gravity="center_horizontal"
-                    android:orientation='horizontal'>
-
-                    <RadioButton
-                        android:id="@+id/rbColorPink"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_pink_selector"
-                        android:button="@null" />
-
-                    <RadioButton
-                        android:id="@+id/rbColorGreen"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_green_selector"
-                        android:button="@null" />
-
-                    <RadioButton
-                        android:id="@+id/rbColorPurple"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:layout_weight="33"
-                        android:background="@drawable/btn_purple_selector"
-                        android:button="@null" />
-                </RadioGroup>
-
-            </LinearLayout>
-
-            <com.google.android.material.button.MaterialButtonToggleGroup
-                android:id="@+id/btnToggle"
-                android:layout_width="175dp"
-                android:layout_height="47dp"
-                app:layout_constraintBottom_toTopOf="@+id/playerColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.86"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/vertices"
-                app:singleSelection="true">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPlayer1"
-                    style="?attr/materialButtonOutlinedStyle"
+                <TextView
+                    android:id="@+id/tvSettingsHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:insetLeft="10dp"
-                    android:insetTop="6dp"
-                    android:insetBottom="6dp"
-                    android:text="Player 1"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    tools:layout_editor_absoluteX="142dp"
-                    tools:layout_editor_absoluteY="560dp" />
+                    android:padding="12dp"
+                    android:text="Settings"
+                    android:textSize="28sp"/>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPlayer2"
-                    style="?attr/materialButtonOutlinedStyle"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:orientation="vertical">
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cvP1"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_centerInParent="true"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardCornerRadius="60dp"
+                            app:strokeColor="@color/btnCustom"
+                            app:strokeWidth="5dp"
+                            tools:layout_editor_absoluteX="50dp"
+                            tools:layout_editor_absoluteY="32dp">
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:src="@drawable/btn_edit">
+                            </androidx.appcompat.widget.AppCompatImageView>
+
+                            <ImageView
+                                android:id="@+id/ivP1"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="5dp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvP1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:padding="4dp"
+                            android:text="Player 1"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <Space
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cvP2"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_centerInParent="true"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardCornerRadius="60dp"
+                            app:strokeColor="@color/btnCustom"
+                            app:strokeWidth="5dp"
+                            tools:layout_editor_absoluteX="50dp"
+                            tools:layout_editor_absoluteY="32dp">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:src="@drawable/btn_edit">
+                            </androidx.appcompat.widget.AppCompatImageView>
+
+                            <ImageView
+                                android:id="@+id/ivP2"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:layout_gravity="center"
+                                android:layout_marginBottom="5dp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvP2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:padding="4dp"
+                            android:text="Player 2"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <TextView
+                    android:id="@+id/tvBoardSize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:insetRight="10dp"
-                    android:text="Player 2"
-                    android:textColor="@color/white"
-                    android:textSize="10dp"
-                    tools:layout_editor_absoluteX="55dp"
-                    tools:layout_editor_absoluteY="560dp" />
-            </com.google.android.material.button.MaterialButtonToggleGroup>
+                    android:text="@string/board_size"
+                    android:layout_margin="5dp"
+                    android:textSize="18sp"/>
+
+                <LinearLayout
+                    android:id="@+id/boardSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/settings_btn_bg"
+                    android:gravity="center_horizontal"
+                    android:padding="20dp">
+
+                    <RadioGroup
+                        android:id="@+id/radioGrid"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:gravity="center_horizontal"
+                        android:orientation='horizontal'>
+
+                        <RadioButton
+                            android:id="@+id/rbGrid4"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="33"
+                            android:background="@drawable/btn_selector"
+                            android:button="@null"
+                            android:buttonTint="@color/white"
+                            android:gravity="center"
+                            android:text="4 x 4"
+                            android:textColor="@color/white" />
+
+                        <RadioButton
+                            android:id="@+id/rbGrid5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="33"
+                            android:background="@drawable/btn_selector"
+                            android:button="@null"
+                            android:buttonTint="@color/white"
+                            android:gravity="center"
+                            android:text="5 x 5"
+                            android:textColor="@color/white" />
+
+                        <RadioButton
+                            android:id="@+id/rbGrid6"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="33"
+                            android:background="@drawable/btn_selector"
+                            android:button="@null"
+                            android:buttonTint="@color/white"
+                            android:gravity="center"
+                            android:text="6 x 6"
+                            android:textColor="@color/white" />
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <!-- Vertices -->
+                <TextView
+                    android:id="@+id/tvVertices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/vertices"
+                    android:textSize="18sp"/>
+
+                <LinearLayout
+                    android:id="@+id/vertices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:background="@drawable/settings_btn_bg"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <RadioGroup
+                        android:id="@+id/radioVerticesA"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:gravity="center_horizontal"
+                        android:orientation='horizontal'>
+
+                        <RadioButton
+                            android:id="@+id/rbDot"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="33"
+                            android:background="@drawable/btn_selector"
+                            android:button="@null"
+                            android:drawableStart="@drawable/ic_circle"
+                            android:gravity="center"
+                            android:paddingLeft="30dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbTriangle"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="33"
+                            android:background="@drawable/btn_selector"
+                            android:button="@null"
+                            android:drawableStart="@drawable/ic_triangle"
+                            android:gravity="center"
+                            android:paddingLeft="30dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbStar"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="33"
+                            android:background="@drawable/btn_selector"
+                            android:button="@null"
+                            android:drawableStart="@drawable/ic_star"
+                            android:gravity="center"
+                            android:paddingLeft="30dp" />
+                    </RadioGroup>
+
+                    <RadioGroup
+                        android:id="@+id/radioVerticesB"
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:gravity="center_horizontal"
+                        android:orientation='horizontal'>
+
+                        <RadioButton
+                            android:id="@+id/rbSun"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="33"
+                            android:background="@drawable/btn_selector"
+                            android:button="@null"
+                            android:drawableStart="@drawable/ic_sun"
+                            android:gravity="center"
+                            android:paddingLeft="30dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbMoon"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="33"
+                            android:background="@drawable/btn_selector"
+                            android:button="@null"
+                            android:drawableStart="@drawable/ic_moon"
+                            android:gravity="center"
+                            android:paddingLeft="30dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbCloud"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_weight="33"
+                            android:background="@drawable/btn_selector"
+                            android:button="@null"
+                            android:drawableStart="@drawable/ic_cloud"
+                            android:gravity="center"
+                            android:paddingLeft="30dp" />
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

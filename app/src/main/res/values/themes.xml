@@ -16,6 +16,12 @@
     <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:background">@color/finalDarkBg</item>
         <item name="android:textColorPrimary">@color/pinkPlayer</item>
-<!--        <item name="android:textAlignment">center</item>-->
+    </style>
+
+    <style name="DialogFragmentTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+        <item name="android:windowIsFloating">true</item>
     </style>
 </resources>

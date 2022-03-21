@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     public static float deviceHeight;
     public static float deviceWidth;
     private static boolean isFirstTime;
+    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private final SettingsFragment settingsFragment = new SettingsFragment();
 
@@ -37,24 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (isFirstTime) {
             startActivity(new Intent(this, Onboard.class));
-            editor.putInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
-            editor.putString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
-            editor.putString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
-            editor.putString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
-            editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
-            editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
-            editor.commit();
-        } else {
-            /** DELETE LATER, JUST SO NO ONE HAS TO WIPE DATA ON EMULATOR */
-            editor.putInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
-            editor.putString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
-            editor.putString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
-            editor.putString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
-            editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
-            editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
-            editor.putString(PrefUtility.PLAYER_NAME, PrefUtility.DEFAULT_PLAYER_NAME);
-            editor.commit();
+            setDefaultPrefs();
         }
+
         replaceFragment(new GameTypeFragment());
 
         binding.btnHelp.setOnClickListener(view -> showHelpDialog());
@@ -63,6 +49,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void setDefaultPrefs() {
+        editor.putInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
+        editor.putString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
+        editor.putString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
+        editor.putString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
+        editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
+        editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
+        editor.commit();
+    }
     private void setBinding() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -97,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchStoredData() {
-        SharedPreferences sharedPreferences = getSharedPreferences(PrefUtility.SHARED_PREF_NAME, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(PrefUtility.SHARED_PREF_NAME, MODE_PRIVATE);
         editor = sharedPreferences.edit();
         isFirstTime = sharedPreferences.getBoolean(PrefUtility.IS_FIRST_TIME, true);
     }

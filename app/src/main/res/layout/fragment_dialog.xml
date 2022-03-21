@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/finalDarkBg"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <ImageView
+        android:id="@+id/close_corner"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/ic_corner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="close"
+        android:src="@drawable/ic_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearAvatarColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+        <!-- Colors -->
+
+
+        <TextView
+            android:id="@+id/tvAvatars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Avatars"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/avatars"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/settings_btn_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearAvatarA"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:gravity="center_horizontal"
+                android:orientation='horizontal'>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvAvatarBoy"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_weight="33"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="50dp"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="32dp">
+
+                    <ImageView
+                        android:id="@+id/ivBoy"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_boy_with_bangs" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvAvatarGma"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_weight="33"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="50dp"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="32dp">
+
+                    <ImageView
+                        android:id="@+id/ivGma"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_gma" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvAvatarGpa"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_weight="33"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="50dp"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="32dp">
+
+                    <ImageView
+                        android:id="@+id/ivGpa"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_gpa" />
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearAvatarB"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:gravity="center_horizontal"
+                android:orientation='horizontal'>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvAvatarGirl"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_weight="33"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="50dp"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="32dp">
+
+                    <ImageView
+                        android:id="@+id/ivGirl"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_neon_hair_girl" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvAvatarCurly"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_weight="33"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="50dp"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="32dp">
+
+                    <ImageView
+                        android:id="@+id/ivCurly"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_curly_hair" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvAvatarBaby"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_weight="33"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="50dp"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="32dp">
+
+                    <ImageView
+                        android:id="@+id/ivBaby"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_baby" />
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPlayerColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Color"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:id="@+id/playerColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="@drawable/settings_btn_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <RadioGroup
+                android:id="@+id/radioColorA"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:gravity="center_horizontal"
+                android:orientation='horizontal'>
+
+                <RadioButton
+                    android:id="@+id/rbColorBlue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="33"
+                    android:background="@drawable/btn_blue_selector"
+                    android:button="@null"
+                    android:shadowColor="@color/pinkPlayer" />
+
+                <RadioButton
+                    android:id="@+id/rbColorRed"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="33"
+                    android:background="@drawable/btn_red_selector"
+                    android:button="@null" />
+
+                <RadioButton
+                    android:id="@+id/rbColorYellow"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="33"
+                    android:background="@drawable/btn_yellow_selector"
+                    android:button="@null" />
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/radioColorB"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:gravity="center_horizontal"
+                android:orientation='horizontal'>
+
+                <RadioButton
+                    android:id="@+id/rbColorPink"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="33"
+                    android:background="@drawable/btn_pink_selector"
+                    android:button="@null" />
+
+                <RadioButton
+                    android:id="@+id/rbColorGreen"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="33"
+                    android:background="@drawable/btn_green_selector"
+                    android:button="@null" />
+
+                <RadioButton
+                    android:id="@+id/rbColorPurple"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="33"
+                    android:background="@drawable/btn_purple_selector"
+                    android:button="@null" />
+            </RadioGroup>
+
+        </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
