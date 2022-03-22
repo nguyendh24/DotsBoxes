@@ -74,7 +74,7 @@
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
             android:paddingBottom="15dp"
-            android:text="1. Take turns drawing lines between the dots."
+            android:text="@string/rules_1"
             android:textSize="20dp" />
 
         <TextView
@@ -86,7 +86,7 @@
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
             android:paddingBottom="15dp"
-            android:text="2. Complete a box by drawing its fourth wall."
+            android:text="@string/rules_2"
             android:textSize="20dp" />
 
         <ImageView
@@ -97,7 +97,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginEnd="6dp"
             android:layout_marginBottom="5dp"
-            android:src="@drawable/ic_help_box_dark" />
+            android:src="@drawable/ic_help_boxes" />
 
         <TextView
             android:id="@+id/tvRuleThree"
@@ -108,7 +108,7 @@
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
             android:paddingBottom="10dp"
-            android:text="3. You take another turn after completing a box."
+            android:text="@string/rules_3"
             android:textSize="20dp" />
 
         <TextView
@@ -132,7 +132,7 @@
             android:gravity="left"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
-            android:text="Player with most boxes at the end of the game wins."
+            android:text="@string/help_goal"
             android:textSize="20dp" />
 
     </LinearLayout>
