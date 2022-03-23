@@ -92,7 +92,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_boy_with_bangs" />
+                        android:src="@drawable/ic_a_bangs" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -114,7 +114,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_gma" />
+                        android:src="@drawable/ic_a_gma" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -136,7 +136,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_gpa" />
+                        android:src="@drawable/ic_a_gpa" />
                 </com.google.android.material.card.MaterialCardView>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -166,7 +166,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_neon_hair_girl" />
+                        android:src="@drawable/ic_a_neon" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -188,7 +188,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_curly_hair" />
+                        android:src="@drawable/ic_a_curly" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -210,7 +210,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_baby" />
+                        android:src="@drawable/ic_a_baby" />
                 </com.google.android.material.card.MaterialCardView>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </LinearLayout>

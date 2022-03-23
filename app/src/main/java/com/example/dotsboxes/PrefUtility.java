@@ -1,7 +1,5 @@
 package com.example.dotsboxes;
 
-import android.graphics.drawable.Drawable;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,12 +68,12 @@ public class PrefUtility {
     }};
 
     private static final Map<String, Integer> avatarMap = new HashMap<String, Integer>() {{
-        put(BOY, R.drawable.ic_boy_with_bangs);
-        put(GIRL, R.drawable.ic_neon_hair_girl);
-        put(GPA, R.drawable.ic_gpa);
-        put(GMA, R.drawable.ic_gma);
-        put(CURLY, R.drawable.ic_curly_hair);
-        put(BABY, R.drawable.ic_baby);
+        put(BOY, R.drawable.ic_a_bangs);
+        put(GIRL, R.drawable.ic_a_neon);
+        put(GPA, R.drawable.ic_a_gpa);
+        put(GMA, R.drawable.ic_a_gma);
+        put(CURLY, R.drawable.ic_a_curly);
+        put(BABY, R.drawable.ic_a_baby);
     }};
 
     public static int getAvatar(String avatar) {
