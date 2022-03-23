@@ -74,7 +74,7 @@
                 android:orientation='horizontal'>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cvAvatarBoy"
+                    android:id="@+id/cvAvatarBangs"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
@@ -88,85 +88,11 @@
                     tools:layout_editor_absoluteY="32dp">
 
                     <ImageView
-                        android:id="@+id/ivBoy"
+                        android:id="@+id/ivBangs"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_a_bangs" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cvAvatarGma"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="5dp"
-                    android:layout_weight="33"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardCornerRadius="50dp"
-                    tools:layout_editor_absoluteX="50dp"
-                    tools:layout_editor_absoluteY="32dp">
-
-                    <ImageView
-                        android:id="@+id/ivGma"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_a_gma" />
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cvAvatarGpa"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="5dp"
-                    android:layout_weight="33"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardCornerRadius="50dp"
-                    tools:layout_editor_absoluteX="50dp"
-                    tools:layout_editor_absoluteY="32dp">
-
-                    <ImageView
-                        android:id="@+id/ivGpa"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_a_gpa" />
-                </com.google.android.material.card.MaterialCardView>
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/linearAvatarB"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:gravity="center_horizontal"
-                android:orientation='horizontal'>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cvAvatarGirl"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="5dp"
-                    android:layout_weight="33"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardCornerRadius="50dp"
-                    tools:layout_editor_absoluteX="50dp"
-                    tools:layout_editor_absoluteY="32dp">
-
-                    <ImageView
-                        android:id="@+id/ivGirl"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_a_neon" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
@@ -192,7 +118,81 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cvAvatarBaby"
+                    android:id="@+id/cvAvatarBuzz"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_weight="33"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="50dp"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="32dp">
+
+                    <ImageView
+                        android:id="@+id/ivBuzz"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_a_buzz" />
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearAvatarB"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:gravity="center_horizontal"
+                android:orientation='horizontal'>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvAvatarFlower"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_weight="33"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="50dp"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="32dp">
+
+                    <ImageView
+                        android:id="@+id/ivFlower"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_a_flower" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvAvatarBrunette"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:layout_weight="33"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="50dp"
+                    tools:layout_editor_absoluteX="50dp"
+                    tools:layout_editor_absoluteY="32dp">
+
+                    <ImageView
+                        android:id="@+id/ivBrunette"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_a_brunette" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvAvatarNeon"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
@@ -210,7 +210,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_a_baby" />
+                        android:src="@drawable/ic_a_neon" />
                 </com.google.android.material.card.MaterialCardView>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </LinearLayout>
