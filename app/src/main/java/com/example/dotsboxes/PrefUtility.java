@@ -1,7 +1,5 @@
 package com.example.dotsboxes;
 
-import android.graphics.drawable.Drawable;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,12 +18,12 @@ public class PrefUtility {
     public static final String PLAYER_NAME_1 = "playerName1";
     public static final String PLAYER_NAME_2 = "playerName2";
 
-    public static final String BOY = "boy";
-    public static final String GIRL = "girl";
-    public static final String GPA = "gpa";
-    public static final String GMA = "gma";
+    public static final String BANGS = "bangs";
+    public static final String FLOWER = "flower";
+    public static final String BUZZ = "gpa";
+    public static final String BRUNETTE = "gma";
     public static final String CURLY = "curly";
-    public static final String BABY = "baby";
+    public static final String NEON = "neon";
 
     public static final String DOT = "dot";
     public static final String TRIANGLE = "triangle";
@@ -47,8 +45,8 @@ public class PrefUtility {
     public static final String DEFAULT_PLAYER_COLOR_2 = RED;
     public static final String DEFAULT_PLAYER_NAME_1 = "Player 1";
     public static final String DEFAULT_PLAYER_NAME_2 = "Player 2";
-    public static final String DEFAULT_PLAYER_AVATAR_1 = BOY;
-    public static final String DEFAULT_PLAYER_AVATAR_2 = GIRL;
+    public static final String DEFAULT_PLAYER_AVATAR_1 = BANGS;
+    public static final String DEFAULT_PLAYER_AVATAR_2 = FLOWER;
 
 
     private static final Map<String, Integer> colorMap = new HashMap<String, Integer>() {{
@@ -70,12 +68,12 @@ public class PrefUtility {
     }};
 
     private static final Map<String, Integer> avatarMap = new HashMap<String, Integer>() {{
-        put(BOY, R.drawable.ic_boy_with_bangs);
-        put(GIRL, R.drawable.ic_neon_hair_girl);
-        put(GPA, R.drawable.ic_gpa);
-        put(GMA, R.drawable.ic_gma);
-        put(CURLY, R.drawable.ic_curly_hair);
-        put(BABY, R.drawable.ic_baby);
+        put(BANGS, R.drawable.ic_a_bangs);
+        put(FLOWER, R.drawable.ic_a_flower);
+        put(BUZZ, R.drawable.ic_a_buzz);
+        put(BRUNETTE, R.drawable.ic_a_brunette);
+        put(CURLY, R.drawable.ic_a_curly);
+        put(NEON, R.drawable.ic_a_neon);
     }};
 
     public static int getAvatar(String avatar) {

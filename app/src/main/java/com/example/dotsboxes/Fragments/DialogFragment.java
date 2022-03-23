@@ -33,24 +33,24 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        com.example.dotsboxes.databinding.FragmentDialogBinding binding = FragmentDialogBinding.inflate(getLayoutInflater());
+        FragmentDialogBinding binding = FragmentDialogBinding.inflate(getLayoutInflater());
         sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         dialogView = binding.getRoot();
 
-        MaterialCardView cvAvatarBoy = dialogView.findViewById(R.id.cvAvatarBoy);
-        MaterialCardView cvAvatarGirl = dialogView.findViewById(R.id.cvAvatarGirl);
-        MaterialCardView cvAvatarGpa = dialogView.findViewById(R.id.cvAvatarGpa);
-        MaterialCardView cvAvatarGma = dialogView.findViewById(R.id.cvAvatarGma);
+        MaterialCardView cvAvatarBangs = dialogView.findViewById(R.id.cvAvatarBangs);
+        MaterialCardView cvAvatarFlower = dialogView.findViewById(R.id.cvAvatarFlower);
+        MaterialCardView cvAvatarBuzz = dialogView.findViewById(R.id.cvAvatarBuzz);
+        MaterialCardView cvAvatarBrunette = dialogView.findViewById(R.id.cvAvatarBrunette);
         MaterialCardView cvAvatarCurly = dialogView.findViewById(R.id.cvAvatarCurly);
-        MaterialCardView cvAvatarBaby = dialogView.findViewById(R.id.cvAvatarBaby);
+        MaterialCardView cvAvatarNeon = dialogView.findViewById(R.id.cvAvatarNeon);
 
-        cvAvatarBoy.setOnClickListener(getListenerAvatars);
-        cvAvatarGirl.setOnClickListener(getListenerAvatars);
-        cvAvatarGpa.setOnClickListener(getListenerAvatars);
-        cvAvatarGma.setOnClickListener(getListenerAvatars);
+        cvAvatarBangs.setOnClickListener(getListenerAvatars);
+        cvAvatarFlower.setOnClickListener(getListenerAvatars);
+        cvAvatarBuzz.setOnClickListener(getListenerAvatars);
+        cvAvatarBrunette.setOnClickListener(getListenerAvatars);
         cvAvatarCurly.setOnClickListener(getListenerAvatars);
-        cvAvatarBaby.setOnClickListener(getListenerAvatars);
+        cvAvatarNeon.setOnClickListener(getListenerAvatars);
 
         setAvatarMap();
         setAvatar();
@@ -65,12 +65,12 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
 
     private void setAvatarMap() {
         avatarMap = new HashMap<String, MaterialCardView>() {{
-            put(PrefUtility.BOY, dialogView.findViewById(R.id.cvAvatarBoy));
-            put(PrefUtility.GIRL, dialogView.findViewById(R.id.cvAvatarGirl));
-            put(PrefUtility.GPA, dialogView.findViewById(R.id.cvAvatarGpa));
-            put(PrefUtility.GMA, dialogView.findViewById(R.id.cvAvatarGma));
+            put(PrefUtility.BANGS, dialogView.findViewById(R.id.cvAvatarBangs));
+            put(PrefUtility.FLOWER, dialogView.findViewById(R.id.cvAvatarFlower));
+            put(PrefUtility.BUZZ, dialogView.findViewById(R.id.cvAvatarBuzz));
+            put(PrefUtility.BRUNETTE, dialogView.findViewById(R.id.cvAvatarBrunette));
             put(PrefUtility.CURLY, dialogView.findViewById(R.id.cvAvatarCurly));
-            put(PrefUtility.BABY, dialogView.findViewById(R.id.cvAvatarBaby));
+            put(PrefUtility.NEON, dialogView.findViewById(R.id.cvAvatarNeon));
         }};
     }
 
