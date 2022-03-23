@@ -17,7 +17,8 @@ public class PrefUtility {
     public static final String IS_FIRST_TIME = "isFirstTime";
     public static final String IS_GAME_SAVED = "isGameSaved";
     public static final String IS_PLAY_COMPUTER = "isPlayComputer";
-    public static final String PLAYER_NAME = "playerName";
+    public static final String PLAYER_NAME_1 = "playerName1";
+    public static final String PLAYER_NAME_2 = "playerName2";
 
     public static final String BOY = "boy";
     public static final String GIRL = "girl";
@@ -44,7 +45,8 @@ public class PrefUtility {
     public static final String DEFAULT_VERTEX = DOT;
     public static final String DEFAULT_PLAYER_COLOR_1 = BLUE;
     public static final String DEFAULT_PLAYER_COLOR_2 = RED;
-    public static final String DEFAULT_PLAYER_NAME = "User";
+    public static final String DEFAULT_PLAYER_NAME_1 = "Player 1";
+    public static final String DEFAULT_PLAYER_NAME_2 = "Player 2";
     public static final String DEFAULT_PLAYER_AVATAR_1 = BOY;
     public static final String DEFAULT_PLAYER_AVATAR_2 = GIRL;
 

@@ -36,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         fetchStoredData();
         setBinding();
 
-        if (isFirstTime) {
+        if (isFirstTime) { // Instantiate default player data for new users
             startActivity(new Intent(this, Onboard.class));
+            setDefaultPrefs();
+        } else { // Temporary, to be removed later
             setDefaultPrefs();
         }
 
@@ -54,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         editor.putString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
         editor.putString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
         editor.putString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
+        editor.putString(PrefUtility.PLAYER_NAME_1, PrefUtility.DEFAULT_PLAYER_NAME_1);
+        editor.putString(PrefUtility.PLAYER_NAME_2, PrefUtility.DEFAULT_PLAYER_NAME_2);
         editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
         editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
         editor.commit();

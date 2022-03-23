@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -31,6 +32,9 @@ public class SettingsFragment extends Fragment {
     private MaterialCardView cvP1;
     private MaterialCardView cvP2;
 
+    private EditText etP1;
+    private EditText etP2;
+
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private View settingsView;
@@ -48,6 +52,7 @@ public class SettingsFragment extends Fragment {
 
         hideFloatingBtn(true);
         setAvatars();
+        setNames();
         setRadioGrid();
         setRadioVertices();
 
@@ -56,6 +61,8 @@ public class SettingsFragment extends Fragment {
         radioVerticesB.setOnCheckedChangeListener(getListenerRadioVerticesB);
         cvP1.setOnClickListener(getListenerCvP1);
         cvP2.setOnClickListener(getListenerCvP2);
+        etP1.setOnClickListener(getListenerEtP1);
+        etP2.setOnClickListener(getListenerEtP2);
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
@@ -66,6 +73,16 @@ public class SettingsFragment extends Fragment {
     private final View.OnClickListener getListenerCvP1 = view -> { isPlayer2 = false; avatarColorDialog(); };
 
     private final View.OnClickListener getListenerCvP2 = view -> { isPlayer2 = true; avatarColorDialog(); };
+
+    private final View.OnClickListener getListenerEtP1 = view -> {
+        editor.putString(PrefUtility.PLAYER_NAME_1, etP1.getText().toString());
+        editor.apply();
+    };
+
+    private final View.OnClickListener getListenerEtP2 = view -> {
+        editor.putString(PrefUtility.PLAYER_NAME_2, etP2.getText().toString());
+        editor.apply();
+    };
 
     private final RadioGroup.OnCheckedChangeListener getListenerRadioGrid = (radioGroup, checkedId) -> {
         int btnID = radioGroup.getCheckedRadioButtonId();
@@ -126,7 +143,7 @@ public class SettingsFragment extends Fragment {
     };
 
     /** Display Setters */
-    public void setAvatars() {
+    private void setAvatars() {
         ImageView ivP1 = settingsView.findViewById(R.id.ivP1);
         ImageView ivP2 = settingsView.findViewById(R.id.ivP2);
 
@@ -145,6 +162,17 @@ public class SettingsFragment extends Fragment {
 
         ivP1.setImageResource(PrefUtility.getAvatar(playerAvatar1));
         ivP2.setImageResource(PrefUtility.getAvatar(playerAvatar2));
+    }
+
+    private void setNames() {
+        etP1 = settingsView.findViewById(R.id.etP1);
+        etP2 = settingsView.findViewById(R.id.etP2);
+
+        String playerName1 = sharedPreferences.getString(PrefUtility.PLAYER_NAME_1, PrefUtility.DEFAULT_PLAYER_NAME_1);
+        String playerName2 = sharedPreferences.getString(PrefUtility.PLAYER_NAME_2, PrefUtility.DEFAULT_PLAYER_NAME_2);
+
+        etP1.setText(playerName1);
+        etP2.setText(playerName2);
     }
 
     private void setRadioGrid() {

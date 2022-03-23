@@ -67,12 +67,16 @@
                                 android:layout_marginBottom="5dp" />
                         </com.google.android.material.card.MaterialCardView>
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvP1"
+                        <EditText
+                            android:id="@+id/etP1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:padding="4dp"
+                            android:inputType="textPersonName"
+                            android:textAlignment="center"
+                            android:padding="12dp"
+                            android:maxLength="8"
+                            android:ems="4"
                             android:text="Player 1"/>
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -115,12 +119,16 @@
                                 android:layout_marginBottom="5dp" />
                         </com.google.android.material.card.MaterialCardView>
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvP2"
+                        <EditText
+                            android:id="@+id/etP2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:padding="4dp"
+                            android:inputType="textPersonName"
+                            android:textAlignment="center"
+                            android:padding="12dp"
+                            android:maxLength="8"
+                            android:ems="4"
                             android:text="Player 2"/>
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -132,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/board_size"
                     android:layout_margin="5dp"
-                    android:textSize="18sp"/>
+                    android:textSize="24sp"/>
 
                 <LinearLayout
                     android:id="@+id/boardSize"
@@ -201,7 +209,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="@string/vertices"
-                    android:textSize="18sp"/>
+                    android:textSize="24sp"/>
 
                 <LinearLayout
                     android:id="@+id/vertices"

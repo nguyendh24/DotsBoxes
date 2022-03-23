@@ -55,16 +55,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="Avatars"
-            android:textSize="18sp" />
+            android:textSize="24sp" />
 
         <LinearLayout
             android:id="@+id/avatars"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:background="@drawable/settings_btn_bg"
+            android:layout_margin="25dp"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="15dp">
@@ -223,14 +220,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Color"
-            android:textSize="18sp" />
+            android:textSize="24sp" />
 
         <LinearLayout
             android:id="@+id/playerColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="25dp"
-            android:background="@drawable/settings_btn_bg"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="15dp">

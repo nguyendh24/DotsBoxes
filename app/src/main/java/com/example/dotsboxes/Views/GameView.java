@@ -93,9 +93,13 @@ public class GameView extends View {
         boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
         gameState.setPlayComputer(playComputer);
 
-        String p1Name = sharedPreferences.getString(PrefUtility.PLAYER_NAME, PrefUtility.DEFAULT_PLAYER_NAME);
+        String p1Name = sharedPreferences.getString(PrefUtility.PLAYER_NAME_1, PrefUtility.DEFAULT_PLAYER_NAME_1);
         gameState.setP1Name(p1Name);
-        if (!playComputer) gameState.setP2Name(p1Name + "'s Friend");
+
+        if (!playComputer) {
+            String p2Name = sharedPreferences.getString(PrefUtility.PLAYER_NAME_2, PrefUtility.DEFAULT_PLAYER_NAME_2);
+            gameState.setP2Name(p2Name);
+        }
 
         String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
         String playerColor2 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);

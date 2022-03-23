@@ -23,7 +23,7 @@ public class Onboard extends AppCompatActivity {
                 view -> {
                     SharedPreferences sh = getApplicationContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sh.edit();
-                    editor.putString(PrefUtility.PLAYER_NAME, etPlayerName.getText().toString());
+                    editor.putString(PrefUtility.PLAYER_NAME_1, etPlayerName.getText().toString());
                     editor.apply();
                     finish();
                 });
