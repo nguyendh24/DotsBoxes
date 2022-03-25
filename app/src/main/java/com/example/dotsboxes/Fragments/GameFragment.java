@@ -73,11 +73,18 @@ public class GameFragment extends Fragment {
 
     private void setPlayerColors(CardView cvP1, CardView cvP2, TextView tvP1, TextView tvP2) {
         SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
+
         String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, "");
-        String playerColor2 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, "");
+        String playerColor2 = (playComputer) ? PrefUtility.COMPUTER_COLOR : sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, "");
 
         cvP1.setCardBackgroundColor(getResources().getColor(PrefUtility.getColor(playerColor1)));
-        cvP2.setCardBackgroundColor(getResources().getColor(PrefUtility.getColor(playerColor2)));
+        if (playComputer) {
+            cvP2.setCardBackgroundColor(getResources().getColor(PrefUtility.getColor(PrefUtility.COMPUTER_COLOR_DARK)));
+        } else {
+            cvP2.setCardBackgroundColor(getResources().getColor(PrefUtility.getColor(playerColor2)));
+        }
+
         tvP1.setTextColor(getResources().getColor(PrefUtility.getColor(playerColor1)));
         tvP2.setTextColor(getResources().getColor(PrefUtility.getColor(playerColor2)));
     }

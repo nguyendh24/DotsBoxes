@@ -40,6 +40,8 @@ public class PrefUtility {
     public static final String PINK = "pink";
     public static final String GREEN = "green";
     public static final String PURPLE = "purple";
+    public static final String COMPUTER_COLOR = "gray";
+    public static final String COMPUTER_COLOR_DARK = "darkGray";
 
     public static final int DEFAULT_BOARD_SIZE = 4;
     public static final String DEFAULT_VERTEX = DOT;
@@ -58,6 +60,8 @@ public class PrefUtility {
         put(PINK, R.color.pinkPlayer);
         put(GREEN, R.color.greenPlayer);
         put(PURPLE, R.color.purplePlayer);
+        put(COMPUTER_COLOR, R.color.computerPlayer);
+        put(COMPUTER_COLOR_DARK, R.color.computerPlayerDark);
     }};
 
     private static final Map<String, Integer> vertexMap = new HashMap<String, Integer>() {{

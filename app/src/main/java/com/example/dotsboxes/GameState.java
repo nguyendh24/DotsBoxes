@@ -250,10 +250,6 @@ public class GameState {
         players[1].setColor(color);
     }
 
-    private void setTurn(int turn) {
-        this.turn = turn;
-    }
-
     public boolean isAllowClick() {
         return allowClick;
     }
