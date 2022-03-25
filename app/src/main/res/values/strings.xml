@@ -24,4 +24,6 @@
     <string name="rules_2">2. Complete a box by drawing its fourth wall.</string>
     <string name="rules_3">3. You take another turn after completing a box.</string>
     <string name="help_goal">Player with most boxes at the end of the game wins.</string>
+
+    <!-- Accessibility Strings -->
 </resources>
