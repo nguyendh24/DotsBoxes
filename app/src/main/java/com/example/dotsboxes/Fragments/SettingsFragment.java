@@ -2,6 +2,8 @@ package com.example.dotsboxes.Fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,6 @@ import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.databinding.FragmentSettingsBinding;
 import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.HashMap;
 
 public class SettingsFragment extends Fragment {
@@ -48,11 +49,10 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         com.example.dotsboxes.databinding.FragmentSettingsBinding binding = FragmentSettingsBinding.inflate(getLayoutInflater());
-        sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        sharedPreferences = getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         settingsView = binding.getRoot();
 
-        hideFloatingBtn(true);
         setAvatars();
         setNames();
         setRadioGrid();
@@ -63,8 +63,8 @@ public class SettingsFragment extends Fragment {
         radioVerticesB.setOnCheckedChangeListener(getListenerRadioVerticesB);
         cvP1.setOnClickListener(getListenerCvP1);
         cvP2.setOnClickListener(getListenerCvP2);
-        etP1.setOnClickListener(getListenerEtP1);
-        etP2.setOnClickListener(getListenerEtP2);
+        etP1.addTextChangedListener(getTextWatcher);
+        etP2.addTextChangedListener(getTextWatcher);
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
@@ -76,16 +76,20 @@ public class SettingsFragment extends Fragment {
 
     private final View.OnClickListener getListenerCvP2 = view -> { isPlayer2 = true; avatarColorDialog(); };
 
-    private final View.OnClickListener getListenerEtP1 = view -> {
-        editor.putString(PrefUtility.PLAYER_NAME_1, etP1.getText().toString());
-        editor.apply();
-    };
+    private final TextWatcher getTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
-    private final View.OnClickListener getListenerEtP2 = view -> {
-        editor.putString(PrefUtility.PLAYER_NAME_2, etP2.getText().toString());
-        editor.apply();
-    };
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
+        @Override
+        public void afterTextChanged(Editable editable) {
+            editor.putString(PrefUtility.PLAYER_NAME_1, etP1.getText().toString());
+            editor.putString(PrefUtility.PLAYER_NAME_2, etP2.getText().toString());
+            editor.apply();
+        }
+    };
     private final RadioGroup.OnCheckedChangeListener getListenerRadioGrid = (radioGroup, checkedId) -> {
         int btnID = radioGroup.getCheckedRadioButtonId();
         HashMap<Integer, Integer> boardMap = new HashMap<Integer, Integer>() {{
@@ -240,23 +244,10 @@ public class SettingsFragment extends Fragment {
         @Override
         public void handleOnBackPressed() {
             FragmentManager fragmentManager = getParentFragmentManager();
-            hideFloatingBtn(false);
             fragmentManager.popBackStack();
         }
     };
 
-    /** Helper methods */
-    private void hideFloatingBtn(boolean isHide) {
-        FloatingActionButton fabHelp = getActivity().findViewById(R.id.btnHelp);
-        FloatingActionButton fabSettings = getActivity().findViewById(R.id.btnSettings);
-        if (isHide) {
-            fabHelp.hide();
-            fabSettings.hide();
-        } else {
-            fabHelp.show();
-            fabSettings.show();
-        }
-    }
 
     public static boolean isPlayer2() { return isPlayer2; }
 

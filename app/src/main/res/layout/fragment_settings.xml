@@ -77,7 +77,10 @@
                             android:padding="12dp"
                             android:maxLength="8"
                             android:ems="4"
-                            android:text="Player 1"/>
+                            android:imeOptions="actionDone"
+                            android:singleLine="true"
+                            android:text="Player 1"
+                            android:contentDescription="@string/player_1"/>
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -129,7 +132,10 @@
                             android:padding="12dp"
                             android:maxLength="8"
                             android:ems="4"
-                            android:text="Player 2"/>
+                            android:imeOptions="actionDone"
+                            android:singleLine="true"
+                            android:text="Player 2"
+                            android:contentDescription="@string/player_2"/>
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -171,7 +177,8 @@
                             android:buttonTint="@color/white"
                             android:gravity="center"
                             android:text="4 x 4"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:contentDescription="@string/btn_size_four"/>
 
                         <RadioButton
                             android:id="@+id/rbGrid5"
@@ -184,7 +191,8 @@
                             android:buttonTint="@color/white"
                             android:gravity="center"
                             android:text="5 x 5"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:contentDescription="@string/btn_size_five"/>
 
                         <RadioButton
                             android:id="@+id/rbGrid6"
@@ -197,7 +205,8 @@
                             android:buttonTint="@color/white"
                             android:gravity="center"
                             android:text="6 x 6"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:contentDescription="@string/btn_size_six"/>
                     </RadioGroup>
 
                 </LinearLayout>
@@ -240,7 +249,8 @@
                             android:button="@null"
                             android:drawableStart="@drawable/ic_circle"
                             android:gravity="center"
-                            android:paddingLeft="30dp" />
+                            android:paddingLeft="30dp"
+                            android:contentDescription="@string/btn_vert_dot"/>
 
                         <RadioButton
                             android:id="@+id/rbTriangle"
@@ -252,7 +262,8 @@
                             android:button="@null"
                             android:drawableStart="@drawable/ic_triangle"
                             android:gravity="center"
-                            android:paddingLeft="30dp" />
+                            android:paddingLeft="30dp"
+                            android:contentDescription="@string/btn_vert_triangle"/>
 
                         <RadioButton
                             android:id="@+id/rbStar"
@@ -264,7 +275,8 @@
                             android:button="@null"
                             android:drawableStart="@drawable/ic_star"
                             android:gravity="center"
-                            android:paddingLeft="30dp" />
+                            android:paddingLeft="30dp"
+                            android:contentDescription="@string/btn_vert_star"/>
                     </RadioGroup>
 
                     <RadioGroup
@@ -284,7 +296,8 @@
                             android:button="@null"
                             android:drawableStart="@drawable/ic_sun"
                             android:gravity="center"
-                            android:paddingLeft="30dp" />
+                            android:paddingLeft="30dp"
+                            android:contentDescription="@string/btn_vert_sun"/>
 
                         <RadioButton
                             android:id="@+id/rbMoon"
@@ -296,7 +309,8 @@
                             android:button="@null"
                             android:drawableStart="@drawable/ic_moon"
                             android:gravity="center"
-                            android:paddingLeft="30dp" />
+                            android:paddingLeft="30dp"
+                            android:contentDescription="@string/btn_vert_moon"/>
 
                         <RadioButton
                             android:id="@+id/rbCloud"
@@ -308,7 +322,8 @@
                             android:button="@null"
                             android:drawableStart="@drawable/ic_cloud"
                             android:gravity="center"
-                            android:paddingLeft="30dp" />
+                            android:paddingLeft="30dp"
+                            android:contentDescription="@string/btn_vert_cloud"/>
                     </RadioGroup>
 
                 </LinearLayout>
