@@ -6,7 +6,7 @@
     <string name="new_user">Looks like you\'re new here. What\'s your name?</string>
     <string name="new_game">+ New Game</string>
     <string name="how_to">How to play</string>
-    <string name="play_person">Play another person</string>
+    <string name="play_person">Play in person</string>
     <string name="play_computer">&#160;&#160;Play the computer&#160;&#160;</string>
     <string name="play_again">Play again</string>
     <string name="dots_boxes">dots and boxes</string>
