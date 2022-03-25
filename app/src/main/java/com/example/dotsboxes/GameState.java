@@ -15,6 +15,7 @@ public class GameState {
 
     private static final String HORIZONTAL_LINE = "H";
     private static final String VERTICAL_LINE = "V";
+    private static final String SCORE_SEPARATOR = "#";
     private static final String ENTRY_SEPARATOR = "&";
     private static final String MOVES_SEPARATOR = "%";
     private static final String DATA_SEPARATOR = "<>";
@@ -352,7 +353,8 @@ public class GameState {
                 Integer.toString(boardWidth),
                 Integer.toString(turn),
                 moves.stream().collect(Collectors.joining(MOVES_SEPARATOR)),
-                filledSquares.stream().collect(Collectors.joining(MOVES_SEPARATOR))
+                filledSquares.stream().collect(Collectors.joining(MOVES_SEPARATOR)),
+                players[0].getScore() + SCORE_SEPARATOR + players[1].getScore()
         };
 
         return Arrays.stream(data).collect(Collectors.joining(DATA_SEPARATOR));
@@ -379,7 +381,7 @@ public class GameState {
             }
         }
 
-        if (data.length > 3 && data[3].length() > 0) {
+        if (data[3].length() > 0) {
             String[] filledSquares = data[3].split(MOVES_SEPARATOR);
             for (String filledSquare : filledSquares) {
                 String[] squareData = filledSquare.split(ENTRY_SEPARATOR);
@@ -389,5 +391,9 @@ public class GameState {
                 squares[row][col].setPlayer(players[player]);
             }
         }
+
+        String[] scores = data[4].split(SCORE_SEPARATOR);
+        players[0].setScore(Integer.parseInt(scores[0]));
+        players[1].setScore(Integer.parseInt(scores[1]));
     }
 }

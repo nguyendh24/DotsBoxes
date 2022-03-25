@@ -56,4 +56,8 @@ public class Player {
     public void resetScore() {
         score = 0;
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }
