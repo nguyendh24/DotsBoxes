@@ -3,6 +3,8 @@ import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Player;
 import com.example.dotsboxes.Components.Square;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 public class GameState {
@@ -28,6 +30,14 @@ public class GameState {
         if (instance == null) {
             instance = new GameState();
         }
+        return instance;
+    }
+
+    public static GameState getInstance(String json) {
+        if (json == null) {
+            return getInstance();
+        }
+        instance = new Gson().fromJson(json, GameState.class);
         return instance;
     }
 

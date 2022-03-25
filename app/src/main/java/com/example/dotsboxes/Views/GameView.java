@@ -25,6 +25,7 @@ import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.MainActivity;
+import com.google.gson.Gson;
 
 public class GameView extends View {
 
@@ -87,7 +88,16 @@ public class GameView extends View {
         boardWidth = size;
         boardHeight = size;
 
-        gameState = GameState.getInstance();
+        boolean useSavedGame = sharedPreferences.getBoolean(PrefUtility.USE_SAVED_GAME, false);
+        if (useSavedGame) {
+            String json = sharedPreferences.getString(PrefUtility.SAVED_GAME, null);
+            gameState = GameState.getInstance(json);
+            editor.putBoolean(PrefUtility.USE_SAVED_GAME, false);
+            editor.apply();
+        } else {
+            gameState = GameState.getInstance();
+        }
+
         gameState.setUpBoard(size);
 
         boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
@@ -206,9 +216,22 @@ public class GameView extends View {
                 if (gameState.isComputerTurn()) {
                     runComputerTurn();
                 }
+                saveGameState();
             }
         }
         return true;
+    }
+
+    private void saveGameState() {
+        if (gameState.gameOver()) {
+            editor.remove(PrefUtility.SAVED_GAME);
+            editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
+        } else {
+            String json = new Gson().toJson(gameState);
+            editor.putString(PrefUtility.SAVED_GAME, json);
+            editor.putBoolean(PrefUtility.IS_GAME_SAVED, true);
+        }
+        editor.apply();
     }
 
     private void runComputerTurn() {

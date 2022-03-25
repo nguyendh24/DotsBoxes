@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, Onboard.class));
             setDefaultPrefs();
         } else { // Temporary, to be removed later
-            setDefaultPrefs();
+//            setDefaultPrefs();
         }
 
         replaceFragment(new GameTypeFragment());

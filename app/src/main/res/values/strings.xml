@@ -4,7 +4,8 @@
     <string name="welcome">Welcome to Dots &amp; Boxes</string>
     <string name="lets_play">Let\'s Play!</string>
     <string name="new_user">Looks like you\'re new here. What\'s your name?</string>
-    <string name="new_game">+ New Game</string>
+    <string name="resume">Resume Saved Game</string>
+    <string name="new_game">Start New Game</string>
     <string name="how_to">How to play</string>
     <string name="play_person">Play another person</string>
     <string name="play_computer">&#160;&#160;Play the computer&#160;&#160;</string>

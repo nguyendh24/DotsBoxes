@@ -23,7 +23,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
         android:layout_marginBottom="45dp"
-        android:src="@drawable/logo"></androidx.appcompat.widget.AppCompatImageView>
+        android:src="@drawable/logo" />
 
     <Button
         android:id="@+id/btnPlayPerson"
@@ -47,6 +47,30 @@
         android:drawableLeft="@drawable/ic_computer"
         android:text="@string/play_computer"
         android:textSize="20sp"
+        app:backgroundTint="@color/primaryBtn" />
+
+    <Button
+        android:id="@+id/btnResumeGane"
+        android:layout_width="280dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
+        android:background="@drawable/btn_rounded_corners"
+        android:text="@string/resume"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:backgroundTint="@color/primaryBtn" />
+
+    <Button
+        android:id="@+id/btnNewGame"
+        android:layout_width="280dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="500dp"
+        android:background="@drawable/btn_rounded_corners"
+        android:text="@string/new_game"
+        android:textSize="20sp"
+        android:visibility="gone"
         app:backgroundTint="@color/primaryBtn" />
 
     <ImageView

@@ -32,8 +32,35 @@ public class GameTypeFragment extends Fragment {
 
         Button btnPlayPerson = homeView.findViewById(R.id.btnPlayPerson);
         Button btnPlayComputer = homeView.findViewById(R.id.btnPlayComputer);
+        Button btnResumeGame = homeView.findViewById(R.id.btnResumeGane);
+        Button btnNewGame = homeView.findViewById(R.id.btnNewGame);
+
+        boolean gameSaved = sharedPreferences.getBoolean(PrefUtility.IS_GAME_SAVED, false);
+        boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
+
+        if (gameSaved) {
+            btnPlayPerson.setVisibility(View.GONE);
+            btnPlayComputer.setVisibility(View.GONE);
+            btnResumeGame.setVisibility(View.VISIBLE);
+            btnNewGame.setVisibility(View.VISIBLE);
+        }
+
         btnPlayPerson.setOnClickListener(view -> newGame(false));
         btnPlayComputer.setOnClickListener(view -> newGame(true));
+        btnResumeGame.setOnClickListener(view -> {
+            editor.putBoolean(PrefUtility.USE_SAVED_GAME, true);
+            editor.apply();
+            newGame(playComputer);
+        });
+        btnNewGame.setOnClickListener(view -> {
+            editor.remove(PrefUtility.SAVED_GAME);
+            editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
+            editor.apply();
+            btnPlayPerson.setVisibility(View.VISIBLE);
+            btnPlayComputer.setVisibility(View.VISIBLE);
+            btnNewGame.setVisibility(View.GONE);
+            btnResumeGame.setVisibility(View.GONE);
+        });
 
         return homeView;
     }
