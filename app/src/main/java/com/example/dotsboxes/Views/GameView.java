@@ -25,7 +25,6 @@ import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.MainActivity;
-import com.google.gson.Gson;
 
 public class GameView extends View {
 
@@ -227,8 +226,8 @@ public class GameView extends View {
             editor.remove(PrefUtility.SAVED_GAME);
             editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
         } else {
-            String json = new Gson().toJson(gameState);
-            editor.putString(PrefUtility.SAVED_GAME, json);
+            String str = gameState.toString();
+            editor.putString(PrefUtility.SAVED_GAME, str);
             editor.putBoolean(PrefUtility.IS_GAME_SAVED, true);
         }
         editor.apply();

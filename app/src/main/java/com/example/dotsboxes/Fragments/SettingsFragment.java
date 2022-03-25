@@ -15,6 +15,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
@@ -215,6 +217,7 @@ public class SettingsFragment extends Fragment {
         builder
                 .setMessage(getResources().getString(R.string.board_warning))
                 .setPositiveButton("Continue", (dialog, id) -> {
+                    GameState.getInstance().resetGame();
                     editor.putInt(PrefUtility.BOARD_SIZE, newBoardSize);
                     editor.apply();
                 })

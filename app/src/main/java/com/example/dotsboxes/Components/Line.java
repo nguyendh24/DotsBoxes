@@ -48,6 +48,10 @@ public class Line {
         return DEFAULT_COLOR;
     }
 
+    public int getPid() {
+        return player.getPid();
+    }
+
     public boolean isSelected() {
         return selected;
     }

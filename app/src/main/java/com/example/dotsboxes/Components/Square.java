@@ -34,11 +34,14 @@ public class Square {
         }
     }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
     public boolean isFilled() {
         return filled;
     }
 
-    /** Getters */
     public float getX() { return x; }
 
     public float getY() { return y; }
@@ -52,6 +55,10 @@ public class Square {
             return player.getColor();
         }
         return DEFAULT_COLOR;
+    }
+
+    public int getPid() {
+        return player.getPid();
     }
 
     @Override
