@@ -6,7 +6,7 @@
     <string name="new_user">Looks like you\'re new here. What\'s your name?</string>
     <string name="new_game">+ New Game</string>
     <string name="how_to">How to play</string>
-    <string name="play_person">Play another person</string>
+    <string name="play_person">Play in person</string>
     <string name="play_computer">&#160;&#160;Play the computer&#160;&#160;</string>
     <string name="play_again">Play again</string>
     <string name="dots_boxes">dots and boxes</string>
@@ -24,4 +24,28 @@
     <string name="rules_2">2. Complete a box by drawing its fourth wall.</string>
     <string name="rules_3">3. You take another turn after completing a box.</string>
     <string name="help_goal">Player with most boxes at the end of the game wins.</string>
+    <!-- Accessibility Strings -->
+    <string name="player_1">Player 1</string>
+    <string name="player_2">Player 2</string>
+    <string name="btn_size_four">4 by 4</string>
+    <string name="btn_size_five">5 by 5</string>
+    <string name="btn_size_six">6 by 6</string>
+    <string name="btn_vert_dot">Dot</string>
+    <string name="btn_vert_triangle">Triangle</string>
+    <string name="btn_vert_star">Star</string>
+    <string name="btn_vert_sun">Sun</string>
+    <string name="btn_vert_moon">Moon</string>
+    <string name="btn_vert_cloud">Cloud</string>
+    <string name="av_bangs">Boy with bangs</string>
+    <string name="av_curly">Boy with curly hair</string>
+    <string name="av_buzz">Boy with buzz cut</string>
+    <string name="av_flower">Girl with two top buns and a flower</string>
+    <string name="av_brunette">Girl with one top bun</string>
+    <string name="av_neon">Girl with neon two low buns</string>
+    <string name="blue">Blue</string>
+    <string name="red">Red</string>
+    <string name="yellow">Yellow</string>
+    <string name="pink">Pink</string>
+    <string name="green">Green</string>
+    <string name="purple">Purple</string>
 </resources>

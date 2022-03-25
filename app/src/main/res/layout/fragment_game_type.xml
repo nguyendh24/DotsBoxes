@@ -37,7 +37,7 @@
 
     <Button
         android:id="@+id/btnPlayPerson"
-        android:layout_width="wrap_content"
+        android:layout_width="290dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
@@ -45,11 +45,12 @@
         android:drawableLeft="@drawable/ic_person"
         android:text="@string/play_person"
         android:textSize="20sp"
-        app:backgroundTint="@color/primaryBtn" />
+        app:backgroundTint="@color/primaryBtn"
+        android:contentDescription="@string/play_person"/>
 
     <Button
         android:id="@+id/btnPlayComputer"
-        android:layout_width="wrap_content"
+        android:layout_width="290dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="500dp"
@@ -57,7 +58,8 @@
         android:drawableLeft="@drawable/ic_computer"
         android:text="@string/play_computer"
         android:textSize="20sp"
-        app:backgroundTint="@color/primaryBtn" />
+        app:backgroundTint="@color/primaryBtn"
+        android:contentDescription="@string/play_computer"/>
 
     <ImageView
         android:id="@+id/star1"
