@@ -77,6 +77,8 @@
                             android:padding="12dp"
                             android:maxLength="8"
                             android:ems="4"
+                            android:imeOptions="actionDone"
+                            android:singleLine="true"
                             android:text="Player 1"/>
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -129,6 +131,8 @@
                             android:padding="12dp"
                             android:maxLength="8"
                             android:ems="4"
+                            android:imeOptions="actionDone"
+                            android:singleLine="true"
                             android:text="Player 2"/>
                     </androidx.appcompat.widget.LinearLayoutCompat>
 

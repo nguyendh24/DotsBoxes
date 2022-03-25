@@ -80,7 +80,7 @@ public class GameView extends View {
     /** If we create a new instance of CustomView and is included in a new layout file for code optimization */
     private void init(@Nullable AttributeSet set) {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        sharedPreferences = getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
         int size = sharedPreferences.getInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
@@ -167,9 +167,9 @@ public class GameView extends View {
         paint.setColor(DOT_COLOR);
         paint.setAlpha(DOT_OPACITY);
 
-        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         String vertex = sharedPreferences.getString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
-        Bitmap bitmap = getBitmapFromVectorDrawable(MainActivity.getContext(), PrefUtility.getVertex(vertex));
+        Bitmap bitmap = getBitmapFromVectorDrawable(getContext(), PrefUtility.getVertex(vertex));
 
         for (Dot[] row : gameState.getDots()) {
             for (Dot dot : row) {

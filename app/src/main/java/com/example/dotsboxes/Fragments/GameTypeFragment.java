@@ -14,9 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-
 import com.example.dotsboxes.GameState;
-import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.databinding.FragmentGameTypeBinding;
@@ -30,7 +28,7 @@ public class GameTypeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         com.example.dotsboxes.databinding.FragmentGameTypeBinding binding = FragmentGameTypeBinding.inflate(getLayoutInflater());
-        SharedPreferences sharedPreferences = MainActivity.getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         View homeView = binding.getRoot();
 
