@@ -369,7 +369,6 @@ public class GameState {
         setUpBoard(Integer.parseInt(data[0]));
         turn = Integer.parseInt(data[1]);
         String[] moves = data[2].split(MOVES_SEPARATOR);
-        String[] filledSquares = data[3].split(MOVES_SEPARATOR);
 
         for (String move : moves) {
             String[] moveData = move.split(ENTRY_SEPARATOR);
@@ -384,13 +383,15 @@ public class GameState {
             }
         }
 
-        for (String filledSquare : filledSquares) {
-            String[] squareData = filledSquare.split(ENTRY_SEPARATOR);
-            int row = Integer.parseInt(squareData[0]);
-            int col = Integer.parseInt(squareData[1]);
-            int player = Integer.parseInt(squareData[2]);
-            squares[row][col].setPlayer(players[player]);
+        if (data.length > 3 && data[3].length() > 0) {
+            String[] filledSquares = data[3].split(MOVES_SEPARATOR);
+            for (String filledSquare : filledSquares) {
+                String[] squareData = filledSquare.split(ENTRY_SEPARATOR);
+                int row = Integer.parseInt(squareData[0]);
+                int col = Integer.parseInt(squareData[1]);
+                int player = Integer.parseInt(squareData[2]);
+                squares[row][col].setPlayer(players[player]);
+            }
         }
     }
-
 }

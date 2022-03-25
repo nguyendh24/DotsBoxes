@@ -38,12 +38,24 @@ public class GameFragment extends Fragment {
         ImageView ivP1 = myView.findViewById(R.id.ivP1);
         ImageView ivP2 = myView.findViewById(R.id.ivP2);
         Button btnPlayAgain = myView.findViewById(R.id.btnPlayAgain);
+        Button btnQuitGame = myView.findViewById(R.id.btnQuitGame);
         CardView cvP1 = myView.findViewById(R.id.cvP1);
         CardView cvP2 = myView.findViewById(R.id.cvP2);
         setPlayerColors(cvP1, cvP2, p1Name, p2Name);
         setPlayerAvatars(ivP1, ivP2);
 
-        gameView.setUpReferences(p1Score, p2Score, p1Name, p2Name, statusDisplay, btnPlayAgain, p1Turn, p2Turn);
+        gameView.setUpReferences(
+                this,
+                p1Score,
+                p2Score,
+                p1Name,
+                p2Name,
+                statusDisplay,
+                btnPlayAgain,
+                btnQuitGame,
+                p1Turn,
+                p2Turn
+        );
         return myView;
     }
 

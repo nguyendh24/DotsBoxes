@@ -17,14 +17,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.dotsboxes.Fragments.GameFragment;
+import com.example.dotsboxes.Fragments.GameTypeFragment;
+import com.example.dotsboxes.Fragments.HomeFragment;
 import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.MainActivity;
+import com.example.dotsboxes.R;
 
 public class GameView extends View {
 
@@ -43,12 +49,14 @@ public class GameView extends View {
     private static int boardWidth;
     private static int boardHeight;
 
+    private Fragment parent;
     private TextView statusDisplay;
     private TextView p1Score;
     private TextView p2Score;
     private ImageView p1Turn;
     private ImageView p2Turn;
     private Button btnPlayAgain;
+    private Button btnQuitGame;
 
     private Paint paint;
 
@@ -214,8 +222,9 @@ public class GameView extends View {
                 this.postInvalidate(); // forces view to call onDraw
                 if (gameState.isComputerTurn()) {
                     runComputerTurn();
+                } else {
+                    saveGameState();
                 }
-                saveGameState();
             }
         }
         return true;
@@ -241,6 +250,8 @@ public class GameView extends View {
             this.postInvalidate(); // forces view to call onDraw
             if (gameState.isComputerTurn()) {
                 runComputerTurn();
+            } else {
+                saveGameState();
             }
         }, 500);
     }
@@ -252,12 +263,14 @@ public class GameView extends View {
         if (gameState.gameOver()) {
             statusDisplay.setText(gameState.getResultsString());
             btnPlayAgain.setVisibility(View.VISIBLE);
+            btnQuitGame.setVisibility(View.GONE);
         } else {
             if (gameState.getTurn() == 0) { GameFragment.animateTurn(p1Turn, p2Turn); }
             else { GameFragment.animateTurn(p2Turn, p1Turn); }
 
             statusDisplay.setText(gameState.getCurrentPlayer().getName() + "'s Turn");
-            btnPlayAgain.setVisibility(View.INVISIBLE);
+            btnPlayAgain.setVisibility(View.GONE);
+            btnQuitGame.setVisibility(View.VISIBLE);
         }
     }
 
@@ -301,23 +314,28 @@ public class GameView extends View {
         return false;
     }
 
-    public void setUpReferences(TextView p1Score,
+    public void setUpReferences(Fragment parent,
+                                TextView p1Score,
                                 TextView p2Score,
                                 TextView p1Name,
                                 TextView p2Name,
                                 TextView statusDisplay,
                                 Button btnPlayAgain,
+                                Button btnQuitGame,
                                 ImageView p1Turn,
                                 ImageView p2Turn) {
+        this.parent = parent;
         this.p1Score = p1Score;
         this.p2Score = p2Score;
         p1Name.setText(gameState.getP1Name());
         p2Name.setText(gameState.getP2Name());
         this.statusDisplay = statusDisplay;
         this.btnPlayAgain = btnPlayAgain;
+        this.btnQuitGame = btnQuitGame;
         this.p1Turn = p1Turn;
         this.p2Turn = p2Turn;
         btnPlayAgain.setOnClickListener(view -> resetGame());
+        btnQuitGame.setOnClickListener(view -> quitGame());
         updateDisplays();
     }
 
@@ -327,4 +345,23 @@ public class GameView extends View {
         this.postInvalidate();
     }
 
+    private void quitGame() {
+        if (gameState.isAllowClick()) {
+            gameState.resetGame();
+            editor.remove(PrefUtility.SAVED_GAME);
+            editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
+            editor.apply();
+            GameState.getInstance().resetGame();
+            // Create new fragment and transaction
+            FragmentManager fragmentManager = parent.getParentFragmentManager();
+            int count = fragmentManager.getBackStackEntryCount();
+            for (int i = 0; i < count; ++i) {
+                fragmentManager.popBackStack();
+            }
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.setReorderingAllowed(true);
+            // Replace whatever is in the fragment_container view with this fragment
+            transaction.replace(R.id.frame_layout, new GameTypeFragment()).addToBackStack(null).commit();
+        }
+    }
 }
