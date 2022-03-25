@@ -85,7 +85,8 @@
                     android:focusable="true"
                     app:cardCornerRadius="50dp"
                     tools:layout_editor_absoluteX="50dp"
-                    tools:layout_editor_absoluteY="32dp">
+                    tools:layout_editor_absoluteY="32dp"
+                    android:contentDescription="@string/av_bangs">
 
                     <ImageView
                         android:id="@+id/ivBangs"
@@ -107,7 +108,8 @@
                     android:focusable="true"
                     app:cardCornerRadius="50dp"
                     tools:layout_editor_absoluteX="50dp"
-                    tools:layout_editor_absoluteY="32dp">
+                    tools:layout_editor_absoluteY="32dp"
+                    android:contentDescription="@string/av_curly">
 
                     <ImageView
                         android:id="@+id/ivCurly"
@@ -129,7 +131,8 @@
                     android:focusable="true"
                     app:cardCornerRadius="50dp"
                     tools:layout_editor_absoluteX="50dp"
-                    tools:layout_editor_absoluteY="32dp">
+                    tools:layout_editor_absoluteY="32dp"
+                    android:contentDescription="@string/av_buzz">
 
                     <ImageView
                         android:id="@+id/ivBuzz"
@@ -159,7 +162,8 @@
                     android:focusable="true"
                     app:cardCornerRadius="50dp"
                     tools:layout_editor_absoluteX="50dp"
-                    tools:layout_editor_absoluteY="32dp">
+                    tools:layout_editor_absoluteY="32dp"
+                    android:contentDescription="@string/av_flower">
 
                     <ImageView
                         android:id="@+id/ivFlower"
@@ -181,7 +185,8 @@
                     android:focusable="true"
                     app:cardCornerRadius="50dp"
                     tools:layout_editor_absoluteX="50dp"
-                    tools:layout_editor_absoluteY="32dp">
+                    tools:layout_editor_absoluteY="32dp"
+                    android:contentDescription="@string/av_brunette">
 
                     <ImageView
                         android:id="@+id/ivBrunette"
@@ -203,10 +208,11 @@
                     android:focusable="true"
                     app:cardCornerRadius="50dp"
                     tools:layout_editor_absoluteX="50dp"
-                    tools:layout_editor_absoluteY="32dp">
+                    tools:layout_editor_absoluteY="32dp"
+                    android:contentDescription="@string/av_neon">
 
                     <ImageView
-                        android:id="@+id/ivBaby"
+                        android:id="@+id/ivNeon"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
@@ -246,7 +252,8 @@
                     android:layout_weight="33"
                     android:background="@drawable/btn_blue_selector"
                     android:button="@null"
-                    android:shadowColor="@color/pinkPlayer" />
+                    android:shadowColor="@color/pinkPlayer"
+                    android:contentDescription="@string/blue"/>
 
                 <RadioButton
                     android:id="@+id/rbColorRed"
@@ -255,7 +262,8 @@
                     android:layout_margin="10dp"
                     android:layout_weight="33"
                     android:background="@drawable/btn_red_selector"
-                    android:button="@null" />
+                    android:button="@null"
+                    android:contentDescription="@string/red"/>
 
                 <RadioButton
                     android:id="@+id/rbColorYellow"
@@ -264,7 +272,8 @@
                     android:layout_margin="10dp"
                     android:layout_weight="33"
                     android:background="@drawable/btn_yellow_selector"
-                    android:button="@null" />
+                    android:button="@null"
+                    android:contentDescription="@string/yellow"/>
             </RadioGroup>
 
             <RadioGroup
@@ -281,7 +290,8 @@
                     android:layout_margin="10dp"
                     android:layout_weight="33"
                     android:background="@drawable/btn_pink_selector"
-                    android:button="@null" />
+                    android:button="@null"
+                    android:contentDescription="@string/pink"/>
 
                 <RadioButton
                     android:id="@+id/rbColorGreen"
@@ -290,7 +300,8 @@
                     android:layout_margin="10dp"
                     android:layout_weight="33"
                     android:background="@drawable/btn_green_selector"
-                    android:button="@null" />
+                    android:button="@null"
+                    android:contentDescription="@string/green"/>
 
                 <RadioButton
                     android:id="@+id/rbColorPurple"
@@ -299,7 +310,8 @@
                     android:layout_margin="10dp"
                     android:layout_weight="33"
                     android:background="@drawable/btn_purple_selector"
-                    android:button="@null" />
+                    android:button="@null"
+                    android:contentDescription="@string/purple"/>
             </RadioGroup>
 
         </LinearLayout>

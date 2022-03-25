@@ -45,7 +45,8 @@
         android:drawableLeft="@drawable/ic_person"
         android:text="@string/play_person"
         android:textSize="20sp"
-        app:backgroundTint="@color/primaryBtn" />
+        app:backgroundTint="@color/primaryBtn"
+        android:contentDescription="@string/play_person"/>
 
     <Button
         android:id="@+id/btnPlayComputer"
@@ -57,7 +58,8 @@
         android:drawableLeft="@drawable/ic_computer"
         android:text="@string/play_computer"
         android:textSize="20sp"
-        app:backgroundTint="@color/primaryBtn" />
+        app:backgroundTint="@color/primaryBtn"
+        android:contentDescription="@string/play_computer"/>
 
     <ImageView
         android:id="@+id/star1"
