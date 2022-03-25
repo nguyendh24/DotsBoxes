@@ -283,8 +283,8 @@ public class GameView extends View {
             for (int j = 0; j <= boardWidth; j++) {
                 if (i < boardHeight) {
                     Line verticalLine = verticalLines[i][j];
-                    boolean lineTapped = yPos >= verticalLine.getY1() + LINE_OFFSET
-                            && yPos <= verticalLine.getY2() - LINE_OFFSET
+                    boolean lineTapped = yPos >= verticalLine.getY1() + BITMAP_WIDTH
+                            && yPos <= verticalLine.getY2() - BITMAP_WIDTH
                             && xPos >= verticalLine.getX1() - LINE_OFFSET
                             && xPos <= verticalLine.getX2() + LINE_OFFSET;
                     if (lineTapped) {
@@ -297,8 +297,8 @@ public class GameView extends View {
                 }
                 if (j < boardWidth) {
                     Line horizontalLine = horizontalLines[i][j];
-                    boolean lineTapped = xPos >= horizontalLine.getX1() + LINE_OFFSET
-                            && xPos <= horizontalLine.getX2() - LINE_OFFSET
+                    boolean lineTapped = xPos >= horizontalLine.getX1() + BITMAP_WIDTH
+                            && xPos <= horizontalLine.getX2() - BITMAP_WIDTH
                             && yPos >= horizontalLine.getY1() - LINE_OFFSET
                             && yPos <= horizontalLine.getY2() + LINE_OFFSET;
                     if (lineTapped) {
