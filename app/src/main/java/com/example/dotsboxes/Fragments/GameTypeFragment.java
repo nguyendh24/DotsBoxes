@@ -2,6 +2,7 @@ package com.example.dotsboxes.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -34,16 +35,16 @@ public class GameTypeFragment extends Fragment {
         View homeView = binding.getRoot();
 
         Button btnPlayPerson = homeView.findViewById(R.id.btnPlayPerson);
-        //add sliding animation to buttons
-        btnPlayPerson.setAlpha(0f);
-        btnPlayPerson.setTranslationY(50);
-        btnPlayPerson.animate().alpha(1f).translationYBy(-50).setDuration(1500);
+        //add sliding animation to buttons (works but too much movement with the other animations)
+        //btnPlayPerson.setAlpha(0f);
+        //btnPlayPerson.setTranslationY(50);
+        //btnPlayPerson.animate().alpha(1f).translationYBy(-50).setDuration(1500);
 
         Button btnPlayComputer = homeView.findViewById(R.id.btnPlayComputer);
-        //add sliding animation to buttons
-        btnPlayComputer.setAlpha(0f);
-        btnPlayComputer.setTranslationY(50);
-        btnPlayComputer.animate().alpha(1f).translationYBy(-50).setDuration(1500);
+        //add sliding animation to buttons (works but too much movement with the other animations)
+        //btnPlayComputer.setAlpha(0f);
+        //btnPlayComputer.setTranslationY(50);
+        //btnPlayComputer.animate().alpha(1f).translationYBy(-50).setDuration(1500);
 
         btnPlayPerson.setOnClickListener(view -> newGame(false));
         btnPlayComputer.setOnClickListener(view -> newGame(true));
@@ -74,11 +75,19 @@ public class GameTypeFragment extends Fragment {
         ImageView star23 = homeView.findViewById(R.id.star23);
         ImageView star24 = homeView.findViewById(R.id.star24);
         ImageView star25 = homeView.findViewById(R.id.star25);
+        ImageView star26 = homeView.findViewById(R.id.star26);
+        ImageView star27 = homeView.findViewById(R.id.star27);
+        ImageView star28 = homeView.findViewById(R.id.star28);
+        ImageView star29 = homeView.findViewById(R.id.star29);
+        ImageView star30 = homeView.findViewById(R.id.star30);
 
+        //actual animation variable
         Animation twinkle1 = AnimationUtils.loadAnimation(getActivity(), R.anim.star1anim);
         Animation twinkle2 = AnimationUtils.loadAnimation(getActivity(), R.anim.star2anim);
         Animation twinkle3 = AnimationUtils.loadAnimation(getActivity(), R.anim.star3anim);
+        Animation twinkle4 = AnimationUtils.loadAnimation(getActivity(), R.anim.star4anim);
 
+        //invoke animation on start of view
         star1.startAnimation(twinkle1);
         star2.startAnimation(twinkle2);
         star3.startAnimation(twinkle3);
@@ -104,6 +113,18 @@ public class GameTypeFragment extends Fragment {
         star23.startAnimation(twinkle2);
         star24.startAnimation(twinkle3);
         star25.startAnimation(twinkle1);
+        star26.startAnimation(twinkle4);
+        star27.startAnimation(twinkle4);
+        star28.startAnimation(twinkle4);
+        star29.startAnimation(twinkle4);
+        star30.startAnimation(twinkle4);
+
+        //logo animation
+        AnimationDrawable logoAnim;
+        ImageView logoImageView = homeView.findViewById(R.id.logo);
+        logoImageView.setBackgroundResource(R.drawable.logo_anim);
+        logoAnim = (AnimationDrawable) logoImageView.getBackground();
+        logoAnim.start();
 
         return homeView;
     }

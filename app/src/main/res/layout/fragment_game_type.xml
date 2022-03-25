@@ -17,6 +17,7 @@
 <!--        android:fontFamily="@font/sawarabi_mincho"-->
 <!--        android:textSize="50dp" />-->
 
+    <!--
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="280dp"
         android:layout_height="303dp"
@@ -24,7 +25,15 @@
         android:layout_marginTop="80dp"
         android:layout_marginBottom="45dp"
         android:src="@drawable/logo"></androidx.appcompat.widget.AppCompatImageView>
+    -->
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="280dp"
+        android:layout_height="303dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="45dp" />
 
     <Button
         android:id="@+id/btnPlayPerson"
@@ -251,64 +260,44 @@
         android:layout_marginTop="580dp"
         android:src="@drawable/ic_vector_star" />
 
-    <!-- Working with the logo animation here
     <ImageView
-        android:id="@+id/starLogo1"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="65dp"
-        android:layout_marginTop="90dp"
-        android:src="@drawable/ic_vector_star" />
-
-    <ImageView
-        android:id="@+id/starLogo2"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="190dp"
-        android:layout_marginTop="90dp"
-        android:src="@drawable/ic_vector_star" />
-
-    <ImageView
-        android:id="@+id/starLogo3"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="65dp"
-        android:layout_marginTop="210dp"
-        android:src="@drawable/ic_vector_star" />
-
-    <ImageView
-        android:id="@+id/starLogo4"
+        android:id="@+id/star26"
         android:layout_width="12dp"
         android:layout_height="12dp"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="700dp"
         android:src="@drawable/ic_vector_star" />
 
     <ImageView
-        android:id="@+id/lineLogo1"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginLeft="-65dp"
-        android:layout_marginTop="55dp"
-        android:src="@drawable/ic_vertical_linelogo" />
-        -->
-
-    <!--
-    <ImageView
-        android:id="@+id/circle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="570dp"
-        android:src="@drawable/ic_half_circle"
-        app:tint="@color/darkGround" />
+        android:id="@+id/star27"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/ic_vector_star" />
 
     <ImageView
-        android:id="@+id/person"
-        android:layout_width="38dp"
-        android:layout_height="47dp"
-        android:layout_marginLeft="185dp"
-        android:layout_marginTop="535dp"
-        android:src="@drawable/ic_person_splash"
-        app:tint="@color/darkGround" />
-    -->
+        android:id="@+id/star28"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginLeft="275dp"
+        android:layout_marginTop="350dp"
+        android:src="@drawable/ic_vector_star" />
+
+    <ImageView
+        android:id="@+id/star29"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/ic_vector_star" />
+
+    <ImageView
+        android:id="@+id/star30"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="250dp"
+        android:src="@drawable/ic_vector_star" />
+
 </RelativeLayout>
