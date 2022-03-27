@@ -23,6 +23,7 @@ import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.databinding.FragmentSettingsBinding;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import java.util.HashMap;
 
@@ -65,11 +66,19 @@ public class SettingsFragment extends Fragment {
         cvP2.setOnClickListener(getListenerCvP2);
         etP1.addTextChangedListener(getTextWatcher);
         etP2.addTextChangedListener(getTextWatcher);
+        binding.btnBack.setOnClickListener(view -> replaceFragment(new GameFragment()));
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         return settingsView;
     }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment).setReorderingAllowed(true).addToBackStack(null).commit();
+    }
+
 
     /** Listeners */
     private final View.OnClickListener getListenerCvP1 = view -> { isPlayer2 = false; avatarColorDialog(); };
@@ -90,6 +99,7 @@ public class SettingsFragment extends Fragment {
             editor.apply();
         }
     };
+
     private final RadioGroup.OnCheckedChangeListener getListenerRadioGrid = (radioGroup, checkedId) -> {
         int btnID = radioGroup.getCheckedRadioButtonId();
         HashMap<Integer, Integer> boardMap = new HashMap<Integer, Integer>() {{
