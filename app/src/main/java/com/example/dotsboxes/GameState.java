@@ -1,11 +1,24 @@
 package com.example.dotsboxes;
+
+import androidx.annotation.NonNull;
+
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Player;
 import com.example.dotsboxes.Components.Square;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class GameState {
+
+    private static final String HORIZONTAL_LINE = "H";
+    private static final String VERTICAL_LINE = "V";
+    private static final String SCORE_SEPARATOR = "#";
+    private static final String ENTRY_SEPARATOR = "&";
+    private static final String MOVES_SEPARATOR = "%";
+    private static final String DATA_SEPARATOR = "<>";
 
     private static final int COMPUTER_PLAYER = 1;
     private static final int NUM_PLAYERS = 2;
@@ -31,14 +44,22 @@ public class GameState {
         return instance;
     }
 
+    public static GameState getInstance(String str) {
+        if (str == null) {
+            return getInstance();
+        }
+        instance = new GameState(str);
+        return instance;
+    }
+
     private GameState() {
 
         int p1Color = PrefUtility.getColor(PrefUtility.DEFAULT_PLAYER_COLOR_1);
         int p2Color = PrefUtility.getColor(PrefUtility.DEFAULT_PLAYER_COLOR_2);
 
         players = new Player[] {
-                new Player("Player 1", p1Color),
-                new Player("Player 2", p2Color)
+                new Player(0, "Player 1", p1Color),
+                new Player(1, "Player 2", p2Color)
         };
 
         turn = 0;
@@ -274,4 +295,105 @@ public class GameState {
         return players[1].getName();
     }
 
+    @NonNull
+    public String toString() {
+
+        ArrayList<String> moves = new ArrayList<>();
+
+        for (int row = 0 ; row < horizontalLines.length ; row++) {
+            for (int col = 0 ; col < horizontalLines[row].length ; col++) {
+                Line line = horizontalLines[row][col];
+                if (line.isSelected()) {
+                    int player = line.getPid();
+                    String[] move = {
+                            HORIZONTAL_LINE,
+                            Integer.toString(row),
+                            Integer.toString(col),
+                            Integer.toString(player)
+                    };
+                    moves.add(Arrays.stream(move).collect(Collectors.joining(ENTRY_SEPARATOR)));
+                }
+            }
+        }
+
+        for (int row = 0 ; row < verticalLines.length ; row++) {
+            for (int col = 0 ; col < verticalLines[row].length ; col++) {
+                Line line = verticalLines[row][col];
+                if (line.isSelected()) {
+                    int player = line.getPid();
+                    String[] move = {
+                            VERTICAL_LINE,
+                            Integer.toString(row),
+                            Integer.toString(col),
+                            Integer.toString(player)
+                    };
+                    moves.add(Arrays.stream(move).collect(Collectors.joining(ENTRY_SEPARATOR)));
+                }
+            }
+        }
+
+        ArrayList<String> filledSquares = new ArrayList<>();
+
+        for (int row = 0 ; row < squares.length ; row++) {
+            for (int col = 0 ; col < squares[row].length ; col++) {
+                Square square = squares[row][col];
+                if (square.isFilled()) {
+                    int player = square.getPid();
+                    String[] filledSquare = {
+                            Integer.toString(row),
+                            Integer.toString(col),
+                            Integer.toString(player)
+                    };
+                    filledSquares.add(Arrays.stream(filledSquare).collect(Collectors.joining(ENTRY_SEPARATOR)));
+                }
+            }
+        }
+
+        String[] data = new String[] {
+                Integer.toString(boardWidth),
+                Integer.toString(turn),
+                moves.stream().collect(Collectors.joining(MOVES_SEPARATOR)),
+                filledSquares.stream().collect(Collectors.joining(MOVES_SEPARATOR)),
+                players[0].getScore() + SCORE_SEPARATOR + players[1].getScore()
+        };
+
+        return Arrays.stream(data).collect(Collectors.joining(DATA_SEPARATOR));
+    }
+
+    private GameState(String str) {
+        this();
+
+        String[] data = str.split(DATA_SEPARATOR);
+        setUpBoard(Integer.parseInt(data[0]));
+        turn = Integer.parseInt(data[1]);
+        String[] moves = data[2].split(MOVES_SEPARATOR);
+
+        for (String move : moves) {
+            String[] moveData = move.split(ENTRY_SEPARATOR);
+            String orientation = moveData[0];
+            int row = Integer.parseInt(moveData[1]);
+            int col = Integer.parseInt(moveData[2]);
+            int player = Integer.parseInt(moveData[3]);
+            if (HORIZONTAL_LINE.equals(orientation)) {
+                horizontalLines[row][col].selectLine(players[player]);
+            } else if (VERTICAL_LINE.equals(orientation)) {
+                verticalLines[row][col].selectLine(players[player]);
+            }
+        }
+
+        if (data[3].length() > 0) {
+            String[] filledSquares = data[3].split(MOVES_SEPARATOR);
+            for (String filledSquare : filledSquares) {
+                String[] squareData = filledSquare.split(ENTRY_SEPARATOR);
+                int row = Integer.parseInt(squareData[0]);
+                int col = Integer.parseInt(squareData[1]);
+                int player = Integer.parseInt(squareData[2]);
+                squares[row][col].setPlayer(players[player]);
+            }
+        }
+
+        String[] scores = data[4].split(SCORE_SEPARATOR);
+        players[0].setScore(Integer.parseInt(scores[0]));
+        players[1].setScore(Integer.parseInt(scores[1]));
+    }
 }

@@ -2,12 +2,14 @@ package com.example.dotsboxes.Components;
 
 public class Player {
 
+    int pid;
     private String name;
     private int color;
     private int score;
     private boolean goAgain;
 
-    public Player(String name, int color){
+    public Player(int pid, String name, int color){
+        this.pid = pid;
         this.name = name;
         this.color = color;
         this.score = 0;
@@ -35,6 +37,10 @@ public class Player {
         return name;
     }
 
+    public int getPid() {
+        return pid;
+    }
+
     public void setColor(int color) {
         this.color = color;
     }
@@ -49,5 +55,9 @@ public class Player {
 
     public void resetScore() {
         score = 0;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

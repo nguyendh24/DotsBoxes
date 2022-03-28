@@ -6,8 +6,12 @@ import java.util.Map;
 public class PrefUtility {
     public static final String SHARED_PREF_NAME = "MySharedPref";
 
+    public static final String SAVED_GAME = "savedGame";
+    public static final String USE_SAVED_GAME = "useSavedGame";
     public static final String BOARD_SIZE = "boardSize";
     public static final String VERTEX = "vertex";
+    public static final String PLAYER_NAME_1 = "playerName1";
+    public static final String PLAYER_NAME_2 = "playerName2";
     public static final String PLAYER_COLOR_1 = "playerColor1";
     public static final String PLAYER_COLOR_2 = "playerColor2";
     public static final String PLAYER_AVATAR_1 = "playerAvatar1";
@@ -15,8 +19,6 @@ public class PrefUtility {
     public static final String IS_FIRST_TIME = "isFirstTime";
     public static final String IS_GAME_SAVED = "isGameSaved";
     public static final String IS_PLAY_COMPUTER = "isPlayComputer";
-    public static final String PLAYER_NAME_1 = "playerName1";
-    public static final String PLAYER_NAME_2 = "playerName2";
 
     public static final String BANGS = "bangs";
     public static final String FLOWER = "flower";
@@ -38,6 +40,8 @@ public class PrefUtility {
     public static final String PINK = "pink";
     public static final String GREEN = "green";
     public static final String PURPLE = "purple";
+    public static final String COMPUTER_COLOR = "gray";
+    public static final String COMPUTER_COLOR_DARK = "darkGray";
 
     public static final int DEFAULT_BOARD_SIZE = 4;
     public static final String DEFAULT_VERTEX = DOT;
@@ -56,6 +60,8 @@ public class PrefUtility {
         put(PINK, R.color.pinkPlayer);
         put(GREEN, R.color.greenPlayer);
         put(PURPLE, R.color.purplePlayer);
+        put(COMPUTER_COLOR, R.color.computerPlayer);
+        put(COMPUTER_COLOR_DARK, R.color.computerPlayerDark);
     }};
 
     private static final Map<String, Integer> vertexMap = new HashMap<String, Integer>() {{

@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -30,12 +28,7 @@ public class MainActivity extends AppCompatActivity {
         fetchStoredData();
         setBinding();
 
-        if (isFirstTime) { // Instantiate default player data for new users
-            startActivity(new Intent(this, Onboard.class));
-            setDefaultPrefs();
-        } else { // Temporary, to be removed later
-            setDefaultPrefs();
-        }
+        if (isFirstTime) { setDefaultPrefs(); } // Instantiate default player data for new users
 
         replaceFragment(new GameTypeFragment());
     }
@@ -51,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
         editor.commit();
     }
+
     private void setBinding() {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
