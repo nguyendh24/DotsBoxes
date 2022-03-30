@@ -28,13 +28,13 @@ import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
-import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
+import com.google.android.material.button.MaterialButton;
 
 public class GameView extends View {
 
     private static final int UNFILLED_SQUARE_OPACITY = 0;
-    private static final int FILLED_SQUARE_OPACITY = 100;
+    private static final int FILLED_SQUARE_OPACITY = 140;
 
     private static final int DOT_COLOR = Color.WHITE;
     private static final int DOT_OPACITY = 255;
@@ -54,8 +54,6 @@ public class GameView extends View {
     private TextView p2Score;
     private ImageView p1Turn;
     private ImageView p2Turn;
-    private Button btnPlayAgain;
-    private Button btnQuitGame;
 
     private Paint paint;
 
@@ -262,15 +260,11 @@ public class GameView extends View {
         p2Score.setText(Integer.toString(gameState.getP2Score()));
         if (gameState.gameOver()) {
             statusDisplay.setText(gameState.getResultsString());
-            btnPlayAgain.setVisibility(View.VISIBLE);
-            btnQuitGame.setVisibility(View.GONE);
         } else {
             if (gameState.getTurn() == 0) { GameFragment.animateTurn(p1Turn, p2Turn); }
             else { GameFragment.animateTurn(p2Turn, p1Turn); }
 
             statusDisplay.setText(gameState.getCurrentPlayer().getName() + "'s Turn");
-            btnPlayAgain.setVisibility(View.GONE);
-            btnQuitGame.setVisibility(View.VISIBLE);
         }
     }
 
@@ -320,8 +314,7 @@ public class GameView extends View {
                                 TextView p1Name,
                                 TextView p2Name,
                                 TextView statusDisplay,
-                                Button btnPlayAgain,
-                                Button btnQuitGame,
+                                Button btnResetGame,
                                 ImageView p1Turn,
                                 ImageView p2Turn) {
         this.parent = parent;
@@ -330,16 +323,16 @@ public class GameView extends View {
         p1Name.setText(gameState.getP1Name());
         p2Name.setText(gameState.getP2Name());
         this.statusDisplay = statusDisplay;
-        this.btnPlayAgain = btnPlayAgain;
-        this.btnQuitGame = btnQuitGame;
         this.p1Turn = p1Turn;
         this.p2Turn = p2Turn;
-        btnPlayAgain.setOnClickListener(view -> resetGame());
-        btnQuitGame.setOnClickListener(view -> quitGame());
+        btnResetGame.setOnClickListener(view -> resetGame());
         updateDisplays();
     }
 
     private void resetGame() {
+        editor.remove(PrefUtility.SAVED_GAME);
+        editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
+        editor.apply();
         gameState.resetGame();
         updateDisplays();
         this.postInvalidate();

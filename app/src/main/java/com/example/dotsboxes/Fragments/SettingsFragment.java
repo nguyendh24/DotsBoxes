@@ -66,7 +66,7 @@ public class SettingsFragment extends Fragment {
         cvP2.setOnClickListener(getListenerCvP2);
         etP1.addTextChangedListener(getTextWatcher);
         etP2.addTextChangedListener(getTextWatcher);
-        binding.btnBack.setOnClickListener(view -> replaceFragment(new GameFragment()));
+//        binding.btnBack.setOnClickListener(view -> replaceFragment(new GameFragment()));
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
@@ -108,8 +108,15 @@ public class SettingsFragment extends Fragment {
             put(R.id.rbGrid6, 6);
         }};
 
-        gridChangeDialog(boardMap.get(btnID));
+        boolean gameSaved = sharedPreferences.getBoolean(PrefUtility.IS_GAME_SAVED, false);
 
+        if (gameSaved) {
+            gridChangeDialog(boardMap.get(btnID));
+        } else {
+            editor.putInt(PrefUtility.BOARD_SIZE, boardMap.get(btnID));
+            editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
+            editor.apply();
+        }
     };
 
     private final RadioGroup.OnCheckedChangeListener getListenerRadioVerticesA = new RadioGroup.OnCheckedChangeListener() {
@@ -233,6 +240,7 @@ public class SettingsFragment extends Fragment {
                 .setPositiveButton("Continue", (dialog, id) -> {
                     GameState.getInstance().resetGame();
                     editor.putInt(PrefUtility.BOARD_SIZE, newBoardSize);
+                    editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
                     editor.apply();
                 })
                 .setNeutralButton("Cancel", (dialog, id) -> {

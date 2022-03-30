@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment).setReorderingAllowed(true).addToBackStack(null).commit();
+        fragmentTransaction.replace(R.id.frame_layout, fragment).setReorderingAllowed(true).commit();
     }
 
     private void setDeviceDimensions() {
