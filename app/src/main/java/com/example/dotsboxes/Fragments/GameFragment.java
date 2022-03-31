@@ -21,10 +21,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.dotsboxes.PrefUtility;
-import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.Views.GameView;
 import com.example.dotsboxes.databinding.FragmentGameBinding;
+import com.google.android.material.button.MaterialButton;
 
 public class GameFragment extends Fragment {
 
@@ -42,8 +42,7 @@ public class GameFragment extends Fragment {
         ImageView p2Turn = myView.findViewById(R.id.ivP2Turn);
         ImageView ivP1 = myView.findViewById(R.id.ivP1);
         ImageView ivP2 = myView.findViewById(R.id.ivP2);
-        Button btnPlayAgain = myView.findViewById(R.id.btnPlayAgain);
-        Button btnQuitGame = myView.findViewById(R.id.btnQuitGame);
+        Button btnResetGame = myView.findViewById(R.id.btnResetGame);
         CardView cvP1 = myView.findViewById(R.id.cvP1);
         CardView cvP2 = myView.findViewById(R.id.cvP2);
         setPlayerColors(cvP1, cvP2, p1Name, p2Name);
@@ -56,8 +55,7 @@ public class GameFragment extends Fragment {
                 p1Name,
                 p2Name,
                 statusDisplay,
-                btnPlayAgain,
-                btnQuitGame,
+                btnResetGame,
                 p1Turn,
                 p2Turn
         );

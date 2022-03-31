@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.databinding.FragmentDialogBinding;
@@ -38,19 +37,12 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
         editor = sharedPreferences.edit();
         dialogView = binding.getRoot();
 
-        MaterialCardView cvAvatarBangs = dialogView.findViewById(R.id.cvAvatarBangs);
-        MaterialCardView cvAvatarFlower = dialogView.findViewById(R.id.cvAvatarFlower);
-        MaterialCardView cvAvatarBuzz = dialogView.findViewById(R.id.cvAvatarBuzz);
-        MaterialCardView cvAvatarBrunette = dialogView.findViewById(R.id.cvAvatarBrunette);
-        MaterialCardView cvAvatarCurly = dialogView.findViewById(R.id.cvAvatarCurly);
-        MaterialCardView cvAvatarNeon = dialogView.findViewById(R.id.cvAvatarNeon);
-
-        cvAvatarBangs.setOnClickListener(getListenerAvatars);
-        cvAvatarFlower.setOnClickListener(getListenerAvatars);
-        cvAvatarBuzz.setOnClickListener(getListenerAvatars);
-        cvAvatarBrunette.setOnClickListener(getListenerAvatars);
-        cvAvatarCurly.setOnClickListener(getListenerAvatars);
-        cvAvatarNeon.setOnClickListener(getListenerAvatars);
+        binding.cvAvatarBangs.setOnClickListener(getListenerAvatars);
+        binding.cvAvatarFlower.setOnClickListener(getListenerAvatars);
+        binding.cvAvatarBuzz.setOnClickListener(getListenerAvatars);
+        binding.cvAvatarBrunette.setOnClickListener(getListenerAvatars);
+        binding.cvAvatarCurly.setOnClickListener(getListenerAvatars);
+        binding.cvAvatarNeon.setOnClickListener(getListenerAvatars);
 
         setAvatarMap();
         setAvatar();

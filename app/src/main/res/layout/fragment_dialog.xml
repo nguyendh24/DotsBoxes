@@ -8,6 +8,10 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/stars" />
+
     <ImageView
         android:id="@+id/close_corner"
         android:layout_width="60dp"
@@ -35,17 +39,17 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linearAvatarColor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="64dp"
-        android:layout_marginBottom="32dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
+        android:background="@color/finalDarkBg_50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
+
 
         <!-- Colors -->
         <TextView
@@ -316,6 +320,7 @@
 
         </LinearLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

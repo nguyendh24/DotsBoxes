@@ -67,7 +67,7 @@
 
         <TextView
             android:id="@+id/tvRuleOne"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:gravity="left"
@@ -79,7 +79,7 @@
 
         <TextView
             android:id="@+id/tvRuleTwo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:gravity="left"
@@ -101,7 +101,7 @@
 
         <TextView
             android:id="@+id/tvRuleThree"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:gravity="left"
@@ -126,7 +126,7 @@
 
         <TextView
             android:id="@+id/tvGoalText"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="left"
             android:gravity="left"
