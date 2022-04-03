@@ -6,10 +6,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +24,6 @@ import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.Views.GameView;
 import com.example.dotsboxes.databinding.FragmentGameBinding;
-import com.google.android.material.button.MaterialButton;
 
 public class GameFragment extends Fragment {
 
@@ -68,7 +67,7 @@ public class GameFragment extends Fragment {
     }
 
     private void setPlayerAvatars(ImageView ivP1, ImageView ivP2) {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
 
         String playerAvatar1 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_1, PrefUtility.DEFAULT_PLAYER_AVATAR_1);
@@ -80,21 +79,21 @@ public class GameFragment extends Fragment {
     }
 
     private void setPlayerColors(CardView cvP1, CardView cvP2, TextView tvP1, TextView tvP2) {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
 
         String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, "");
         String playerColor2 = (playComputer) ? PrefUtility.COMPUTER_COLOR : sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, "");
 
-        cvP1.setCardBackgroundColor(getResources().getColor(PrefUtility.getColor(playerColor1)));
+        cvP1.setCardBackgroundColor(ContextCompat.getColor(requireContext(), PrefUtility.getColor(playerColor1)));
         if (playComputer) {
-            cvP2.setCardBackgroundColor(getResources().getColor(PrefUtility.getColor(PrefUtility.COMPUTER_COLOR_DARK)));
+            cvP2.setCardBackgroundColor(ContextCompat.getColor(requireContext(), PrefUtility.getColor(PrefUtility.COMPUTER_COLOR_DARK)));
         } else {
-            cvP2.setCardBackgroundColor(getResources().getColor(PrefUtility.getColor(playerColor2)));
+            cvP2.setCardBackgroundColor(ContextCompat.getColor(requireContext(), PrefUtility.getColor(playerColor2)));
         }
 
-        tvP1.setTextColor(getResources().getColor(PrefUtility.getColor(playerColor1)));
-        tvP2.setTextColor(getResources().getColor(PrefUtility.getColor(playerColor2)));
+        tvP1.setTextColor(ContextCompat.getColor(requireContext(), PrefUtility.getColor(playerColor1)));
+        tvP2.setTextColor(ContextCompat.getColor(requireContext(), PrefUtility.getColor(playerColor2)));
     }
 
     private void showHelpDialog() {
