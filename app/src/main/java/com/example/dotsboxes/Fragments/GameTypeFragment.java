@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -11,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.PrefUtility;
@@ -20,7 +20,6 @@ import com.example.dotsboxes.databinding.FragmentGameTypeBinding;
 
 public class GameTypeFragment extends Fragment {
 
-    private com.example.dotsboxes.databinding.FragmentGameTypeBinding binding;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private View homeView;
@@ -28,9 +27,9 @@ public class GameTypeFragment extends Fragment {
     public GameTypeFragment() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentGameTypeBinding.inflate(getLayoutInflater());
-        sharedPreferences = getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        com.example.dotsboxes.databinding.FragmentGameTypeBinding binding = FragmentGameTypeBinding.inflate(getLayoutInflater());
+        sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         homeView = binding.getRoot();
         animateBackground();
@@ -132,7 +131,6 @@ public class GameTypeFragment extends Fragment {
         for (ImageView star : stars) { star.startAnimation(twinkle); }
     }
     private void animateLogo() {
-        //logo animation
         AnimationDrawable logoAnim;
         ImageView logoImageView = homeView.findViewById(R.id.logo);
         logoImageView.setBackgroundResource(R.drawable.logo_anim);

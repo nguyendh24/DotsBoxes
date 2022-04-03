@@ -109,16 +109,16 @@ public class GameView extends View {
 
         String p1Name = sharedPreferences.getString(PrefUtility.PLAYER_NAME_1, PrefUtility.DEFAULT_PLAYER_NAME_1);
         String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
-        gameState.setP1Color(getResources().getColor(PrefUtility.getColor(playerColor1)));
+        gameState.setP1Color(ContextCompat.getColor(getContext(), PrefUtility.getColor(playerColor1)));
         gameState.setP1Name(p1Name);
 
         if (!playComputer) {
             String p2Name = sharedPreferences.getString(PrefUtility.PLAYER_NAME_2, PrefUtility.DEFAULT_PLAYER_NAME_2);
             String playerColor2 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
             gameState.setP2Name(p2Name);
-            gameState.setP2Color(getResources().getColor(PrefUtility.getColor(playerColor2)));
+            gameState.setP2Color(ContextCompat.getColor(getContext(), PrefUtility.getColor(playerColor2)));
         } else {
-            gameState.setP2Color(getResources().getColor(PrefUtility.getColor(PrefUtility.COMPUTER_COLOR)));
+            gameState.setP2Color(ContextCompat.getColor(getContext(), PrefUtility.getColor(PrefUtility.COMPUTER_COLOR)));
         }
     }
 

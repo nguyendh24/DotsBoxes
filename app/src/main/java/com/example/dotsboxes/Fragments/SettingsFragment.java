@@ -14,16 +14,14 @@ import android.widget.RadioGroup;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.PrefUtility;
-import com.example.dotsboxes.MainActivity;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.databinding.FragmentSettingsBinding;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import java.util.HashMap;
 
@@ -50,7 +48,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         com.example.dotsboxes.databinding.FragmentSettingsBinding binding = FragmentSettingsBinding.inflate(getLayoutInflater());
-        sharedPreferences = getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         settingsView = binding.getRoot();
 
@@ -66,19 +64,11 @@ public class SettingsFragment extends Fragment {
         cvP2.setOnClickListener(getListenerCvP2);
         etP1.addTextChangedListener(getTextWatcher);
         etP2.addTextChangedListener(getTextWatcher);
-//        binding.btnBack.setOnClickListener(view -> replaceFragment(new GameFragment()));
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
         return settingsView;
     }
-
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getParentFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment).setReorderingAllowed(true).addToBackStack(null).commit();
-    }
-
 
     /** Listeners */
     private final View.OnClickListener getListenerCvP1 = view -> { isPlayer2 = false; avatarColorDialog(); };
@@ -174,8 +164,8 @@ public class SettingsFragment extends Fragment {
         String playerAvatar2 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_2, PrefUtility.DEFAULT_PLAYER_AVATAR_2);
         String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
         String playerColor2 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
-        int colorP1 = getResources().getColor(PrefUtility.getColor(playerColor1));
-        int colorP2 = getResources().getColor(PrefUtility.getColor(playerColor2));
+        int colorP1 = ContextCompat.getColor(requireContext(), PrefUtility.getColor(playerColor1));
+        int colorP2 = ContextCompat.getColor(requireContext(), PrefUtility.getColor(playerColor2));
 
         cvP1 = settingsView.findViewById(R.id.cvP1);
         cvP2 = settingsView.findViewById(R.id.cvP2);
@@ -234,7 +224,7 @@ public class SettingsFragment extends Fragment {
 
     /** Dialogs */
     private void gridChangeDialog(Integer newBoardSize) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),  R.style.AlertDialogStyle);
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity(),  R.style.AlertDialogStyle);
         builder
                 .setMessage(getResources().getString(R.string.board_warning))
                 .setPositiveButton("Continue", (dialog, id) -> {
