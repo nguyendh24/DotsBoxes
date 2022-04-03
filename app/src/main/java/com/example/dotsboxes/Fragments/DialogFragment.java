@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.dotsboxes.PrefUtility;
@@ -28,12 +29,13 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
     private View dialogView;
 
     private Map<String, MaterialCardView> avatarMap;
+    private Map<String, RadioButton> colorMap;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentDialogBinding binding = FragmentDialogBinding.inflate(getLayoutInflater());
-        sharedPreferences = getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         dialogView = binding.getRoot();
 
@@ -46,6 +48,7 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
 
         setAvatarMap();
         setAvatar();
+        setColorMap();
         setRadioPlayerColor();
 
         radioColorA.setOnCheckedChangeListener(getListenerRadioColorA);
@@ -63,6 +66,17 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
             put(PrefUtility.BRUNETTE, dialogView.findViewById(R.id.cvAvatarBrunette));
             put(PrefUtility.CURLY, dialogView.findViewById(R.id.cvAvatarCurly));
             put(PrefUtility.NEON, dialogView.findViewById(R.id.cvAvatarNeon));
+        }};
+    }
+
+    private void setColorMap() {
+        colorMap = new HashMap<String, RadioButton>() {{
+            put(PrefUtility.BLUE, dialogView.findViewById(R.id.rbColorBlue));
+            put(PrefUtility.RED, dialogView.findViewById(R.id.rbColorRed));
+            put(PrefUtility.YELLOW, dialogView.findViewById(R.id.rbColorYellow));
+            put(PrefUtility.PINK, dialogView.findViewById(R.id.rbColorPink));
+            put(PrefUtility.GREEN, dialogView.findViewById(R.id.rbColorGreen));
+            put(PrefUtility.PURPLE, dialogView.findViewById(R.id.rbColorPurple));
         }};
     }
 
@@ -152,19 +166,17 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
                 ? sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2)
                 : sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
 
-        RadioButton rb;
+        String disableColor = (!SettingsFragment.isPlayer2())
+                ? sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2)
+                : sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
 
-        switch (playerColor) {
-            case PrefUtility.BLUE: rb = dialogView.findViewById(R.id.rbColorBlue); break;
-            case PrefUtility.RED: rb = dialogView.findViewById(R.id.rbColorRed); break;
-            case PrefUtility.YELLOW: rb = dialogView.findViewById(R.id.rbColorYellow); break;
-            case PrefUtility.PINK: rb = dialogView.findViewById(R.id.rbColorPink); break;
-            case PrefUtility.GREEN: rb = dialogView.findViewById(R.id.rbColorGreen); break;
-            default: rb = dialogView.findViewById(R.id.rbColorPurple); break;
-        }
+        RadioButton rb = colorMap.get(playerColor);
+        RadioButton disabledRb = colorMap.get(disableColor);
 
-        updateAvatarColors(getResources().getColor(PrefUtility.getColor(playerColor)));
+        updateAvatarColors(ContextCompat.getColor(requireContext(), PrefUtility.getColor(playerColor)));
         rb.setChecked(true);
+        disabledRb.setCompoundDrawablesWithIntrinsicBounds(null, ContextCompat.getDrawable(requireContext(), R.drawable.ic_disable), null, null);
+        disabledRb.setEnabled(false);
     }
 
     private void setAvatar() {
