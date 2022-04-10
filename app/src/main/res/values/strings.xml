@@ -21,8 +21,8 @@
     <string name="help_button">help button</string>
     <string name="board_warning">Changing the board size will result in any game progress being lost.\nDo you want to continue?</string>
     <string name="new_user_name_input">My name is …</string>
-    <string name="rules_1">1. Take turns drawing lines between the dots.</string>
-    <string name="rules_2">2. Complete a box by drawing its fourth wall.</string>
+    <string name="rules_1">1. Take turns tapping between dots to form lines.</string>
+    <string name="rules_2">2. Complete a box by closing its fourth wall.</string>
     <string name="rules_3">3. You take another turn after completing a box.</string>
     <string name="help_goal">Player with most boxes at the end of the game wins.</string>
     <string name="quit_game">Quit Game</string>
