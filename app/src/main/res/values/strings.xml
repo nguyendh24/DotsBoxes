@@ -51,4 +51,9 @@
     <string name="green">Green</string>
     <string name="purple">Purple</string>
     <string name="resume_game">resume current game</string>
+    <string name="reset_game">reset</string>
+    <string name="exit_game">exit</string>
+    <string name="_4_x_4">4 x 4</string>
+    <string name="_5_x_5">5 x 5</string>
+    <string name="_6_x_6">6 x 6</string>
 </resources>

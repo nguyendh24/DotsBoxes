@@ -62,6 +62,7 @@ public class GameFragment extends Fragment {
         binding.btnHelp.setOnClickListener(view -> showHelpDialog());
 
         binding.btnSettings.setOnClickListener(view -> replaceFragment(new SettingsFragment()));
+        binding.btnExitGame.setOnClickListener(view -> replaceFragment(new GameTypeFragment()));
 
         return myView;
     }

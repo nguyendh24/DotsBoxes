@@ -162,9 +162,9 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginBottom="32dp"
-            android:orientation="vertical"
             android:background="@color/finalDarkBg_75"
-            app:layout_constraintBottom_toTopOf="@+id/btnResetGame"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/buttons"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider"
@@ -184,45 +184,67 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
-<!--        <Button-->
-<!--            android:id="@+id/btnResetGame"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_marginBottom="16dp"-->
-<!--            android:backgroundTint="@color/primaryBtn"-->
-<!--            android:text="@string/play_again"-->
-<!--            android:textSize="20sp"-->
-<!--            android:visibility="gone"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.518"-->
-<!--            app:layout_constraintStart_toStartOf="parent" />-->
+        <!--        <Button-->
+        <!--            android:id="@+id/btnResetGame"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="60dp"-->
+        <!--            android:layout_marginBottom="16dp"-->
+        <!--            android:backgroundTint="@color/primaryBtn"-->
+        <!--            android:text="@string/play_again"-->
+        <!--            android:textSize="20sp"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.518"-->
+        <!--            app:layout_constraintStart_toStartOf="parent" />-->
 
-        <Button
-            android:id="@+id/btnResetGame"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginBottom="80dp"
-            android:backgroundTint="@color/primaryBtn"
-            android:text="reset game"
-            android:textSize="20sp"
+        <!--        <Button-->
+        <!--            android:id="@+id/btnQuitGame"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="60dp"-->
+        <!--            android:layout_marginBottom="64dp"-->
+        <!--            android:backgroundTint="@color/primaryBtn"-->
+        <!--            android:text="@string/quit_game"-->
+        <!--            android:textSize="20sp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintHorizontal_bias="0.518"-->
+        <!--            app:layout_constraintStart_toStartOf="parent" />-->
+
+        <LinearLayout
+            android:id="@+id/buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="88dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.518"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent">
 
-<!--        <Button-->
-<!--            android:id="@+id/btnQuitGame"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_marginBottom="64dp"-->
-<!--            android:backgroundTint="@color/primaryBtn"-->
-<!--            android:text="@string/quit_game"-->
-<!--            android:textSize="20sp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.518"-->
-<!--            app:layout_constraintStart_toStartOf="parent" />-->
+            <Button
+                android:id="@+id/btnResetGame"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/primaryBtn"
+                android:text="@string/reset_game"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="70dp"
+                tools:layout_editor_absoluteY="571dp" />
+
+            <Button
+                android:layout_marginStart="30dp"
+                android:id="@+id/btnExitGame"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/primaryBtn"
+                android:text="@string/exit_game"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="241dp"
+                tools:layout_editor_absoluteY="571dp" />
+
+        </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnHelp"
@@ -231,15 +253,15 @@
             android:layout_marginStart="24dp"
             android:layout_marginBottom="24dp"
             android:clickable="true"
+            android:contentDescription="@string/help_button"
             android:focusable="true"
             app:backgroundTint="@color/primaryBtn"
-            app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/ic_help"
-            android:contentDescription="@string/help_button" />
+            app:tint="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnSettings"
@@ -248,9 +270,9 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
             android:clickable="true"
+            android:contentDescription="@string/settings_button"
             android:focusable="true"
             app:backgroundTint="@color/primaryBtn"
-            app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -258,7 +280,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
             app:srcCompat="@drawable/ic_settings"
-            android:contentDescription="@string/settings_button" />
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

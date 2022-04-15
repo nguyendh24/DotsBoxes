@@ -67,7 +67,15 @@ public class SettingsFragment extends Fragment {
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
+        binding.btnReturnToGame.setOnClickListener(view -> replaceFragment(new GameFragment()));
+
         return settingsView;
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment).setReorderingAllowed(true).addToBackStack(null).commit();
     }
 
     /** Listeners */
