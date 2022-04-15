@@ -92,7 +92,10 @@ public class GameState {
             for (int j = 0 ; j <= boardWidth ; j++) {
                 int x = spacing * (j + 1);
                 int y = spacing * (i + 1);
-                dots[i][j] = new Dot(x, y);
+                int maxLines = 2;
+                if (i > 0 && i < boardHeight) maxLines++;
+                if (j > 0 && j < boardHeight) maxLines++;
+                dots[i][j] = new Dot(x, y, maxLines);
                 if (i < boardHeight) {
                     verticalLines[i][j] = new Line(x, y, x, y + spacing);
                 }
@@ -130,6 +133,10 @@ public class GameState {
 
             }
         }
+    }
+
+    public int getSpacing() {
+        return spacing;
     }
 
     public void advanceTurn() {

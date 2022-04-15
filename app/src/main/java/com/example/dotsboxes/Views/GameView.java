@@ -17,19 +17,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.dotsboxes.Fragments.GameFragment;
-import com.example.dotsboxes.Fragments.GameTypeFragment;
 import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
-import com.example.dotsboxes.R;
-import com.google.android.material.button.MaterialButton;
 
 public class GameView extends View {
 
@@ -38,22 +32,24 @@ public class GameView extends View {
 
     private static final int DOT_COLOR = Color.WHITE;
     private static final int DOT_OPACITY = 255;
+    private static final int SELECTED_DOT_OPACITY = 100;
     private static final int BITMAP_WIDTH = 30;
+    private static final int SELECTED_DOT_WIDTH = 2 * BITMAP_WIDTH;
 
     private static final int UNSELECTED_LINE_OPACITY = 50;
     private static final int SELECTED_LINE_OPACITY = 255;
     private static final int LINE_WIDTH = 12;
-    private static final int LINE_OFFSET = 50;
 
-    private static int boardWidth;
-    private static int boardHeight;
-
-    private Fragment parent;
     private TextView statusDisplay;
     private TextView p1Score;
     private TextView p2Score;
     private ImageView p1Turn;
     private ImageView p2Turn;
+
+    private Dot selectedDot1;
+    private Dot selectedDot2;
+    private float currentX2;
+    private float currentY2;
 
     private Paint paint;
 
@@ -89,8 +85,6 @@ public class GameView extends View {
         editor = sharedPreferences.edit();
 
         int size = sharedPreferences.getInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
-        boardWidth = size;
-        boardHeight = size;
 
         boolean useSavedGame = sharedPreferences.getBoolean(PrefUtility.USE_SAVED_GAME, false);
         if (useSavedGame) {
@@ -128,6 +122,7 @@ public class GameView extends View {
         super.onDraw(canvas);
         drawSquares(canvas);
         drawLines(canvas);
+        drawInProgressMove(canvas);
         drawDots(canvas);
     }
 
@@ -178,6 +173,23 @@ public class GameView extends View {
         canvas.drawLine(line.getX1(), line.getY1(), line.getX2(), line.getY2(), paint);
     }
 
+    private void drawInProgressMove(Canvas canvas) {
+        paint.setColor(DOT_COLOR);
+        paint.setAlpha(SELECTED_DOT_OPACITY);
+
+        if (selectedDot2 != null) {
+            canvas.drawCircle(selectedDot2.getX(), selectedDot2.getY(), SELECTED_DOT_WIDTH + BITMAP_WIDTH, paint);
+        }
+
+        if (selectedDot1 != null) {
+            canvas.drawCircle(selectedDot1.getX(), selectedDot1.getY(), SELECTED_DOT_WIDTH, paint);
+            paint.setColor(gameState.getCurrentPlayer().getColor());
+            paint.setAlpha(SELECTED_LINE_OPACITY);
+            paint.setStrokeWidth(LINE_WIDTH);
+            canvas.drawLine(selectedDot1.getX(), selectedDot1.getY(), currentX2, currentY2, paint);
+        }
+    }
+
     private void drawDots(Canvas canvas) {
         paint.setColor(DOT_COLOR);
         paint.setAlpha(DOT_OPACITY);
@@ -211,21 +223,90 @@ public class GameView extends View {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN && gameState.isAllowClick()) {
-            double xPos = event.getX();
-            double yPos = event.getY();
-            if (findTappedLine(xPos, yPos)) {
-                gameState.advanceTurn();
-                updateDisplays();
-                this.postInvalidate(); // forces view to call onDraw
-                if (gameState.isComputerTurn()) {
-                    runComputerTurn();
-                } else {
-                    saveGameState();
+        if (event.getAction() == MotionEvent.ACTION_DOWN && gameState.isAllowClick() && selectedDot1 == null) {
+            double x1 = event.getX();
+            double y1 = event.getY();
+            Dot dot1 = findDot(x1, y1);
+            if (dot1 != null) {
+                selectedDot1 = dot1;
+                this.postInvalidate();
+            }
+        } else if (event.getAction() == MotionEvent.ACTION_MOVE && selectedDot1 != null) {
+            currentX2 = event.getX();
+            currentY2 = event.getY();
+            Dot dot2 = findDot(currentX2, currentY2);
+            if (dot2 != null && findUnselectedLine(selectedDot1, dot2) != null) {
+                selectedDot2 = dot2;
+            } else {
+                selectedDot2 = null;
+            }
+            this.postInvalidate();
+        } else if (event.getAction() == MotionEvent.ACTION_UP && selectedDot1 != null) {
+            currentX2 = event.getX();
+            currentY2 = event.getY();
+            Dot dot2 = findDot(currentX2, currentY2);
+            if (dot2 != null) {
+                Line line = findUnselectedLine(selectedDot1, dot2);
+                if (line != null) {
+                    makeMove(selectedDot1, dot2, line);
+                }
+            }
+            selectedDot1 = null;
+            selectedDot2 = null;
+            this.postInvalidate();
+        }
+        return true;
+    }
+
+    private Dot findDot(double x, double y) {
+        for (Dot[] row : gameState.getDots()) {
+            for (Dot dot : row) {
+                double xDist = Math.abs(dot.getX() - x);
+                double yDist = Math.abs(dot.getY() - y);
+                if (xDist <= SELECTED_DOT_WIDTH && yDist <= SELECTED_DOT_WIDTH && !dot.isSaturated()) {
+                    return dot;
                 }
             }
         }
-        return true;
+        return null;
+    }
+
+    private Line findUnselectedLine(Dot dot1, Dot dot2) {
+        int spacing = gameState.getSpacing();
+        int row1 = (int) (dot1.getY() / spacing) - 1;
+        int row2 = (int) (dot2.getY() / spacing) - 1;
+        int col1 = (int) (dot1.getX() / spacing) - 1;
+        int col2 = (int) (dot2.getX() / spacing) - 1;
+        Line line = null;
+        if (Math.abs(row1 - row2) <= 1 && Math.abs(col1 - col2) <= 1) {
+            if (row1 == row2 && col1 > col2) {
+                line = gameState.getHorizontalLines()[row1][col2];
+            } else if (row1 == row2 && col1 < col2) {
+                line = gameState.getHorizontalLines()[row1][col1];
+            } else if (row1 > row2 && col1 == col2) {
+                line = gameState.getVerticalLines()[row2][col1];
+            } else if (row1 < row2 && col1 == col2) {
+                line = gameState.getVerticalLines()[row1][col1];
+            }
+            if (line != null && !line.isSelected()) {
+                return line;
+            }
+        }
+        return null;
+    }
+
+    private void makeMove(Dot dot1, Dot dot2, Line line) {
+        dot1.addLine();
+        dot2.addLine();
+        line.selectLine(gameState.getCurrentPlayer());
+        gameState.advanceTurn();
+        updateDisplays();
+        this.postInvalidate(); // forces view to call onDraw
+        if (gameState.isComputerTurn()) {
+            runComputerTurn();
+        } else {
+            saveGameState();
+        }
     }
 
     private void saveGameState() {
@@ -268,48 +349,7 @@ public class GameView extends View {
         }
     }
 
-    private boolean findTappedLine(double xPos, double yPos) {
-
-        Line[][] horizontalLines = gameState.getHorizontalLines();
-        Line[][] verticalLines = gameState.getVerticalLines();
-
-        for (int i = 0; i <= boardHeight; i++) {
-            for (int j = 0; j <= boardWidth; j++) {
-                if (i < boardHeight) {
-                    Line verticalLine = verticalLines[i][j];
-                    boolean lineTapped = yPos >= verticalLine.getY1() + BITMAP_WIDTH
-                            && yPos <= verticalLine.getY2() - BITMAP_WIDTH
-                            && xPos >= verticalLine.getX1() - LINE_OFFSET
-                            && xPos <= verticalLine.getX2() + LINE_OFFSET;
-                    if (lineTapped) {
-                        if (verticalLine.isSelected()) {
-                            return false;
-                        }
-                        verticalLine.selectLine(gameState.getCurrentPlayer());
-                        return true;
-                    }
-                }
-                if (j < boardWidth) {
-                    Line horizontalLine = horizontalLines[i][j];
-                    boolean lineTapped = xPos >= horizontalLine.getX1() + BITMAP_WIDTH
-                            && xPos <= horizontalLine.getX2() - BITMAP_WIDTH
-                            && yPos >= horizontalLine.getY1() - LINE_OFFSET
-                            && yPos <= horizontalLine.getY2() + LINE_OFFSET;
-                    if (lineTapped) {
-                        if (horizontalLine.isSelected()) {
-                            return false;
-                        }
-                        horizontalLine.selectLine(gameState.getCurrentPlayer());
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    public void setUpReferences(Fragment parent,
-                                TextView p1Score,
+    public void setUpReferences(TextView p1Score,
                                 TextView p2Score,
                                 TextView p1Name,
                                 TextView p2Name,
@@ -317,7 +357,6 @@ public class GameView extends View {
                                 Button btnResetGame,
                                 ImageView p1Turn,
                                 ImageView p2Turn) {
-        this.parent = parent;
         this.p1Score = p1Score;
         this.p2Score = p2Score;
         p1Name.setText(gameState.getP1Name());
@@ -338,23 +377,4 @@ public class GameView extends View {
         this.postInvalidate();
     }
 
-    private void quitGame() {
-        if (gameState.isAllowClick()) {
-            gameState.resetGame();
-            editor.remove(PrefUtility.SAVED_GAME);
-            editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
-            editor.apply();
-            GameState.getInstance().resetGame();
-            // Create new fragment and transaction
-            FragmentManager fragmentManager = parent.getParentFragmentManager();
-            int count = fragmentManager.getBackStackEntryCount();
-            for (int i = 0; i < count; ++i) {
-                fragmentManager.popBackStack();
-            }
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.setReorderingAllowed(true);
-            // Replace whatever is in the fragment_container view with this fragment
-            transaction.replace(R.id.frame_layout, new GameTypeFragment()).addToBackStack(null).commit();
-        }
-    }
 }

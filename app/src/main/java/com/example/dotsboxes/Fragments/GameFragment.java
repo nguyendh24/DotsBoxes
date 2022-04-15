@@ -48,7 +48,6 @@ public class GameFragment extends Fragment {
         setPlayerAvatars(ivP1, ivP2);
 
         gameView.setUpReferences(
-                this,
                 p1Score,
                 p2Score,
                 p1Name,

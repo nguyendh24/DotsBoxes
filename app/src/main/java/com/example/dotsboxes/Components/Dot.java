@@ -8,7 +8,11 @@ public class Dot {
     private final float x;
     private final float y;
 
-    public Dot(float x, float y) { this.x = x; this.y = y; }
+    private final int maxLines;
+    private int numLines;
+    private boolean saturated;
+
+    public Dot(float x, float y, int maxLines) { this.x = x; this.y = y; this.maxLines = maxLines; }
 
     public float getX() {
         return x;
@@ -18,6 +22,12 @@ public class Dot {
         return y;
     }
 
+    public void addLine() {
+        if (!saturated) {
+            numLines++;
+            saturated = numLines >= maxLines;
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -25,6 +35,10 @@ public class Dot {
         if (!(o instanceof Dot)) return false;
         Dot dot = (Dot) o;
         return Float.compare(dot.x, x) == 0 && Float.compare(dot.y, y) == 0;
+    }
+
+    public boolean isSaturated() {
+        return saturated;
     }
 
     @Override

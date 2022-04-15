@@ -22,7 +22,6 @@ public class Square {
         filled = false;
     }
 
-    // Returns true if new square created
     public void addSide(Player player) {
         if (sides < 4) {
             sides++;
