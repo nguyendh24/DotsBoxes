@@ -85,7 +85,11 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
         FragmentManager fm = getParentFragmentManager();
         fm.popBackStack();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frame_layout, new SettingsFragment()).setReorderingAllowed(true).addToBackStack(null).commit();
+        if (SettingsFragment.isSettings())  {
+            ft.replace(R.id.frame_layout, new SettingsFragment()).setReorderingAllowed(true).addToBackStack(null).commit();
+        } else {
+            ft.replace(R.id.frame_layout, new GameFragment()).setReorderingAllowed(true).addToBackStack(null).commit();
+        }
         getDialog().dismiss();
     };
 

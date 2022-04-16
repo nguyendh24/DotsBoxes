@@ -42,6 +42,7 @@ public class SettingsFragment extends Fragment {
     private View settingsView;
 
     private static boolean isPlayer2;
+    private static boolean isSettings;
 
     public SettingsFragment(){ }
 
@@ -249,6 +250,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void avatarColorDialog() {
+        isSettings = true;
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
         DialogFragment dialogFragment = DialogFragment.newInstance();
         dialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogFragmentTheme);
@@ -264,7 +266,12 @@ public class SettingsFragment extends Fragment {
         }
     };
 
+    public static void setIsPlayer2(boolean player) { isPlayer2 = player; }
 
     public static boolean isPlayer2() { return isPlayer2; }
+
+    public static void setIsSettings(boolean settings) { isSettings = settings; }
+
+    public static boolean isSettings() { return isSettings; }
 
 }
