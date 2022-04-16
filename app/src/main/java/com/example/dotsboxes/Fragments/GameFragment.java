@@ -2,14 +2,19 @@ package com.example.dotsboxes.Fragments;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,15 +32,19 @@ import com.example.dotsboxes.databinding.FragmentGameBinding;
 
 public class GameFragment extends Fragment {
 
+    private AppCompatEditText p1Name;
+    private AppCompatEditText p2Name;
+    View myView;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         com.example.dotsboxes.databinding.FragmentGameBinding binding = FragmentGameBinding.inflate(getLayoutInflater());
-        View myView = binding.getRoot();
+        myView = binding.getRoot();
         GameView gameView = myView.findViewById(R.id.gameView);
         TextView p1Score = myView.findViewById(R.id.tvP1Score);
         TextView p2Score = myView.findViewById(R.id.tvP2Score);
-        TextView p1Name = myView.findViewById(R.id.tvP1Name);
-        TextView p2Name = myView.findViewById(R.id.tvP2Name);
+        p1Name = myView.findViewById(R.id.etP1Name);
+        p2Name = myView.findViewById(R.id.etP2Name);
         TextView statusDisplay = myView.findViewById(R.id.tvCurrentTurn);
         ImageView p1Turn = myView.findViewById(R.id.ivP1Turn);
         ImageView p2Turn = myView.findViewById(R.id.ivP2Turn);
@@ -58,6 +67,12 @@ public class GameFragment extends Fragment {
                 p2Turn
         );
 
+        p1Name.addTextChangedListener(getTextWatcher);
+        p2Name.addTextChangedListener(getTextWatcher);
+
+        binding.cvP1.setOnClickListener(getListenerCvP1);
+        binding.cvP2.setOnClickListener(getListenerCvP2);
+
         binding.btnHelp.setOnClickListener(view -> showHelpDialog());
 
         binding.btnSettings.setOnClickListener(view -> replaceFragment(new SettingsFragment()));
@@ -65,6 +80,28 @@ public class GameFragment extends Fragment {
 
         return myView;
     }
+
+    /** Listeners */
+    private final View.OnClickListener getListenerCvP1 = view -> { SettingsFragment.setIsPlayer2(false); avatarColorDialog(); };
+
+    private final View.OnClickListener getListenerCvP2 = view -> { SettingsFragment.setIsPlayer2(true); avatarColorDialog(); };
+
+    private final TextWatcher getTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            SharedPreferences sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(PrefUtility.PLAYER_NAME_1, p1Name.getText().toString());
+            editor.putString(PrefUtility.PLAYER_NAME_2, p2Name.getText().toString());
+            editor.apply();
+        }
+    };
 
     private void setPlayerAvatars(ImageView ivP1, ImageView ivP2) {
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -84,6 +121,15 @@ public class GameFragment extends Fragment {
 
         String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, "");
         String playerColor2 = (playComputer) ? PrefUtility.COMPUTER_COLOR : sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, "");
+
+        int colorP1 = ContextCompat.getColor(requireContext(), PrefUtility.getColor(playerColor1));
+        int colorP2 = ContextCompat.getColor(requireContext(), PrefUtility.getColor(playerColor2));
+
+        ColorStateList colorStateListP1 = ColorStateList.valueOf(colorP1);
+        ColorStateList colorStateListP2 = ColorStateList.valueOf(colorP2);
+
+        p1Name.setBackgroundTintList(colorStateListP1);
+        p2Name.setBackgroundTintList(colorStateListP2);
 
         cvP1.setCardBackgroundColor(ContextCompat.getColor(requireContext(), PrefUtility.getColor(playerColor1)));
         if (playComputer) {
@@ -111,6 +157,14 @@ public class GameFragment extends Fragment {
         FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment).setReorderingAllowed(true).addToBackStack(null).commit();
+    }
+
+    private void avatarColorDialog() {
+        SettingsFragment.setIsSettings(false);
+        FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+        DialogFragment dialogFragment = DialogFragment.newInstance();
+        dialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogFragmentTheme);
+        dialogFragment.show(fragmentTransaction, "dialog");
     }
 
     public static void animateTurn(ImageView visiblePlayer, ImageView invisiblePlayer) {
