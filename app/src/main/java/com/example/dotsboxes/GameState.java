@@ -383,8 +383,12 @@ public class GameState {
             int player = Integer.parseInt(moveData[3]);
             if (HORIZONTAL_LINE.equals(orientation)) {
                 horizontalLines[row][col].selectLine(players[player]);
+                dots[row][col].addLine();
+                if (col < dots.length - 1) dots[row][col+1].addLine();
             } else if (VERTICAL_LINE.equals(orientation)) {
                 verticalLines[row][col].selectLine(players[player]);
+                dots[row][col].addLine();
+                if (row < dots.length - 1) dots[row+1][col].addLine();
             }
         }
 
