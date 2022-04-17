@@ -4,13 +4,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -37,6 +42,7 @@ public class SettingsFragment extends Fragment {
     private EditText etP1;
     private EditText etP2;
 
+    private FragmentSettingsBinding binding;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private View settingsView;
@@ -48,7 +54,7 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        com.example.dotsboxes.databinding.FragmentSettingsBinding binding = FragmentSettingsBinding.inflate(getLayoutInflater());
+        binding = FragmentSettingsBinding.inflate(getLayoutInflater());
         sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         settingsView = binding.getRoot();
