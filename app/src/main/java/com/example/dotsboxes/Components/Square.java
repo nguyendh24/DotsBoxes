@@ -2,8 +2,6 @@ package com.example.dotsboxes.Components;
 
 import android.graphics.Color;
 
-import java.util.Objects;
-
 public class Square {
 
     private static float size;
@@ -58,20 +56,6 @@ public class Square {
 
     public int getPid() {
         return player.getPid();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Square)) return false;
-        Square square = (Square) o;
-        return (Float.compare(square.x, x) == 0
-                && Float.compare(square.y, y) == 0);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
     }
 
     public void reset() {
