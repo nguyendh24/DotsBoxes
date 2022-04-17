@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/finalDarkBg"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent">
 
@@ -40,15 +42,32 @@
         android:id="@+id/linearAvatarColor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/finalDarkBg_50"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:background="@color/finalDarkBg_50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Player Name -->
+        <EditText
+            android:id="@+id/etPlayerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Player"
+            android:layout_marginBottom="24dp"
+            android:ems="5"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:maxLength="8"
+            android:singleLine="true"
+            android:text="Player"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+        <!--            android:visibility="gone"-->
 
 
         <!-- Colors -->
