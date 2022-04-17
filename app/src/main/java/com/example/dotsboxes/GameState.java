@@ -273,6 +273,11 @@ public class GameState {
             player.resetGoAgain();
             player.resetScore();
         }
+        for (Dot[] row : dots) {
+            for (Dot dot : row) {
+                dot.reset();
+            }
+        }
         for (Square[] row : squares) {
             for (Square square : row) {
                 square.reset();

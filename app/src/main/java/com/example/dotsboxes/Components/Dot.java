@@ -41,6 +41,11 @@ public class Dot {
         return saturated;
     }
 
+    public void reset() {
+        saturated = false;
+        numLines = 0;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
