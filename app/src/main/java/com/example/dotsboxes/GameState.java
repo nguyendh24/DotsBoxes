@@ -114,6 +114,8 @@ public class GameState {
             for (int j = 0 ; j <= boardWidth ; j++) {
                 if (i < boardHeight) {
                     Line vLine = verticalLines[i][j];
+                    vLine.addAdjacentDot(dots[i][j]);
+                    vLine.addAdjacentDot(dots[i+1][j]);
                     if (j > 0) {
                         vLine.addAdjacentSquare(squares[i][j-1]);
                     }
@@ -123,6 +125,8 @@ public class GameState {
                 }
                 if (j < boardWidth) {
                     Line hLine = horizontalLines[i][j];
+                    hLine.addAdjacentDot(dots[i][j]);
+                    hLine.addAdjacentDot(dots[i][j+1]);
                     if (i > 0) {
                         hLine.addAdjacentSquare(squares[i-1][j]);
                     }
@@ -383,12 +387,8 @@ public class GameState {
             int player = Integer.parseInt(moveData[3]);
             if (HORIZONTAL_LINE.equals(orientation)) {
                 horizontalLines[row][col].selectLine(players[player]);
-                dots[row][col].addLine();
-                if (col < dots.length - 1) dots[row][col+1].addLine();
             } else if (VERTICAL_LINE.equals(orientation)) {
                 verticalLines[row][col].selectLine(players[player]);
-                dots[row][col].addLine();
-                if (row < dots.length - 1) dots[row+1][col].addLine();
             }
         }
 

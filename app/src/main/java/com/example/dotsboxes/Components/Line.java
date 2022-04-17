@@ -12,6 +12,7 @@ public class Line {
 
     private final float x1, y1, x2, y2;
     private final Set<Square> adjacentSquares;
+    private final Set<Dot> adjacentDots;
     private boolean selected;
     private Player player;
 
@@ -21,6 +22,7 @@ public class Line {
         this.x2 = x2;
         this.y2 = y2;
         adjacentSquares = new HashSet<>();
+        adjacentDots = new HashSet<>();
         selected = false;
     }
 
@@ -29,6 +31,9 @@ public class Line {
         this.player = player;
         for (Square square : adjacentSquares) {
             square.addSide(player);
+        }
+        for (Dot dot : adjacentDots) {
+            dot.addLine();
         }
     }
 
@@ -58,6 +63,10 @@ public class Line {
 
     public void addAdjacentSquare(Square square) {
         adjacentSquares.add(square);
+    }
+
+    public void addAdjacentDot(Dot dot) {
+        adjacentDots.add(dot);
     }
 
     @Override

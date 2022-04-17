@@ -248,7 +248,7 @@ public class GameView extends View {
             if (dot2 != null) {
                 Line line = findUnselectedLine(selectedDot1, dot2);
                 if (line != null) {
-                    makeMove(selectedDot1, dot2, line);
+                    makeMove(line);
                 }
             }
             selectedDot1 = null;
@@ -295,9 +295,7 @@ public class GameView extends View {
         return null;
     }
 
-    private void makeMove(Dot dot1, Dot dot2, Line line) {
-        dot1.addLine();
-        dot2.addLine();
+    private void makeMove(Line line) {
         line.selectLine(gameState.getCurrentPlayer());
         gameState.advanceTurn();
         updateDisplays();
