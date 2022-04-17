@@ -53,6 +53,9 @@ public class GameFragment extends Fragment {
         Button btnResetGame = myView.findViewById(R.id.btnResetGame);
         CardView cvP1 = myView.findViewById(R.id.cvP1);
         CardView cvP2 = myView.findViewById(R.id.cvP2);
+        ImageView winIcon = myView.findViewById(R.id.winIcon);
+        TextView winTop = myView.findViewById(R.id.winTop);
+        TextView winBot = myView.findViewById(R.id.winBot);
         setPlayerColors(cvP1, cvP2, p1Name, p2Name);
         setPlayerAvatars(ivP1, ivP2);
 
@@ -183,5 +186,33 @@ public class GameFragment extends Fragment {
 
         invisiblePlayer.clearAnimation();
         visiblePlayer.setAnimation(mAnimation);
+    }
+
+    private void winnerPopUp(CardView winBg, ImageView winIcon, TextView winTop, TextView winBot){
+        TextView p1Score = myView.findViewById(R.id.tvP1Score);
+        TextView p2Score = myView.findViewById(R.id.tvP2Score);
+        int p1ScoreInt = Integer.parseInt(p1Score.getText().toString());
+        int p2ScoreInt = Integer.parseInt(p2Score.getText().toString());
+
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+
+        //P1 wins
+        if(p1ScoreInt > p2ScoreInt){
+            String playerAvatar1 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_1, PrefUtility.DEFAULT_PLAYER_AVATAR_1);
+            winIcon.setImageResource(PrefUtility.getAvatar(playerAvatar1));
+        }
+        //P2 wins
+        else if (p1ScoreInt < p2ScoreInt){
+            String playerAvatar2 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_2, PrefUtility.DEFAULT_PLAYER_AVATAR_2);
+            winIcon.setImageResource(PrefUtility.getAvatar(playerAvatar2));
+        }
+        //Tie
+        else{
+            winIcon.setImageResource(PrefUtility.getAvatar("baby"));
+            winTop.setText("It's a");
+            winBot.setText("Tie!");
+        }
+        winBg.setVisibility(View.VISIBLE);
+        winIcon.setVisibility(View.VISIBLE);
     }
 }

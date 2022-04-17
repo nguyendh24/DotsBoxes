@@ -26,6 +26,7 @@ public class PrefUtility {
     public static final String BRUNETTE = "gma";
     public static final String CURLY = "curly";
     public static final String NEON = "neon";
+    public static final String BABY = "baby";
 
     public static final String DOT = "dot";
     public static final String TRIANGLE = "triangle";
@@ -42,6 +43,7 @@ public class PrefUtility {
     public static final String PURPLE = "purple";
     public static final String COMPUTER_COLOR = "gray";
     public static final String COMPUTER_COLOR_DARK = "darkGray";
+    public static final String DARKGROUND = "darkGround";
 
     public static final int DEFAULT_BOARD_SIZE = 4;
     public static final String DEFAULT_VERTEX = DOT;
@@ -62,6 +64,7 @@ public class PrefUtility {
         put(PURPLE, R.color.purplePlayer);
         put(COMPUTER_COLOR, R.color.computerPlayer);
         put(COMPUTER_COLOR_DARK, R.color.computerPlayerDark);
+        put(DARKGROUND, R.color.darkGround);
     }};
 
     private static final Map<String, Integer> vertexMap = new HashMap<String, Integer>() {{
@@ -80,6 +83,7 @@ public class PrefUtility {
         put(BRUNETTE, R.drawable.ic_a_brunette);
         put(CURLY, R.drawable.ic_a_curly);
         put(NEON, R.drawable.ic_a_neon);
+        put(BABY, R.drawable.ic_a_baby);
     }};
 
     public static int getAvatar(String avatar) {
