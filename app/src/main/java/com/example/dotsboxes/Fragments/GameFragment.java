@@ -44,8 +44,6 @@ public class GameFragment extends Fragment {
         ImageView ivP2 = myView.findViewById(R.id.ivP2);
         ImageView ivWinner = myView.findViewById(R.id.ivWinner);
 
-        ivWinner.setVisibility(View.GONE);
-
         Button btnResetGame = myView.findViewById(R.id.btnResetGame);
         CardView cvP1 = myView.findViewById(R.id.cvP1);
         CardView cvP2 = myView.findViewById(R.id.cvP2);
@@ -79,7 +77,6 @@ public class GameFragment extends Fragment {
     private final View.OnClickListener getListenerCvP1 = view -> { SettingsFragment.setIsPlayer2(false); avatarColorDialog(); };
 
     private final View.OnClickListener getListenerCvP2 = view -> { SettingsFragment.setIsPlayer2(true); avatarColorDialog(); };
-
 
     private void setPlayerAvatars(ImageView ivP1, ImageView ivP2) {
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
