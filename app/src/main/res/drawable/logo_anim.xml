@@ -2,17 +2,14 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="true"
     android:visible="true">
-    <item android:drawable="@drawable/ic_starslogo" android:duration="300" />
-    <item android:drawable="@drawable/ic_logo_frame01" android:duration="300" />
-    <item android:drawable="@drawable/ic_logo_frame02" android:duration="300" />
-    <item android:drawable="@drawable/ic_logo_frame03" android:duration="300" />
-    <item android:drawable="@drawable/ic_logo_frame04" android:duration="300" />
-    <item android:drawable="@drawable/ic_logo_frame05" android:duration="300" />
-    <item android:drawable="@drawable/ic_logo_frame06" android:duration="300" />
-    <item android:drawable="@drawable/ic_logo_frame07" android:duration="300" />
-    <item android:drawable="@drawable/ic_logo_frame08" android:duration="300" />
-    <item android:drawable="@drawable/ic_logo_frame09" android:duration="300" />
-    <item android:drawable="@drawable/ic_logo_frame10" android:duration="300" />
-    <item android:drawable="@drawable/ic_logo_final_frame" android:duration="250" />
+    <item android:drawable="@drawable/ic_frame_1" android:duration="250" />
+    <item android:drawable="@drawable/ic_frame_2" android:duration="300" />
+    <item android:drawable="@drawable/ic_frame_3" android:duration="300" />
+    <item android:drawable="@drawable/ic_frame_4" android:duration="300" />
+    <item android:drawable="@drawable/ic_frame_5" android:duration="300" />
+    <item android:drawable="@drawable/ic_frame_6" android:duration="300" />
+    <item android:drawable="@drawable/ic_frame_7" android:duration="300" />
+    <item android:drawable="@drawable/ic_frame_8" android:duration="300" />
+    <item android:drawable="@drawable/ic_frame_9" android:duration="300" />
 
 </animation-list>
