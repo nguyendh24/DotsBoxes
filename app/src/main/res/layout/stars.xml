@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:clipToPadding="false">
 
+
     <ImageView
         android:id="@+id/star1"
         android:layout_width="18dp"
@@ -47,6 +48,14 @@
 
     <ImageView
         android:id="@+id/star6"
+        android:layout_width="18dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/ic_vector_star" />
+
+    <ImageView
+        android:id="@+id/star"
         android:layout_width="18dp"
         android:layout_height="24dp"
         android:layout_marginStart="250dp"
@@ -300,6 +309,7 @@
         android:layout_marginStart="390dp"
         android:layout_marginTop="700dp"
         android:src="@drawable/ic_vector_star" />
+
 
     <!--        <ImageView-->
     <!--            android:id="@+id/star1"-->

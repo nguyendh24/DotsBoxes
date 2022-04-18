@@ -238,6 +238,7 @@ public class GameState {
                 }
             }
         }
+        winnerID = -1;
         return "Game is a tie!";
     }
 
