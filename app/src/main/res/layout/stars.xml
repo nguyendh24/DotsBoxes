@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:clipToPadding="false">
 
+
     <ImageView
         android:id="@+id/star1"
         android:layout_width="18dp"
@@ -47,6 +48,14 @@
 
     <ImageView
         android:id="@+id/star6"
+        android:layout_width="18dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/ic_vector_star" />
+
+    <ImageView
+        android:id="@+id/star"
         android:layout_width="18dp"
         android:layout_height="24dp"
         android:layout_marginStart="250dp"
@@ -299,6 +308,54 @@
         android:layout_height="48dp"
         android:layout_marginStart="390dp"
         android:layout_marginTop="700dp"
+        android:src="@drawable/ic_vector_star" />
+
+    <ImageView
+        android:id="@+id/starLogo1"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/ic_vector_star" />
+
+    <ImageView
+        android:id="@+id/starLogo2"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/ic_vector_star" />
+
+    <ImageView
+        android:id="@+id/starLogo3"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="186dp"
+        android:src="@drawable/ic_vector_star" />
+
+    <ImageView
+        android:id="@+id/starLogo4"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="301dp"
+        android:src="@drawable/ic_vector_star" />
+
+    <ImageView
+        android:id="@+id/starLogo5"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="269dp"
+        android:layout_marginTop="186dp"
+        android:src="@drawable/ic_vector_star" />
+
+    <ImageView
+        android:id="@+id/starLogo6"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="269dp"
+        android:layout_marginTop="301dp"
         android:src="@drawable/ic_vector_star" />
 
     <!--        <ImageView-->
