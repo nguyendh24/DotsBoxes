@@ -24,6 +24,7 @@ import com.example.dotsboxes.Components.Dot;
 import com.example.dotsboxes.Components.Line;
 import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
+import com.example.dotsboxes.R;
 
 public class GameView extends View {
 
@@ -45,6 +46,7 @@ public class GameView extends View {
     private TextView p2Score;
     private ImageView p1Turn;
     private ImageView p2Turn;
+    private ImageView winner;
 
     private Dot selectedDot1;
     private Dot selectedDot2;
@@ -115,7 +117,6 @@ public class GameView extends View {
             gameState.setP2Color(ContextCompat.getColor(getContext(), PrefUtility.getColor(PrefUtility.COMPUTER_COLOR)));
         }
     }
-
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -339,6 +340,7 @@ public class GameView extends View {
         p2Score.setText(Integer.toString(gameState.getP2Score()));
         if (gameState.gameOver()) {
             statusDisplay.setText(gameState.getResultsString());
+            setWinnerImage(gameState.getWinnerID());
         } else {
             if (gameState.getTurn() == 0) { GameFragment.animateTurn(p1Turn, p2Turn); }
             else { GameFragment.animateTurn(p2Turn, p1Turn); }
@@ -347,6 +349,23 @@ public class GameView extends View {
         }
     }
 
+    private void setWinnerImage(int winnerID) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
+        int resID;
+        String playerAvatar1 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_1, PrefUtility.DEFAULT_PLAYER_AVATAR_1);
+        String playerAvatar2 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_2, PrefUtility.DEFAULT_PLAYER_AVATAR_2);
+
+        if (winnerID == 0) {
+            resID = PrefUtility.getAvatar(playerAvatar1);
+        } else {
+            resID = (playComputer) ? R.drawable.ic_robot : PrefUtility.getAvatar(playerAvatar2);
+        }
+
+        winner.setImageResource(PrefUtility.getAvatar(playerAvatar1));
+        winner.setImageResource(resID);
+        winner.setVisibility(VISIBLE);
+    }
     public void setUpReferences(TextView p1Score,
                                 TextView p2Score,
                                 TextView p1Name,
@@ -354,7 +373,8 @@ public class GameView extends View {
                                 TextView statusDisplay,
                                 Button btnResetGame,
                                 ImageView p1Turn,
-                                ImageView p2Turn) {
+                                ImageView p2Turn,
+                                ImageView winner) {
         this.p1Score = p1Score;
         this.p2Score = p2Score;
         p1Name.setText(gameState.getP1Name());
@@ -362,11 +382,13 @@ public class GameView extends View {
         this.statusDisplay = statusDisplay;
         this.p1Turn = p1Turn;
         this.p2Turn = p2Turn;
+        this.winner = winner;
         btnResetGame.setOnClickListener(view -> resetGame());
         updateDisplays();
     }
 
     private void resetGame() {
+        winner.setVisibility(View.GONE);
         editor.remove(PrefUtility.SAVED_GAME);
         editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
         editor.apply();

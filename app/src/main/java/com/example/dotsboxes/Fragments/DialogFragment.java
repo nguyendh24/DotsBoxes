@@ -3,16 +3,21 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.databinding.FragmentDialogBinding;
@@ -24,6 +29,7 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
     private RadioGroup radioColorA;
     private RadioGroup radioColorB;
 
+    private FragmentDialogBinding binding;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private View dialogView;
@@ -34,11 +40,15 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentDialogBinding binding = FragmentDialogBinding.inflate(getLayoutInflater());
+        binding = FragmentDialogBinding.inflate(getLayoutInflater());
         sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         dialogView = binding.getRoot();
 
+        if (!SettingsFragment.isSettings()) setPlayerName();
+        else binding.etPlayerName.setVisibility(View.GONE);
+
+        binding.etPlayerName.addTextChangedListener(getTextWatcher);
         binding.cvAvatarBangs.setOnClickListener(getListenerAvatars);
         binding.cvAvatarFlower.setOnClickListener(getListenerAvatars);
         binding.cvAvatarBuzz.setOnClickListener(getListenerAvatars);
@@ -54,6 +64,16 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
         radioColorA.setOnCheckedChangeListener(getListenerRadioColorA);
         radioColorB.setOnCheckedChangeListener(getListenerRadioColorB);
         dialogView.findViewById(R.id.close_corner).setOnClickListener(getListenerDismiss);
+
+//        binding.etPlayerName.setOnEditorActionListener((v, actionId, event) -> {
+//            if(actionId == EditorInfo.IME_ACTION_DONE) {
+//                InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+//                binding.etPlayerName.clearFocus();
+//                dialogView.requestFocus();
+//            }
+//            return false;
+//        });
 
         return dialogView;
     }
@@ -81,6 +101,27 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
     }
 
     /** Listeners */
+    private final TextWatcher getTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            String player = (SettingsFragment.isPlayer2()) ? PrefUtility.PLAYER_NAME_2 : PrefUtility.PLAYER_NAME_1;
+            String updatedName = binding.etPlayerName.getText().toString();
+            editor.putString(player, updatedName);
+            editor.apply();
+
+            if (SettingsFragment.isPlayer2()) GameState.getInstance().setP2Name(updatedName);
+            else GameState.getInstance().setP1Name(updatedName);
+
+        }
+    };
+
+
     private final View.OnClickListener getListenerDismiss = view -> {
         FragmentManager fm = getParentFragmentManager();
         fm.popBackStack();
@@ -196,6 +237,15 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
                 avatar.getValue().setStrokeColor(Color.WHITE);
             }
         }
+    }
+
+    private void setPlayerName() {
+        String PlayerName = (SettingsFragment.isPlayer2())
+                ? sharedPreferences.getString(PrefUtility.PLAYER_NAME_2, PrefUtility.DEFAULT_PLAYER_AVATAR_2)
+                : sharedPreferences.getString(PrefUtility.PLAYER_NAME_1, PrefUtility.DEFAULT_PLAYER_AVATAR_1);
+
+        binding.etPlayerName.setText(PlayerName);
+        binding.etPlayerName.setVisibility(View.VISIBLE);
     }
 
     /** Helper methods */

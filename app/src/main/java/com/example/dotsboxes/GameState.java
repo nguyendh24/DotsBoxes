@@ -36,6 +36,7 @@ public class GameState {
     private int turn;
     private boolean playComputer;
     private boolean allowClick;
+    private int winnerID;
 
     public static GameState getInstance() {
         if (instance == null) {
@@ -232,6 +233,7 @@ public class GameState {
         if (numWinners == 1) {
             for (Player player : players) {
                 if (player.getScore() == highScore) {
+                    winnerID = player.getPid();
                     return player.getName() + " wins!";
                 }
             }
@@ -310,6 +312,8 @@ public class GameState {
     public String getP2Name() {
         return players[1].getName();
     }
+
+    public int getWinnerID() { return winnerID; }
 
     @NonNull
     public String toString() {
