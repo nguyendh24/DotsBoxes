@@ -1,5 +1,6 @@
 package com.example.dotsboxes.Fragments;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,9 +9,11 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -45,9 +48,6 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
         editor = sharedPreferences.edit();
         dialogView = binding.getRoot();
 
-        if (!SettingsFragment.isSettings()) setPlayerName();
-        else binding.etPlayerName.setVisibility(View.GONE);
-
         binding.etPlayerName.addTextChangedListener(getTextWatcher);
         binding.cvAvatarBangs.setOnClickListener(getListenerAvatars);
         binding.cvAvatarFlower.setOnClickListener(getListenerAvatars);
@@ -56,6 +56,7 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
         binding.cvAvatarCurly.setOnClickListener(getListenerAvatars);
         binding.cvAvatarNeon.setOnClickListener(getListenerAvatars);
 
+        setPlayerName();
         setAvatarMap();
         setAvatar();
         setColorMap();
@@ -65,15 +66,7 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
         radioColorB.setOnCheckedChangeListener(getListenerRadioColorB);
         dialogView.findViewById(R.id.close_corner).setOnClickListener(getListenerDismiss);
 
-//        binding.etPlayerName.setOnEditorActionListener((v, actionId, event) -> {
-//            if(actionId == EditorInfo.IME_ACTION_DONE) {
-//                InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-//                binding.etPlayerName.clearFocus();
-//                dialogView.requestFocus();
-//            }
-//            return false;
-//        });
+        getDialog().setOnCancelListener(dialogInterface -> handleFragment());
 
         return dialogView;
     }
@@ -121,16 +114,8 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
         }
     };
 
-
     private final View.OnClickListener getListenerDismiss = view -> {
-        FragmentManager fm = getParentFragmentManager();
-        fm.popBackStack();
-        FragmentTransaction ft = fm.beginTransaction();
-        if (SettingsFragment.isSettings())  {
-            ft.replace(R.id.frame_layout, new SettingsFragment()).setReorderingAllowed(true).addToBackStack(null).commit();
-        } else {
-            ft.replace(R.id.frame_layout, new GameFragment()).setReorderingAllowed(true).addToBackStack(null).commit();
-        }
+        handleFragment();
         getDialog().dismiss();
     };
 
@@ -201,7 +186,6 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
         }
     };
 
-
     /** Display Setters */
     private void setRadioPlayerColor() {
         radioColorA = dialogView.findViewById(R.id.radioColorA);
@@ -253,5 +237,14 @@ public class DialogFragment extends androidx.fragment.app.DialogFragment {
         for (Map.Entry<String, MaterialCardView> avatar : avatarMap.entrySet()) avatar.getValue().setCardBackgroundColor(color);
     }
 
-    public static DialogFragment newInstance() { return new DialogFragment(); }
+    private void handleFragment() {
+        FragmentManager fm = getParentFragmentManager();
+        fm.popBackStack();
+        FragmentTransaction ft = fm.beginTransaction();
+        if (SettingsFragment.isSettings())  {
+            ft.replace(R.id.frame_layout, new SettingsFragment()).setReorderingAllowed(true).addToBackStack(null).commit();
+        } else {
+            ft.replace(R.id.frame_layout, new GameFragment()).setReorderingAllowed(true).addToBackStack(null).commit();
+        }
+    }
 }

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.WindowManager;
 import com.example.dotsboxes.Fragments.GameTypeFragment;
 import com.example.dotsboxes.databinding.ActivityMainBinding;
@@ -17,15 +18,13 @@ public class MainActivity extends AppCompatActivity {
     public static float deviceHeight;
     public static float deviceWidth;
     private static boolean isFirstTime;
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         hideActionBar();
+        setModes();
         setDeviceDimensions();
         fetchStoredData();
         setBinding();
@@ -33,6 +32,32 @@ public class MainActivity extends AppCompatActivity {
         if (isFirstTime) { setDefaultPrefs(); } // Instantiate default player data for new users
 
         replaceFragment(new GameTypeFragment());
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        if (!hasFocus) hideSystemUI();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideSystemUI();
+    }
+
+    private void hideSystemUI() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    private void setModes() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // locks portrait mode, landscape not implemented
     }
 
     private void setDefaultPrefs() {
@@ -70,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchStoredData() {
-        sharedPreferences = getSharedPreferences(PrefUtility.SHARED_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(PrefUtility.SHARED_PREF_NAME, MODE_PRIVATE);
         editor = sharedPreferences.edit();
         isFirstTime = sharedPreferences.getBoolean(PrefUtility.IS_FIRST_TIME, true);
     }

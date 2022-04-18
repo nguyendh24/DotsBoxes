@@ -2,6 +2,7 @@ package com.example.dotsboxes.Fragments;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,13 +25,13 @@ import com.example.dotsboxes.PrefUtility;
 import com.example.dotsboxes.R;
 import com.example.dotsboxes.Views.GameView;
 import com.example.dotsboxes.databinding.FragmentGameBinding;
+import nl.dionsegijn.konfetti.xml.KonfettiView;
 
 public class GameFragment extends Fragment {
-    FragmentGameBinding binding;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentGameBinding.inflate(getLayoutInflater());
+        FragmentGameBinding binding = FragmentGameBinding.inflate(getLayoutInflater());
         View myView = binding.getRoot();
         GameView gameView = myView.findViewById(R.id.gameView);
         TextView p1Score = myView.findViewById(R.id.tvP1Score);
@@ -43,6 +44,7 @@ public class GameFragment extends Fragment {
         ImageView ivP1 = myView.findViewById(R.id.ivP1);
         ImageView ivP2 = myView.findViewById(R.id.ivP2);
         ImageView ivWinner = myView.findViewById(R.id.ivWinner);
+        KonfettiView konfettiView = myView.findViewById(R.id.konfettiView);
 
         Button btnResetGame = myView.findViewById(R.id.btnResetGame);
         CardView cvP1 = myView.findViewById(R.id.cvP1);
@@ -59,7 +61,8 @@ public class GameFragment extends Fragment {
                 btnResetGame,
                 p1Turn,
                 p2Turn,
-                ivWinner
+                ivWinner,
+                konfettiView
         );
 
         binding.cvP1.setOnClickListener(getListenerCvP1);
@@ -113,19 +116,16 @@ public class GameFragment extends Fragment {
     private void avatarColorDialog() {
         SettingsFragment.setIsSettings(false);
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-        DialogFragment dialogFragment = DialogFragment.newInstance();
+        DialogFragment dialogFragment = new DialogFragment();
         dialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogFragmentTheme);
         dialogFragment.show(fragmentTransaction, "dialog");
     }
 
     private void showHelpDialog() {
-        Dialog dialog = new Dialog(getContext());
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Dialog dialog = new Dialog(getContext(), R.style.DialogFragmentTheme);
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
         dialog.setContentView(R.layout.dialog_help);
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        dialog.show(); dialog.getWindow().setAttributes(lp);
+        dialog.show();
         dialog.findViewById(R.id.close_corner).setOnClickListener(view -> dialog.dismiss());
     }
 
@@ -152,4 +152,5 @@ public class GameFragment extends Fragment {
         invisiblePlayer.clearAnimation();
         visiblePlayer.setAnimation(mAnimation);
     }
+
 }

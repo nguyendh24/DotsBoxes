@@ -26,20 +26,30 @@ import com.example.dotsboxes.Components.Square;
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.R;
 
+import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+
+import nl.dionsegijn.konfetti.core.PartyFactory;
+import nl.dionsegijn.konfetti.core.Position;
+import nl.dionsegijn.konfetti.core.emitter.Emitter;
+import nl.dionsegijn.konfetti.core.emitter.EmitterConfig;
+import nl.dionsegijn.konfetti.core.models.Shape;
+import nl.dionsegijn.konfetti.xml.KonfettiView;
+
 public class GameView extends View {
 
-    private static final int UNFILLED_SQUARE_OPACITY = 0;
-    private static final int FILLED_SQUARE_OPACITY = 140;
+    private final int UNFILLED_SQUARE_OPACITY = 0;
+    private final int FILLED_SQUARE_OPACITY = 140;
 
-    private static final int DOT_COLOR = Color.WHITE;
-    private static final int DOT_OPACITY = 255;
-    private static final int SELECTED_DOT_OPACITY = 100;
-    private static final int BITMAP_WIDTH = 30;
-    private static final int SELECTED_DOT_WIDTH = 2 * BITMAP_WIDTH;
+    private final int DOT_COLOR = Color.WHITE;
+    private final int DOT_OPACITY = 255;
+    private final int SELECTED_DOT_OPACITY = 100;
+    private final int BITMAP_WIDTH = 30;
+    private final int SELECTED_DOT_WIDTH = 2 * BITMAP_WIDTH;
 
-    private static final int UNSELECTED_LINE_OPACITY = 50;
-    private static final int SELECTED_LINE_OPACITY = 255;
-    private static final int LINE_WIDTH = 12;
+    private final int UNSELECTED_LINE_OPACITY = 50;
+    private final int SELECTED_LINE_OPACITY = 255;
+    private final int LINE_WIDTH = 12;
 
     private TextView statusDisplay;
     private TextView p1Score;
@@ -47,6 +57,7 @@ public class GameView extends View {
     private ImageView p1Turn;
     private ImageView p2Turn;
     private ImageView winner;
+    private KonfettiView konfettiView;
 
     private Dot selectedDot1;
     private Dot selectedDot2;
@@ -221,6 +232,21 @@ public class GameView extends View {
         return resizedBitmap;
     }
 
+    private void explode(KonfettiView konfettiView) {
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.ic_heart);
+        Shape.DrawableShape drawableShape = new Shape.DrawableShape(drawable, true);
+        EmitterConfig emitterConfig = new Emitter(100L, TimeUnit.MILLISECONDS).max(100);
+        konfettiView.start(
+                new PartyFactory(emitterConfig)
+                        .spread(360)
+                        .shapes(Arrays.asList(Shape.Square.INSTANCE, Shape.Circle.INSTANCE, drawableShape))
+                        .colors(Arrays.asList(0xfce18a, 0xff726d, 0xf4306d, 0xb48def))
+                        .setSpeedBetween(0f, 30f)
+                        .position(new Position.Relative(0.5, 0.3))
+                        .build()
+        );
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -341,6 +367,7 @@ public class GameView extends View {
         if (gameState.gameOver()) {
             statusDisplay.setText(gameState.getResultsString());
             setWinnerImage(gameState.getWinnerID());
+            explode(konfettiView);
         } else {
             if (gameState.getTurn() == 0) { GameFragment.animateTurn(p1Turn, p2Turn); }
             else { GameFragment.animateTurn(p2Turn, p1Turn); }
@@ -365,6 +392,7 @@ public class GameView extends View {
         winner.setImageResource(resID);
         winner.setVisibility(VISIBLE);
     }
+
     public void setUpReferences(TextView p1Score,
                                 TextView p2Score,
                                 TextView p1Name,
@@ -373,7 +401,8 @@ public class GameView extends View {
                                 Button btnResetGame,
                                 ImageView p1Turn,
                                 ImageView p2Turn,
-                                ImageView winner) {
+                                ImageView winner,
+                                KonfettiView konfettiView) {
         this.p1Score = p1Score;
         this.p2Score = p2Score;
         p1Name.setText(gameState.getP1Name());
@@ -382,6 +411,7 @@ public class GameView extends View {
         this.p1Turn = p1Turn;
         this.p2Turn = p2Turn;
         this.winner = winner;
+        this.konfettiView = konfettiView;
         btnResetGame.setOnClickListener(view -> resetGame());
         updateDisplays();
     }

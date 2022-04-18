@@ -4,13 +4,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -39,8 +35,8 @@ public class SettingsFragment extends Fragment {
     private MaterialCardView cvP1;
     private MaterialCardView cvP2;
 
-    private EditText etP1;
-    private EditText etP2;
+    private TextView tvP1;
+    private TextView tvP2;
 
     private FragmentSettingsBinding binding;
     private SharedPreferences sharedPreferences;
@@ -69,8 +65,8 @@ public class SettingsFragment extends Fragment {
         radioVerticesB.setOnCheckedChangeListener(getListenerRadioVerticesB);
         cvP1.setOnClickListener(getListenerCvP1);
         cvP2.setOnClickListener(getListenerCvP2);
-        etP1.addTextChangedListener(getTextWatcher);
-        etP2.addTextChangedListener(getTextWatcher);
+        tvP1.addTextChangedListener(getTextWatcher);
+        tvP2.addTextChangedListener(getTextWatcher);
 
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
 
@@ -99,8 +95,8 @@ public class SettingsFragment extends Fragment {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            editor.putString(PrefUtility.PLAYER_NAME_1, etP1.getText().toString());
-            editor.putString(PrefUtility.PLAYER_NAME_2, etP2.getText().toString());
+            editor.putString(PrefUtility.PLAYER_NAME_1, tvP1.getText().toString());
+            editor.putString(PrefUtility.PLAYER_NAME_2, tvP2.getText().toString());
             editor.apply();
         }
     };
@@ -193,14 +189,20 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setNames() {
-        etP1 = settingsView.findViewById(R.id.etP1);
-        etP2 = settingsView.findViewById(R.id.etP2);
+        tvP1 = settingsView.findViewById(R.id.tvP1);
+        tvP2 = settingsView.findViewById(R.id.tvP2);
 
         String playerName1 = sharedPreferences.getString(PrefUtility.PLAYER_NAME_1, PrefUtility.DEFAULT_PLAYER_NAME_1);
         String playerName2 = sharedPreferences.getString(PrefUtility.PLAYER_NAME_2, PrefUtility.DEFAULT_PLAYER_NAME_2);
+        String playerColor1 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
+        String playerColor2 = sharedPreferences.getString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
+        int colorP1 = ContextCompat.getColor(requireContext(), PrefUtility.getColor(playerColor1));
+        int colorP2 = ContextCompat.getColor(requireContext(), PrefUtility.getColor(playerColor2));
 
-        etP1.setText(playerName1);
-        etP2.setText(playerName2);
+        tvP1.setText(playerName1);
+        tvP2.setText(playerName2);
+        tvP1.setTextColor(colorP1);
+        tvP2.setTextColor(colorP2);
     }
 
     private void setRadioGrid() {
@@ -258,12 +260,12 @@ public class SettingsFragment extends Fragment {
     private void avatarColorDialog() {
         isSettings = true;
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-        DialogFragment dialogFragment = DialogFragment.newInstance();
+        DialogFragment dialogFragment = new DialogFragment();
         dialogFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogFragmentTheme);
         dialogFragment.show(fragmentTransaction, "dialog");
     }
 
-    /** Custom back navigation for showing FAB */
+    /** Custom back navigation */
     private final OnBackPressedCallback callback = new OnBackPressedCallback(true) {
         @Override
         public void handleOnBackPressed() {

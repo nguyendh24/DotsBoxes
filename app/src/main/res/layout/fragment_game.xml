@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:background="@color/finalDarkBg_50">
 
+
         <View
             android:id="@+id/divider"
             android:layout_width="409dp"
@@ -69,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="TextView"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     tools:layout_editor_absoluteX="76dp"
                     tools:layout_editor_absoluteY="129dp" />
 
@@ -146,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="TextView2"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     tools:layout_editor_absoluteX="270dp"
                     tools:layout_editor_absoluteY="129dp" />
 
@@ -187,44 +188,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
+        <nl.dionsegijn.konfetti.xml.KonfettiView
+            android:id="@+id/konfettiView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="100dp"/>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivWinner"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:text="TextView"
-            android:textSize="24sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/gameView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-        <!--        <Button-->
-        <!--            android:id="@+id/btnResetGame"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="60dp"-->
-        <!--            android:layout_marginBottom="16dp"-->
-        <!--            android:backgroundTint="@color/primaryBtn"-->
-        <!--            android:text="@string/play_again"-->
-        <!--            android:textSize="20sp"-->
-        <!--            android:visibility="gone"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintHorizontal_bias="0.518"-->
-        <!--            app:layout_constraintStart_toStartOf="parent" />-->
-
-        <!--        <Button-->
-        <!--            android:id="@+id/btnQuitGame"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="60dp"-->
-        <!--            android:layout_marginBottom="64dp"-->
-        <!--            android:backgroundTint="@color/primaryBtn"-->
-        <!--            android:text="@string/quit_game"-->
-        <!--            android:textSize="20sp"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintHorizontal_bias="0.518"-->
-        <!--            app:layout_constraintStart_toStartOf="parent" />-->
 
         <LinearLayout
             android:id="@+id/buttons"
