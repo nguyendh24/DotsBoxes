@@ -46,6 +46,8 @@ public class GameFragment extends Fragment {
         ImageView ivWinner = myView.findViewById(R.id.ivWinner);
         KonfettiView konfettiView = myView.findViewById(R.id.konfettiView);
 
+        ivWinner.setVisibility(View.GONE);
+
         Button btnResetGame = myView.findViewById(R.id.btnResetGame);
         CardView cvP1 = myView.findViewById(R.id.cvP1);
         CardView cvP2 = myView.findViewById(R.id.cvP2);
