@@ -12,7 +12,6 @@ public class Line {
     private final float x1, y1, x2, y2;
     private final Set<Square> adjacentSquares;
     private final Set<Dot> adjacentDots;
-    private boolean selected;
     private Player player;
 
     public Line(float x1, float y1, float x2, float y2) {
@@ -22,11 +21,9 @@ public class Line {
         this.y2 = y2;
         adjacentSquares = new HashSet<>();
         adjacentDots = new HashSet<>();
-        selected = false;
     }
 
     public void selectLine(Player player) {
-        selected = true;
         this.player = player;
         for (Square square : adjacentSquares) {
             square.addSide(player);
@@ -46,18 +43,21 @@ public class Line {
     public float getY2() { return y2; }
 
     public int getColor() {
-        if (selected && player != null) {
+        if (isSelected()) {
             return player.getColor();
         }
         return DEFAULT_COLOR;
     }
 
     public int getPid() {
-        return player.getPid();
+        if (isSelected()) {
+            return player.getPid();
+        }
+        return -1;
     }
 
     public boolean isSelected() {
-        return selected;
+        return player != null;
     }
 
     public void addAdjacentSquare(Square square) {
@@ -69,7 +69,6 @@ public class Line {
     }
 
     public void reset() {
-        selected = false;
         player = null;
     }
 }
