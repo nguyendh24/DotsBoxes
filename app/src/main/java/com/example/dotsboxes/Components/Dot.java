@@ -18,13 +18,13 @@ public class Dot {
     }
 
     public void addLine() {
-        if (!isSaturated()) {
+        if (hasOpenLines()) {
             numLines++;
         }
     }
 
-    public boolean isSaturated() {
-        return numLines >= maxLines;
+    public boolean hasOpenLines() {
+        return numLines < maxLines;
     }
 
     public void reset() {

@@ -290,7 +290,7 @@ public class GameView extends View {
             for (Dot dot : row) {
                 double xDist = Math.abs(dot.getX() - x);
                 double yDist = Math.abs(dot.getY() - y);
-                if (xDist <= SELECTED_DOT_WIDTH && yDist <= SELECTED_DOT_WIDTH && !dot.isSaturated()) {
+                if (xDist <= SELECTED_DOT_WIDTH && yDist <= SELECTED_DOT_WIDTH && dot.hasOpenLines()) {
                     return dot;
                 }
             }
