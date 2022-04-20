@@ -6,7 +6,6 @@ public class Dot {
 
     private final int maxLines;
     private int numLines;
-    private boolean saturated;
 
     public Dot(float x, float y, int maxLines) { this.x = x; this.y = y; this.maxLines = maxLines; }
 
@@ -19,18 +18,16 @@ public class Dot {
     }
 
     public void addLine() {
-        if (!saturated) {
+        if (!isSaturated()) {
             numLines++;
-            saturated = numLines >= maxLines;
         }
     }
 
     public boolean isSaturated() {
-        return saturated;
+        return numLines >= maxLines;
     }
 
     public void reset() {
-        saturated = false;
         numLines = 0;
     }
 

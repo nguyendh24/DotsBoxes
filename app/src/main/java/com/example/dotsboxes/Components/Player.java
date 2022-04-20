@@ -12,7 +12,6 @@ public class Player {
         this.pid = pid;
         this.name = name;
         this.color = color;
-        this.score = 0;
         this.goAgain = false;
     }
 

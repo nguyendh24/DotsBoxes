@@ -10,21 +10,17 @@ public class Square {
     private final float x, y;
 
     private int sides;
-    private boolean filled;
     private Player player;
 
     public Square(float x, float y) {
         this.x = x;
         this.y = y;
-        sides = 0;
-        filled = false;
     }
 
     public void addSide(Player player) {
-        if (sides < 4) {
+        if (!isFilled()) {
             sides++;
             if (sides == 4) {
-                filled = true;
                 this.player = player;
                 player.incrementScore();
             }
@@ -36,7 +32,7 @@ public class Square {
     }
 
     public boolean isFilled() {
-        return filled;
+        return sides >= 4;
     }
 
     public float getX() { return x; }
@@ -48,7 +44,7 @@ public class Square {
     public static float getSize() { return size; }
 
     public int getColor() {
-        if (filled && player != null) {
+        if (isFilled() && player != null) {
             return player.getColor();
         }
         return DEFAULT_COLOR;
@@ -60,7 +56,6 @@ public class Square {
 
     public void reset() {
         sides = 0;
-        filled = false;
         player = null;
     }
 }
