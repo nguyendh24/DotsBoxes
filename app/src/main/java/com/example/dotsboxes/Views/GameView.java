@@ -233,14 +233,16 @@ public class GameView extends View {
     }
 
     private void explode() {
-        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.ic_heart);
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.ic_star);
+        Drawable drawable2 = ContextCompat.getDrawable(getContext(), R.drawable.ic_heart);
         Shape.DrawableShape drawableShape = new Shape.DrawableShape(drawable, true);
+        Shape.DrawableShape drawableShape2 = new Shape.DrawableShape(drawable2, true);
         EmitterConfig emitterConfig = new Emitter(100L, TimeUnit.MILLISECONDS).max(100);
         konfettiView.start(
                 new PartyFactory(emitterConfig)
                         .spread(360)
-                        .shapes(Arrays.asList(Shape.Square.INSTANCE, Shape.Circle.INSTANCE, drawableShape))
-                        .colors(Arrays.asList(0xfce18a, 0xff726d, 0xf4306d, 0xb48def))
+                        .shapes(Arrays.asList(Shape.Square.INSTANCE, Shape.Circle.INSTANCE, drawableShape, drawableShape2))
+                        .colors(Arrays.asList(0xfce18a, 0xff726d, 0x8aa5fc, 0xb48def, 0xb8fda3))
                         .setSpeedBetween(0f, 30f)
                         .position(new Position.Relative(0.5, 0.38))
                         .build()
