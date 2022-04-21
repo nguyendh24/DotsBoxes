@@ -117,6 +117,7 @@ public class SettingsFragment extends Fragment {
             editor.putInt(PrefUtility.BOARD_SIZE, boardMap.get(btnID));
             editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
             editor.apply();
+            GameState.getInstance().resetGame();
         }
     };
 
