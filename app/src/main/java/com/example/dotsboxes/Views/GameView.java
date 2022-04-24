@@ -232,17 +232,19 @@ public class GameView extends View {
         return resizedBitmap;
     }
 
-    private void explode(KonfettiView konfettiView) {
-        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.ic_heart);
+    private void explode() {
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.ic_star);
+        Drawable drawable2 = ContextCompat.getDrawable(getContext(), R.drawable.ic_heart);
         Shape.DrawableShape drawableShape = new Shape.DrawableShape(drawable, true);
+        Shape.DrawableShape drawableShape2 = new Shape.DrawableShape(drawable2, true);
         EmitterConfig emitterConfig = new Emitter(100L, TimeUnit.MILLISECONDS).max(100);
         konfettiView.start(
                 new PartyFactory(emitterConfig)
                         .spread(360)
-                        .shapes(Arrays.asList(Shape.Square.INSTANCE, Shape.Circle.INSTANCE, drawableShape))
-                        .colors(Arrays.asList(0xfce18a, 0xff726d, 0xf4306d, 0xb48def))
+                        .shapes(Arrays.asList(Shape.Square.INSTANCE, Shape.Circle.INSTANCE, drawableShape, drawableShape2))
+                        .colors(Arrays.asList(0xfce18a, 0xff726d, 0x8aa5fc, 0xb48def, 0xb8fda3))
                         .setSpeedBetween(0f, 30f)
-                        .position(new Position.Relative(0.5, 0.3))
+                        .position(new Position.Relative(0.5, 0.38))
                         .build()
         );
     }
@@ -367,7 +369,7 @@ public class GameView extends View {
         if (gameState.gameOver()) {
             statusDisplay.setText(gameState.getResultsString());
             setWinnerImage(gameState.getWinnerID());
-            explode(konfettiView);
+            explode();
         } else {
             if (gameState.getTurn() == 0) { GameFragment.animateTurn(p1Turn, p2Turn); }
             else { GameFragment.animateTurn(p2Turn, p1Turn); }
@@ -377,6 +379,7 @@ public class GameView extends View {
     }
 
     private void setWinnerImage(int winnerID) {
+
         if (winnerID == -1) return;
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -388,7 +391,6 @@ public class GameView extends View {
         if (winnerID == 0) { resID = PrefUtility.getAvatar(playerAvatar1); }
         else { resID = (playComputer) ? R.drawable.ic_robot : PrefUtility.getAvatar(playerAvatar2); }
 
-        winner.setImageResource(PrefUtility.getAvatar(playerAvatar1));
         winner.setImageResource(resID);
         winner.setVisibility(VISIBLE);
     }
@@ -402,7 +404,8 @@ public class GameView extends View {
                                 ImageView p1Turn,
                                 ImageView p2Turn,
                                 ImageView winner,
-                                KonfettiView konfettiView) {
+                                KonfettiView konfettiView
+    ) {
         this.p1Score = p1Score;
         this.p2Score = p2Score;
         p1Name.setText(gameState.getP1Name());
@@ -413,6 +416,7 @@ public class GameView extends View {
         this.winner = winner;
         this.konfettiView = konfettiView;
         btnResetGame.setOnClickListener(view -> resetGame());
+        winner.setOnClickListener(view -> explode());
         updateDisplays();
     }
 

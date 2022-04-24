@@ -100,7 +100,7 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_a_bangs" />
+                                android:src="@drawable/av_bangs" />
                         </com.google.android.material.card.MaterialCardView>
 
                         <com.google.android.material.card.MaterialCardView
@@ -123,7 +123,7 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_a_curly" />
+                                android:src="@drawable/av_curly" />
                         </com.google.android.material.card.MaterialCardView>
 
                         <com.google.android.material.card.MaterialCardView
@@ -146,7 +146,7 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_a_buzz" />
+                                android:src="@drawable/av_buzz" />
                         </com.google.android.material.card.MaterialCardView>
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -177,7 +177,7 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_a_flower" />
+                                android:src="@drawable/av_flower" />
                         </com.google.android.material.card.MaterialCardView>
 
                         <com.google.android.material.card.MaterialCardView
@@ -200,7 +200,7 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_a_brunette" />
+                                android:src="@drawable/av_brunette" />
                         </com.google.android.material.card.MaterialCardView>
 
                         <com.google.android.material.card.MaterialCardView
@@ -223,7 +223,7 @@
                                 android:layout_width="70dp"
                                 android:layout_height="70dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ic_a_neon" />
+                                android:src="@drawable/av_neon" />
                         </com.google.android.material.card.MaterialCardView>
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </LinearLayout>
@@ -233,7 +233,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Color"
+                    android:text="Colors"
                     android:textSize="20sp" />
 
                 <LinearLayout

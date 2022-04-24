@@ -77,13 +77,13 @@ public class PrefUtility {
     }};
 
     private static final Map<String, Integer> avatarMap = new HashMap<String, Integer>() {{
-        put(BANGS, R.drawable.ic_a_bangs);
-        put(FLOWER, R.drawable.ic_a_flower);
-        put(BUZZ, R.drawable.ic_a_buzz);
-        put(BRUNETTE, R.drawable.ic_a_brunette);
-        put(CURLY, R.drawable.ic_a_curly);
-        put(NEON, R.drawable.ic_a_neon);
-        put(BABY, R.drawable.ic_a_baby);
+        put(BANGS, R.drawable.av_bangs);
+        put(FLOWER, R.drawable.av_flower);
+        put(BUZZ, R.drawable.av_buzz);
+        put(BRUNETTE, R.drawable.av_brunette);
+        put(CURLY, R.drawable.av_curly);
+        put(NEON, R.drawable.av_neon);
+        put(BABY, R.drawable.av_baby);
     }};
 
     public static int getAvatar(String avatar) {
