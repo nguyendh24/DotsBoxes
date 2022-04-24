@@ -220,27 +220,15 @@ public class GameState {
 
     public String getResultsString() {
         if (gameOver()) {
-            int highScore = 0;
-            int numWinners = 0;
-            for (Player player : players) {
-                if (player.getScore() > highScore) {
-                    highScore = player.getScore();
-                }
+            if (getP1Score() > getP2Score()) {
+                winnerID = players[0].getPid();
+                return getP1Name() + " wins!";
+            } else if (getP1Score() < getP2Score()) {
+                winnerID = players[1].getPid();
+                return getP2Name() + " wins!";
+            } else {
+                return "Game is a tie!";
             }
-            for (Player player : players) {
-                if (player.getScore() == highScore) {
-                    numWinners++;
-                }
-            }
-            if (numWinners == 1) {
-                for (Player player : players) {
-                    if (player.getScore() == highScore) {
-                        winnerID = player.getPid();
-                        return player.getName() + " wins!";
-                    }
-                }
-            }
-            return "Game is a tie!";
         } else {
             return "Game not over yet!";
         }
