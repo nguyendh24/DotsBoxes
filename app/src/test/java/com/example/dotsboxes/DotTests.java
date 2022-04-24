@@ -19,6 +19,9 @@ public class DotTests {
         dot = new Dot(x, y, maxLines);
     }
 
+    /* This first section of tests represents tests from
+     * Test Report, Part 2: Base Choice Coverage */
+
     // Base case: A1 (numLines < maxLines), B1 (numLines > 0)
     @Test
     public void testA1B1() {

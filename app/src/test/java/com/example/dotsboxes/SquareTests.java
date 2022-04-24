@@ -24,6 +24,9 @@ public class SquareTests {
         player = new Player(PID, "player", PLAYER_COLOR);
     }
 
+    /* This first section of tests represents tests from
+     * Test Report, Part 2: Base Choice Coverage */
+
     // Base case: A1 (sides < 4), B1 (sides > 0)
     @Test
     public void testA1B1() {

@@ -38,6 +38,9 @@ public class LineTests {
         adjacentDot.addLine();
     }
 
+    /* This first section of tests represents tests from
+     * Test Report, Part 2: Base Choice Coverage */
+
     // Base case: A1 (player == NULL)
     @Test
     public void testA1() {
