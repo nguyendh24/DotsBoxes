@@ -51,7 +51,10 @@ public class Square {
     }
 
     public int getPid() {
-        return player.getPid();
+        if (isFilled() && player != null) {
+            return player.getPid();
+        }
+        return -1;
     }
 
     public void reset() {
