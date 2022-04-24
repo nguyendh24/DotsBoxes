@@ -29,6 +29,15 @@ public class GameStateTests {
     public void init() {
         GameState.setNull();
         gameState = GameState.getInstance();
+        saveMatrices();
+    }
+
+    // Helper method
+    private void saveMatrices() {
+        dots = gameState.getDots();
+        horizontalLines = gameState.getHorizontalLines();
+        verticalLines = gameState.getVerticalLines();
+        squares = gameState.getSquares();
     }
 
     // Helper method
@@ -47,14 +56,6 @@ public class GameStateTests {
     // GAME CREATION TESTS (Characteristics A - C)
     // Each test checks on the size and state of the matrices
     // which store information about Dots, Lines, and Squares.
-
-    // Helper method
-    private void saveMatrices() {
-        dots = gameState.getDots();
-        horizontalLines = gameState.getHorizontalLines();
-        verticalLines = gameState.getVerticalLines();
-        squares = gameState.getSquares();
-    }
 
     // Helper method
     private void testSizes(int size) {
@@ -111,8 +112,6 @@ public class GameStateTests {
     // Base case: A1 (No arg constructor), B1 (size == 4), C1 (empty board)
     @Test
     public void testA1B1C1() {
-        gameState = GameState.getInstance();
-        saveMatrices();
         testSizes(4);
         testElements(0, 0, 0);
     }
@@ -130,7 +129,6 @@ public class GameStateTests {
     // A3 (setUpBoard() given new size), B1 (size == 4), C1 (empty board)
     @Test
     public void testA3B1C1() {
-        gameState = GameState.getInstance();
         gameState.setUpBoard(6);
         gameState.setUpBoard(4);
         saveMatrices();
@@ -150,7 +148,6 @@ public class GameStateTests {
     // A3 (setUpBoard() given new size), B2 (size == 5), C1 (empty board)
     @Test
     public void testA3B2C1() {
-        gameState = GameState.getInstance();
         gameState.setUpBoard(5);
         saveMatrices();
         testSizes(5);
@@ -160,7 +157,6 @@ public class GameStateTests {
     // A3 (setUpBoard() given new size), B3 (size == 6), C1 (empty board)
     @Test
     public void testA3B3C1() {
-        gameState = GameState.getInstance();
         gameState.setUpBoard(6);
         saveMatrices();
         testSizes(6);
@@ -170,8 +166,6 @@ public class GameStateTests {
     // A1 (No arg constructor), B1 (size == 4), C2 (gameStarted)
     @Test
     public void testA1B1C2() {
-        gameState = GameState.getInstance();
-        saveMatrices();
         playGame(new Line[] {
                 verticalLines[1][1],
                 horizontalLines[2][1],
@@ -195,8 +189,6 @@ public class GameStateTests {
     // F1 (Player 1 went last), G1 (no square created last turn)
     @Test
     public void testD1E1F1G1() {
-        gameState = GameState.getInstance();
-        saveMatrices();
         playGame(new Line[] {
                 verticalLines[1][1],
                 horizontalLines[2][1],
@@ -218,9 +210,7 @@ public class GameStateTests {
     // F1 (Player 1 went last), G1 (no square created last turn)
     @Test
     public void testD2E1F1G1() {
-        gameState = GameState.getInstance();
         gameState.setPlayComputer(true);
-        saveMatrices();
         playGame(new Line[] {
                 verticalLines[1][1],
                 horizontalLines[2][1],
@@ -242,8 +232,6 @@ public class GameStateTests {
     // F1 (Player 1 went last), G1 (no square created last turn)
     @Test
     public void testD1E2F1G1() {
-        gameState = GameState.getInstance();
-        saveMatrices();
         playGame(new Line[] {
                 horizontalLines[3][0],
                 horizontalLines[0][3],
@@ -262,8 +250,6 @@ public class GameStateTests {
     // F2 (Player 2 went last), G1 (no square created last turn)
     @Test
     public void testD1E1F2G1() {
-        gameState = GameState.getInstance();
-        saveMatrices();
         playGame(new Line[] {
                 verticalLines[1][2],
                 horizontalLines[1][2],
@@ -284,8 +270,6 @@ public class GameStateTests {
     // F3 (no turn yet), G1 (no square created last turn)
     @Test
     public void testD1E2F3G1() {
-        gameState = GameState.getInstance();
-        saveMatrices();
         assertFalse(gameState.isComputerTurn());
         assertTrue(gameState.isAllowClick());
         assertFalse(gameState.getP1Score() > 0 || gameState.getP2Score() > 0);
@@ -297,8 +281,6 @@ public class GameStateTests {
     // F1 (Player 1 went last), G2 (square created last turn)
     @Test
     public void testD1E1F1G2() {
-        gameState = GameState.getInstance();
-        saveMatrices();
         playGame(new Line[] {
                 verticalLines[1][1],
                 horizontalLines[2][1],

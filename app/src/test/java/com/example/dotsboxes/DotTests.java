@@ -13,14 +13,14 @@ public class DotTests {
 
     @Before
     public void init() {
-        int x = 0;
-        int y = 0;
+        int x = 2;
+        int y = 2;
         int maxLines = 4;
         dot = new Dot(x, y, maxLines);
     }
 
-    /* This first section of tests represents tests from
-     * Test Report, Part 2: Base Choice Coverage */
+    // This first section of tests represents tests from
+    // Test Report, Part 2: Base Choice Coverage
 
     // Base case: A1 (numLines < maxLines), B1 (numLines > 0)
     @Test
@@ -43,5 +43,15 @@ public class DotTests {
     @Test
     public void testA1B2() {
         assertTrue(dot.hasOpenLines());
+    }
+
+
+    // This second section of tests represents tests from
+    // Test Report, Part 3: Mutation Coverage
+
+    @Test
+    public void testGetXGetY() {
+        assertEquals(dot.getX(), 2, 0);
+        assertEquals(dot.getY(), 2, 0);
     }
 }

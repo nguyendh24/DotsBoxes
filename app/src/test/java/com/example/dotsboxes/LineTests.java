@@ -24,7 +24,7 @@ public class LineTests {
 
     @Before
     public void init() {
-        line = new Line(0, 0, 0, 1);
+        line = new Line(2, 2, 2, 3);
         adjacentSquare = new Square(0, 0);
         adjacentDot = new Dot(0, 0, 4);
         player = new Player(PID, "player", PLAYER_COLOR);
@@ -38,8 +38,9 @@ public class LineTests {
         adjacentDot.addLine();
     }
 
-    /* This first section of tests represents tests from
-     * Test Report, Part 2: Base Choice Coverage */
+    // This first section of tests represents tests from
+    // Test Report, Part 2: Base Choice Coverage    // This first section of tests represents tests from
+    //    // Test Report, Part 2: Base Choice Coverage
 
     // Base case: A1 (player == NULL)
     @Test
@@ -64,5 +65,17 @@ public class LineTests {
         assertTrue(adjacentSquare.isFilled());
         assertEquals(adjacentSquare.getColor(), PLAYER_COLOR);
         assertEquals(adjacentSquare.getPid(), PID);
+    }
+
+
+    // This second section of tests represents tests from
+    // Test Report, Part 3: Mutation Coverage
+
+    @Test
+    public void testCoordinates() {
+        assertEquals(line.getX1(), 2, 0);
+        assertEquals(line.getX2(), 2, 0);
+        assertEquals(line.getY1(), 2, 0);
+        assertEquals(line.getY2(), 3, 0);
     }
 }
