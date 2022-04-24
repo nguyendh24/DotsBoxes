@@ -63,6 +63,7 @@ public class GameState {
                 new Player(1, "Player 2", p2Color)
         };
 
+        winnerID = -1;
         turn = 0;
 
         allowClick = true;
@@ -218,28 +219,31 @@ public class GameState {
     }
 
     public String getResultsString() {
-        int highScore = 0;
-        int numWinners = 0;
-        for (Player player : players) {
-            if (player.getScore() > highScore) {
-                highScore = player.getScore();
-            }
-        }
-        for (Player player : players) {
-            if (player.getScore() == highScore) {
-                numWinners++;
-            }
-        }
-        if (numWinners == 1) {
+        if (gameOver()) {
+            int highScore = 0;
+            int numWinners = 0;
             for (Player player : players) {
-                if (player.getScore() == highScore) {
-                    winnerID = player.getPid();
-                    return player.getName() + " wins!";
+                if (player.getScore() > highScore) {
+                    highScore = player.getScore();
                 }
             }
+            for (Player player : players) {
+                if (player.getScore() == highScore) {
+                    numWinners++;
+                }
+            }
+            if (numWinners == 1) {
+                for (Player player : players) {
+                    if (player.getScore() == highScore) {
+                        winnerID = player.getPid();
+                        return player.getName() + " wins!";
+                    }
+                }
+            }
+            return "Game is a tie!";
+        } else {
+            return "Game not over yet!";
         }
-        winnerID = -1;
-        return "Game is a tie!";
     }
 
     public void setPlayComputer(boolean playComputer) {
@@ -416,5 +420,9 @@ public class GameState {
         String[] scores = data[4].split(SCORE_SEPARATOR);
         players[0].setScore(Integer.parseInt(scores[0]));
         players[1].setScore(Integer.parseInt(scores[1]));
+    }
+
+    public static void setNull() {
+        instance = null;
     }
 }
