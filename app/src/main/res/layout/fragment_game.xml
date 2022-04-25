@@ -22,13 +22,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.258" />
+            app:layout_constraintVertical_bias="0.3" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/scoreBoardLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/divider"
@@ -36,11 +35,12 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
                 tools:layout_editor_absoluteX="38dp"
@@ -73,10 +73,11 @@
                     tools:layout_editor_absoluteX="76dp"
                     tools:layout_editor_absoluteY="129dp" />
 
+
                 <ImageView
                     android:id="@+id/ivP1Turn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="48dp"
+                    android:layout_height="64dp"
                     android:src="@drawable/ic_arrow_up"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.199"
@@ -88,10 +89,10 @@
                 android:id="@+id/tvP1Score"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
+                android:paddingTop="64dp"
                 android:gravity="center_horizontal"
-                android:text="0"
-                android:textSize="18sp"
+                android:text="00"
+                android:textSize="20sp"
                 tools:layout_editor_absoluteX="142dp"
                 tools:layout_editor_absoluteY="62dp" />
 
@@ -100,10 +101,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
+                android:paddingTop="64dp"
                 android:layout_marginRight="20dp"
                 android:text="-"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 tools:layout_editor_absoluteX="176dp"
                 tools:layout_editor_absoluteY="62dp" />
 
@@ -111,16 +112,17 @@
                 android:id="@+id/tvP2Score"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
+                android:paddingTop="64dp"
                 android:gravity="center_horizontal"
-                android:text="0"
-                android:textSize="18sp"
+                android:text="00"
+                android:textSize="20sp"
                 tools:layout_editor_absoluteX="202dp"
                 tools:layout_editor_absoluteY="62dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
@@ -152,8 +154,8 @@
 
                 <ImageView
                     android:id="@+id/ivP2Turn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="48dp"
+                    android:layout_height="64dp"
                     android:src="@drawable/ic_arrow_up"
                     tools:layout_editor_absoluteY="150dp" />
             </LinearLayout>
@@ -190,7 +192,13 @@
         <nl.dionsegijn.konfetti.xml.KonfettiView
             android:id="@+id/konfettiView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivWinner"
@@ -199,44 +207,43 @@
             app:layout_constraintBottom_toBottomOf="@+id/gameView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/scoreBoardLayout" />
 
-<!--        <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:gravity="center_horizontal"-->
-<!--            android:orientation="horizontal"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/gameView"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="1.0"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/linearLayout">-->
-
-<!--            <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--                android:layout_width="200dp"-->
-<!--                android:layout_height="200dp">-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/ivWinnerLeft"-->
+<!--                <androidx.appcompat.widget.LinearLayoutCompat-->
 <!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:translationX="100dp"-->
-<!--                    android:background="@drawable/ic_a_bangs"/>-->
-<!--            </androidx.appcompat.widget.LinearLayoutCompat>-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center_horizontal"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/gameView"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="1.0"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/divider">-->
 
-<!--            <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--                android:layout_width="200dp"-->
-<!--                android:layout_height="200dp">-->
+<!--                    <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                        android:layout_width="200dp"-->
+<!--                        android:layout_height="200dp">-->
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/ivWinnerRight"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:translationX="-100dp"-->
-<!--                    android:background="@drawable/ic_a_neon"/>-->
-<!--            </androidx.appcompat.widget.LinearLayoutCompat>-->
+<!--                        <ImageView-->
+<!--                            android:id="@+id/ivWinnerLeft"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="200dp"-->
+<!--                            android:translationX="100dp"-->
+<!--                            android:background="@drawable/av_bangs"/>-->
+<!--                    </androidx.appcompat.widget.LinearLayoutCompat>-->
 
-<!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
+<!--                    <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                        android:layout_width="200dp"-->
+<!--                        android:layout_height="200dp">-->
+
+<!--                        <ImageView-->
+<!--                            android:id="@+id/ivWinnerRight"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:translationX="-100dp"-->
+<!--                            android:background="@drawable/av_flower"/>-->
+<!--                    </androidx.appcompat.widget.LinearLayoutCompat>-->
+<!--                </androidx.appcompat.widget.LinearLayoutCompat>-->
 
         <LinearLayout
             android:id="@+id/buttons"

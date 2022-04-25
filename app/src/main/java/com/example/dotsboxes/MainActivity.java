@@ -17,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     public static float deviceHeight;
     public static float deviceWidth;
-    private static boolean isFirstTime;
-    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
         hideActionBar();
         setModes();
         setDeviceDimensions();
-        fetchStoredData();
         setBinding();
+        SharedPreferences sharedPreferences = getSharedPreferences(PrefUtility.SHARED_PREF_NAME, MODE_PRIVATE);
+        boolean isFirstTime = sharedPreferences.getBoolean(PrefUtility.IS_FIRST_TIME, true);
 
         if (isFirstTime) { setDefaultPrefs(); } // Instantiate default player data for new users
 
@@ -61,15 +60,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setDefaultPrefs() {
+        SharedPreferences sharedPreferences = getSharedPreferences(PrefUtility.SHARED_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(PrefUtility.BOARD_SIZE, PrefUtility.DEFAULT_BOARD_SIZE);
         editor.putString(PrefUtility.VERTEX, PrefUtility.DEFAULT_VERTEX);
         editor.putString(PrefUtility.PLAYER_COLOR_1, PrefUtility.DEFAULT_PLAYER_COLOR_1);
         editor.putString(PrefUtility.PLAYER_COLOR_2, PrefUtility.DEFAULT_PLAYER_COLOR_2);
         editor.putString(PrefUtility.PLAYER_NAME_1, PrefUtility.DEFAULT_PLAYER_NAME_1);
         editor.putString(PrefUtility.PLAYER_NAME_2, PrefUtility.DEFAULT_PLAYER_NAME_2);
-        editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
         editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
-        editor.commit();
+        editor.apply();
     }
 
     private void setBinding() {
@@ -92,12 +92,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void hideActionBar() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    }
-
-    private void fetchStoredData() {
-        SharedPreferences sharedPreferences = getSharedPreferences(PrefUtility.SHARED_PREF_NAME, MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        isFirstTime = sharedPreferences.getBoolean(PrefUtility.IS_FIRST_TIME, true);
     }
 
 }

@@ -7,8 +7,8 @@
     <string name="resume">Resume Saved Game</string>
     <string name="new_game">Start New Game</string>
     <string name="how_to">How to play</string>
-    <string name="play_person">Play in person</string>
-    <string name="play_computer">Play the computer</string>
+    <string name="play_person">PLAYER vs PLAYER</string>
+    <string name="play_computer">PLAYER vs COMPUTER</string>
     <string name="play_again">Play again</string>
     <string name="dots_boxes">dots and boxes</string>
     <string name="play_options">Start a Game:</string>

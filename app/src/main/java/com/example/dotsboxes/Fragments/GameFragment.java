@@ -33,6 +33,9 @@ public class GameFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentGameBinding binding = FragmentGameBinding.inflate(getLayoutInflater());
         View myView = binding.getRoot();
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        boolean isFirstTime = sharedPreferences.getBoolean(PrefUtility.IS_FIRST_TIME,true);
+
         GameView gameView = myView.findViewById(R.id.gameView);
         TextView p1Score = myView.findViewById(R.id.tvP1Score);
         TextView p2Score = myView.findViewById(R.id.tvP2Score);
@@ -74,6 +77,8 @@ public class GameFragment extends Fragment {
 
         binding.btnSettings.setOnClickListener(view -> replaceFragment(new SettingsFragment()));
         binding.btnExitGame.setOnClickListener(view -> replaceFragment(new GameTypeFragment()));
+
+        if (isFirstTime) firstTimeSetting();
 
         return myView;
     }
@@ -137,6 +142,14 @@ public class GameFragment extends Fragment {
         fragmentTransaction.replace(R.id.frame_layout, fragment).setReorderingAllowed(true).addToBackStack(null).commit();
     }
 
+    private void firstTimeSetting() {
+        showHelpDialog();
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
+        editor.apply();
+    }
+
     public static void animateTurn(ImageView visiblePlayer, ImageView invisiblePlayer) {
         invisiblePlayer.setVisibility(View.INVISIBLE);
         visiblePlayer.setVisibility(View.VISIBLE);
@@ -145,8 +158,8 @@ public class GameFragment extends Fragment {
                 TranslateAnimation.ABSOLUTE, 0f,
                 TranslateAnimation.ABSOLUTE, 0f,
                 TranslateAnimation.RELATIVE_TO_PARENT, -0.1f,
-                TranslateAnimation.RELATIVE_TO_PARENT, 0.05f);
-        mAnimation.setDuration(800);
+                TranslateAnimation.RELATIVE_TO_PARENT, 0.12f);
+        mAnimation.setDuration(1000);
         mAnimation.setRepeatCount(-1);
         mAnimation.setRepeatMode(Animation.REVERSE);
         mAnimation.setInterpolator(new LinearInterpolator());

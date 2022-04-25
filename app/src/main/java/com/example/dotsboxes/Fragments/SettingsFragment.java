@@ -72,6 +72,11 @@ public class SettingsFragment extends Fragment {
 
         binding.btnReturnToGame.setOnClickListener(view -> replaceFragment(new GameFragment()));
 
+        binding.btnRestoreDefaults.setOnClickListener(view -> {
+            editor.putBoolean(PrefUtility.IS_FIRST_TIME, true); editor.apply();
+            getActivity().recreate();
+        });
+
         return settingsView;
     }
 

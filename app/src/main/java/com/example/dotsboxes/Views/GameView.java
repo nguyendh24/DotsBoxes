@@ -369,12 +369,12 @@ public class GameView extends View {
         if (gameState.gameOver()) {
             statusDisplay.setText(gameState.getResultsString());
             setWinnerImage(gameState.getWinnerID());
-            explode();
+            if (gameState.getP1Score() != gameState.getP2Score()) explode();
         } else {
             if (gameState.getTurn() == 0) { GameFragment.animateTurn(p1Turn, p2Turn); }
             else { GameFragment.animateTurn(p2Turn, p1Turn); }
 
-            statusDisplay.setText(gameState.getCurrentPlayer().getName() + "'s Turn");
+            statusDisplay.setText(gameState.getCurrentPlayer().getName() + "'s turn");
         }
     }
 

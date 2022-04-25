@@ -342,6 +342,17 @@
                     android:layout_marginEnd="35dp"
                     android:textSize="20sp" />
 
+                <Button
+                    android:id="@+id/btnRestoreDefaults"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@color/primaryBtn"
+                    android:text="restore defaults"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_marginEnd="35dp"
+                    android:textSize="20sp" />
+
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
