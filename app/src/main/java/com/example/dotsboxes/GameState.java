@@ -36,7 +36,6 @@ public class GameState {
     private int turn;
     private boolean playComputer;
     private boolean allowClick;
-    private int winnerID;
 
     public static GameState getInstance() {
         if (instance == null) {
@@ -63,7 +62,6 @@ public class GameState {
                 new Player(1, "Player 2", p2Color)
         };
 
-        winnerID = -1;
         turn = 0;
 
         allowClick = true;
@@ -221,10 +219,8 @@ public class GameState {
     public String getResultsString() {
         if (gameOver()) {
             if (getP1Score() > getP2Score()) {
-                winnerID = players[0].getPid();
                 return getP1Name() + " wins!";
             } else if (getP1Score() < getP2Score()) {
-                winnerID = players[1].getPid();
                 return getP2Name() + " wins!";
             } else {
                 return "Game is a tie!";
@@ -306,7 +302,16 @@ public class GameState {
         return players[1].getName();
     }
 
-    public int getWinnerID() { return winnerID; }
+    public int getWinnerID() {
+        if (gameOver()) {
+            if (getP1Score() > getP2Score()) {
+                return players[0].getPid();
+            } else if (getP1Score() < getP2Score()) {
+                return players[1].getPid();
+            }
+        }
+        return -1;
+    }
 
     @NonNull
     public String toString() {
