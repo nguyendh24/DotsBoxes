@@ -144,7 +144,7 @@ public class GameTypeFragment extends Fragment {
         ObjectAnimator x = ObjectAnimator.ofFloat(rocket, "translationX", 1500f);
         ObjectAnimator y = ObjectAnimator.ofFloat(rocket, "translationY", -1500f);
         animSetXY.playTogether(x,y);
-        animSetXY.setDuration(4000);
+        animSetXY.setDuration(5500);
         animSetXY.start();
     }
 }

@@ -369,7 +369,7 @@ public class GameView extends View {
         if (gameState.gameOver()) {
             statusDisplay.setText(gameState.getResultsString());
             setWinnerImage(gameState.getWinnerID());
-            if (gameState.getP1Score() != gameState.getP2Score()) explode();
+            if (gameState.getP1Score() != gameState.getP2Score()) { explode(); } else { winner.setOnClickListener(null); }
         } else {
             if (gameState.getTurn() == 0) { GameFragment.animateTurn(p1Turn, p2Turn); }
             else { GameFragment.animateTurn(p2Turn, p1Turn); }
@@ -415,11 +415,11 @@ public class GameView extends View {
         this.winner = winner;
         this.konfettiView = konfettiView;
         btnResetGame.setOnClickListener(view -> resetGame());
-        winner.setOnClickListener(view -> explode());
         updateDisplays();
     }
 
     private void resetGame() {
+        winner.setOnClickListener(view -> explode());
         winner.setVisibility(View.GONE);
         editor.remove(PrefUtility.SAVED_GAME);
         editor.putBoolean(PrefUtility.IS_GAME_SAVED, false);
