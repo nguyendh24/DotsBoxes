@@ -380,8 +380,6 @@ public class GameView extends View {
 
     private void setWinnerImage(int winnerID) {
 
-        if (winnerID == -1) return;
-
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(PrefUtility.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         boolean playComputer = sharedPreferences.getBoolean(PrefUtility.IS_PLAY_COMPUTER, false);
         String playerAvatar1 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_1, PrefUtility.DEFAULT_PLAYER_AVATAR_1);
@@ -389,6 +387,7 @@ public class GameView extends View {
         int resID;
 
         if (winnerID == 0) { resID = PrefUtility.getAvatar(playerAvatar1); }
+        else if(winnerID == -1){ resID = PrefUtility.getTie("tie1"); }
         else { resID = (playComputer) ? R.drawable.ic_robot : PrefUtility.getAvatar(playerAvatar2); }
 
         winner.setImageResource(resID);

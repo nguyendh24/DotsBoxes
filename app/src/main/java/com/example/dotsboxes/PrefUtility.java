@@ -54,6 +54,10 @@ public class PrefUtility {
     public static final String DEFAULT_PLAYER_AVATAR_1 = BANGS;
     public static final String DEFAULT_PLAYER_AVATAR_2 = FLOWER;
 
+    public static final String TIE1 = "tie1";
+    public static final String TIE2 = "tie2";
+    public static final String TIE3 = "tie3";
+
 
     private static final Map<String, Integer> colorMap = new HashMap<String, Integer>() {{
         put(BLUE, R.color.bluePlayer);
@@ -86,6 +90,12 @@ public class PrefUtility {
         put(BABY, R.drawable.av_baby);
     }};
 
+    private static final Map<String, Integer> tieMap = new HashMap<String, Integer>() {{
+        put(TIE1, R.drawable.ic_tie1);
+        put(TIE2, R.drawable.ic_tie2);
+        put(TIE3, R.drawable.ic_tie3);
+    }};
+
     public static int getAvatar(String avatar) {
         if (avatarMap.containsKey(avatar))
             return avatarMap.get(avatar);
@@ -101,6 +111,13 @@ public class PrefUtility {
     public static int getColor(String color) {
         if (colorMap.containsKey(color)) {
             return colorMap.get(color);
+        }
+        return 0;
+    }
+
+    public static int getTie(String tie) {
+        if (tieMap.containsKey(tie)) {
+            return tieMap.get(tie);
         }
         return 0;
     }
