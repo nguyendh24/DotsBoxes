@@ -54,6 +54,10 @@ public class PrefUtility {
     public static final String DEFAULT_PLAYER_AVATAR_1 = BANGS;
     public static final String DEFAULT_PLAYER_AVATAR_2 = FLOWER;
 
+    public static final String TIE1 = "tie1";
+    public static final String TIE2 = "tie2";
+    public static final String TIE3 = "tie3";
+
 
     private static final Map<String, Integer> colorMap = new HashMap<String, Integer>() {{
         put(BLUE, R.color.bluePlayer);

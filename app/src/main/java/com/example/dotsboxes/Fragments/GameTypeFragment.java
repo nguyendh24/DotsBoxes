@@ -94,12 +94,9 @@ public class GameTypeFragment extends Fragment {
         Animation twinkle = AnimationUtils.loadAnimation(getActivity(), R.anim.star2anim);
 
         ImageView[] stars = {
-//                homeView.findViewById(R.id.star2),
                 homeView.findViewById(R.id.star5),
                 homeView.findViewById(R.id.star6),
                 homeView.findViewById(R.id.star14),
-//                homeView.findViewById(R.id.star17),
-//                homeView.findViewById(R.id.star20),
                 homeView.findViewById(R.id.star25),
         };
 
@@ -114,7 +111,6 @@ public class GameTypeFragment extends Fragment {
                 homeView.findViewById(R.id.star9),
                 homeView.findViewById(R.id.star12),
                 homeView.findViewById(R.id.star15),
-//                homeView.findViewById(R.id.star23),
         };
 
         for (ImageView star : stars) { star.startAnimation(twinkle); }
@@ -124,8 +120,6 @@ public class GameTypeFragment extends Fragment {
         Animation twinkle = AnimationUtils.loadAnimation(getActivity(), R.anim.star4anim);
 
         ImageView[] stars = {
-//                homeView.findViewById(R.id.star4),
-//                homeView.findViewById(R.id.star10),
                 homeView.findViewById(R.id.star16),
                 homeView.findViewById(R.id.star22),
                 homeView.findViewById(R.id.star26),
@@ -150,8 +144,7 @@ public class GameTypeFragment extends Fragment {
         ObjectAnimator x = ObjectAnimator.ofFloat(rocket, "translationX", 1500f);
         ObjectAnimator y = ObjectAnimator.ofFloat(rocket, "translationY", -1500f);
         animSetXY.playTogether(x,y);
-        //animSetXY.setInterpolator(new LinearInterpolator(1f));
-        animSetXY.setDuration(3000);
+        animSetXY.setDuration(4000);
         animSetXY.start();
     }
 }
