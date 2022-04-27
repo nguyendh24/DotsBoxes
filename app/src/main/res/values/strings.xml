@@ -21,7 +21,7 @@
     <string name="help_button">help button</string>
     <string name="board_warning">Changing the board size will result in any game progress being lost.\nDo you want to continue?</string>
     <string name="new_user_name_input">My name is …</string>
-    <string name="rules_1">Grab a friend if you\'re not playing the computer. Take turns creating lines by dragging your finger from one dot to another.</string>
+    <string name="rules_1">Take turns creating lines by dragging your finger from one dot to another.</string>
     <string name="rules_2">Complete a box by closing its fourth wall.</string>
     <string name="rules_3">You take another turn after completing a box.</string>
     <string name="help_goal">Player with most boxes at the end of the game wins.</string>

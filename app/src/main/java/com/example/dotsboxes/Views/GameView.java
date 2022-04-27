@@ -244,7 +244,7 @@ public class GameView extends View {
                         .shapes(Arrays.asList(Shape.Square.INSTANCE, Shape.Circle.INSTANCE, drawableShape, drawableShape2))
                         .colors(Arrays.asList(0xfce18a, 0xff726d, 0x8aa5fc, 0xb48def, 0xb8fda3))
                         .setSpeedBetween(0f, 30f)
-                        .position(new Position.Relative(0.5, 0.39))
+                        .position(new Position.Relative(0.5, 0.38))
                         .build()
         );
     }

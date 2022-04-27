@@ -26,7 +26,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+        <ImageView
+            android:id="@+id/rocket"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:rotation="45"
+            android:translationX="-100dp"
+            android:translationY="50dp"
+            android:src="@drawable/ic_rocket"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+
+        <Button
         android:id="@+id/btnPlayPerson"
         android:layout_width="290dp"
         android:layout_height="80dp"
@@ -44,23 +60,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
-        <Button
-            android:id="@+id/btnPlayComputer"
-            android:layout_width="290dp"
-            android:layout_height="80dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="36dp"
-            android:background="@drawable/btn_rounded_corners"
-            android:contentDescription="@string/play_computer"
-            android:drawableLeft="@drawable/ic_computer"
-            android:text="@string/play_computer"
-            android:textAllCaps="false"
-            android:textSize="20sp"
-            app:backgroundTint="@color/primaryBtn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnPlayPerson" />
+    <Button
+        android:id="@+id/btnPlayComputer"
+        android:layout_width="290dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_rounded_corners"
+        android:contentDescription="@string/play_computer"
+        android:drawableLeft="@drawable/ic_computer"
+        android:text="@string/play_computer"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:backgroundTint="@color/primaryBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlayPerson" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnResumeGame"
