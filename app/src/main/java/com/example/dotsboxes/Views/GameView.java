@@ -386,8 +386,8 @@ public class GameView extends View {
         String playerAvatar2 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_2, PrefUtility.DEFAULT_PLAYER_AVATAR_2);
         int resID;
 
-        if (winnerID == 0) { resID = PrefUtility.getAvatar(playerAvatar1); }
-        else if(winnerID == -1){ resID = PrefUtility.getTie("tie1"); }
+        if(winnerID == -1){ resID = R.drawable.ic_tie1; }
+        else if (winnerID == 0) { resID = PrefUtility.getAvatar(playerAvatar1); }
         else { resID = (playComputer) ? R.drawable.ic_robot : PrefUtility.getAvatar(playerAvatar2); }
 
         winner.setImageResource(resID);

@@ -90,12 +90,6 @@ public class PrefUtility {
         put(BABY, R.drawable.av_baby);
     }};
 
-    private static final Map<String, Integer> tieMap = new HashMap<String, Integer>() {{
-        put(TIE1, R.drawable.ic_tie1);
-        put(TIE2, R.drawable.ic_tie2);
-        put(TIE3, R.drawable.ic_tie3);
-    }};
-
     public static int getAvatar(String avatar) {
         if (avatarMap.containsKey(avatar))
             return avatarMap.get(avatar);
@@ -111,13 +105,6 @@ public class PrefUtility {
     public static int getColor(String color) {
         if (colorMap.containsKey(color)) {
             return colorMap.get(color);
-        }
-        return 0;
-    }
-
-    public static int getTie(String tie) {
-        if (tieMap.containsKey(tie)) {
-            return tieMap.get(tie);
         }
         return 0;
     }
