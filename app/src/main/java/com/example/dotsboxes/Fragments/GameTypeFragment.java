@@ -1,5 +1,7 @@
 package com.example.dotsboxes.Fragments;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import com.example.dotsboxes.GameState;
 import com.example.dotsboxes.PrefUtility;
@@ -24,6 +27,8 @@ public class GameTypeFragment extends Fragment {
     private SharedPreferences.Editor editor;
     private View homeView;
 
+    private ImageView rocket;
+
     public GameTypeFragment() {}
 
     @Override
@@ -34,6 +39,7 @@ public class GameTypeFragment extends Fragment {
         homeView = binding.getRoot();
         animateBackground();
         animateLogo();
+        rocketShip();
 
         boolean gameSaved = sharedPreferences.getBoolean(PrefUtility.IS_GAME_SAVED, false);
 
@@ -136,5 +142,16 @@ public class GameTypeFragment extends Fragment {
         logoImageView.setBackgroundResource(R.drawable.logo_anim);
         logoAnim = (AnimationDrawable) logoImageView.getBackground();
         logoAnim.start();
+    }
+
+    private void rocketShip(){
+        AnimatorSet animSetXY = new AnimatorSet();
+        rocket = homeView.findViewById(R.id.rocket);
+        ObjectAnimator x = ObjectAnimator.ofFloat(rocket, "translationX", 1500f);
+        ObjectAnimator y = ObjectAnimator.ofFloat(rocket, "translationY", -1500f);
+        animSetXY.playTogether(x,y);
+        //animSetXY.setInterpolator(new LinearInterpolator(1f));
+        animSetXY.setDuration(3000);
+        animSetXY.start();
     }
 }
