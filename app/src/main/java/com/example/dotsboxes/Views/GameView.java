@@ -12,6 +12,9 @@ import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -371,13 +374,29 @@ public class GameView extends View {
             setWinnerImage(gameState.getWinnerID());
             if (gameState.getP1Score() != gameState.getP2Score()) { explode(); }
             else { winner.setOnClickListener(null); }
-
         } else {
-            if (gameState.getTurn() == 0) { GameFragment.animateTurn(p1Turn, p2Turn); }
-            else { GameFragment.animateTurn(p2Turn, p1Turn); }
-
+            if (gameState.getTurn() == 0) { animateTurn(p1Turn, p2Turn); }
+            else { animateTurn(p2Turn, p1Turn); }
             statusDisplay.setText(gameState.getCurrentPlayer().getName() + "'s turn");
         }
+    }
+
+    private void animateTurn(ImageView visiblePlayer, ImageView invisiblePlayer) {
+        visiblePlayer.setVisibility(VISIBLE);
+        invisiblePlayer.setVisibility(INVISIBLE);
+
+        Animation mAnimation = new TranslateAnimation(
+                TranslateAnimation.ABSOLUTE, 0f,
+                TranslateAnimation.ABSOLUTE, 0f,
+                TranslateAnimation.RELATIVE_TO_PARENT, -0.1f,
+                TranslateAnimation.RELATIVE_TO_PARENT, 0.12f);
+        mAnimation.setDuration(1000);
+        mAnimation.setRepeatCount(-1);
+        mAnimation.setRepeatMode(Animation.REVERSE);
+        mAnimation.setInterpolator(new LinearInterpolator());
+
+        invisiblePlayer.clearAnimation();
+        visiblePlayer.setAnimation(mAnimation);
     }
 
     private void setWinnerImage(int winnerID) {

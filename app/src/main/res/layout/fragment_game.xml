@@ -79,6 +79,7 @@
                     android:layout_width="48dp"
                     android:layout_height="64dp"
                     android:src="@drawable/ic_arrow_up"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.199"
                     app:layout_constraintStart_toStartOf="parent"
@@ -156,6 +157,7 @@
                     android:id="@+id/ivP2Turn"
                     android:layout_width="48dp"
                     android:layout_height="64dp"
+                    android:visibility="invisible"
                     android:src="@drawable/ic_arrow_up"
                     tools:layout_editor_absoluteY="150dp" />
             </LinearLayout>

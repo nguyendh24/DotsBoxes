@@ -49,6 +49,8 @@ public class GameFragment extends Fragment {
         ImageView ivWinner = myView.findViewById(R.id.ivWinner);
         KonfettiView konfettiView = myView.findViewById(R.id.konfettiView);
 
+        p1Turn.setVisibility(View.INVISIBLE);
+        p2Turn.setVisibility(View.INVISIBLE);
         ivWinner.setVisibility(View.GONE);
 
         Button btnResetGame = myView.findViewById(R.id.btnResetGame);
@@ -149,23 +151,4 @@ public class GameFragment extends Fragment {
         editor.putBoolean(PrefUtility.IS_FIRST_TIME, false);
         editor.apply();
     }
-
-    public static void animateTurn(ImageView visiblePlayer, ImageView invisiblePlayer) {
-        invisiblePlayer.setVisibility(View.INVISIBLE);
-        visiblePlayer.setVisibility(View.VISIBLE);
-
-        Animation mAnimation = new TranslateAnimation(
-                TranslateAnimation.ABSOLUTE, 0f,
-                TranslateAnimation.ABSOLUTE, 0f,
-                TranslateAnimation.RELATIVE_TO_PARENT, -0.1f,
-                TranslateAnimation.RELATIVE_TO_PARENT, 0.12f);
-        mAnimation.setDuration(1000);
-        mAnimation.setRepeatCount(-1);
-        mAnimation.setRepeatMode(Animation.REVERSE);
-        mAnimation.setInterpolator(new LinearInterpolator());
-
-        invisiblePlayer.clearAnimation();
-        visiblePlayer.setAnimation(mAnimation);
-    }
-
 }
