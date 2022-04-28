@@ -369,7 +369,9 @@ public class GameView extends View {
         if (gameState.gameOver()) {
             statusDisplay.setText(gameState.getResultsString());
             setWinnerImage(gameState.getWinnerID());
-            if (gameState.getP1Score() != gameState.getP2Score()) { explode(); } else { winner.setOnClickListener(null); }
+            if (gameState.getP1Score() != gameState.getP2Score()) { explode(); }
+            else { winner.setOnClickListener(null); }
+
         } else {
             if (gameState.getTurn() == 0) { GameFragment.animateTurn(p1Turn, p2Turn); }
             else { GameFragment.animateTurn(p2Turn, p1Turn); }
@@ -386,8 +388,8 @@ public class GameView extends View {
         String playerAvatar2 = sharedPreferences.getString(PrefUtility.PLAYER_AVATAR_2, PrefUtility.DEFAULT_PLAYER_AVATAR_2);
         int resID;
 
-        if(winnerID == -1){ resID = R.drawable.ic_tie1; }
-        else if (winnerID == 0) { resID = PrefUtility.getAvatar(playerAvatar1); }
+        if (winnerID == 0) { resID = PrefUtility.getAvatar(playerAvatar1); }
+        else if(winnerID == -1) { resID = R.drawable.ic_tie; }
         else { resID = (playComputer) ? R.drawable.ic_robot : PrefUtility.getAvatar(playerAvatar2); }
 
         winner.setImageResource(resID);
@@ -415,6 +417,7 @@ public class GameView extends View {
         this.winner = winner;
         this.konfettiView = konfettiView;
         btnResetGame.setOnClickListener(view -> resetGame());
+        winner.setOnClickListener(view -> explode());
         updateDisplays();
     }
 
