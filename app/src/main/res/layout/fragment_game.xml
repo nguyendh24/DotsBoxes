@@ -164,7 +164,7 @@
         </LinearLayout>
 
 
-        <com.example.dotsboxes.Views.GameView
+        <com.startechies.dotsboxes.Views.GameView
             android:id="@+id/gameView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
