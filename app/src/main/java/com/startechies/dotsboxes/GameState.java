@@ -13,15 +13,15 @@ import java.util.stream.Collectors;
 
 public class GameState {
 
-    private static final String HORIZONTAL_LINE = "H";
-    private static final String VERTICAL_LINE = "V";
-    private static final String SCORE_SEPARATOR = "#";
-    private static final String ENTRY_SEPARATOR = "&";
-    private static final String MOVES_SEPARATOR = "%";
-    private static final String DATA_SEPARATOR = "<>";
+    private final String HORIZONTAL_LINE = "H";
+    private final String VERTICAL_LINE = "V";
+    private final String SCORE_SEPARATOR = "#";
+    private final String ENTRY_SEPARATOR = "&";
+    private final String MOVES_SEPARATOR = "%";
+    private final String DATA_SEPARATOR = "<>";
 
-    private static final int COMPUTER_PLAYER = 1;
-    private static final int NUM_PLAYERS = 2;
+    private final int COMPUTER_PLAYER = 1;
+    private final int NUM_PLAYERS = 2;
     private static GameState instance;
 
     private int boardWidth;
@@ -157,8 +157,31 @@ public class GameState {
     }
 
     public void computerTurn() {
-        makeRandomMove();
+        if (!computerFilledSquare()) makeRandomMove();
         advanceTurn();
+    }
+
+    private boolean computerFilledSquare() {
+        for (int row = 0; row < boardWidth; row++) {
+            for (int col = 0; col < boardHeight; col++) {
+                if (squares[row][col].getSides() == 3) {
+                    if (!horizontalLines[row][col].isSelected()) {
+                        horizontalLines[row][col].selectLine(players[COMPUTER_PLAYER]);
+                        return true;
+                    } else if (!verticalLines[row][col].isSelected()) {
+                        verticalLines[row][col].selectLine(players[COMPUTER_PLAYER]);
+                        return true;
+                    } else if (!horizontalLines[row + 1][col].isSelected()) {
+                        horizontalLines[row + 1][col].selectLine(players[COMPUTER_PLAYER]);
+                        return true;
+                    } else if (!verticalLines[row][col + 1].isSelected()) {
+                        verticalLines[row][col + 1].selectLine(players[COMPUTER_PLAYER]);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private void makeRandomMove() {

@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Line {
 
-    private static final int DEFAULT_COLOR = Color.BLACK;;
+    private final int DEFAULT_COLOR = Color.BLACK;;
 
     private final float x1, y1, x2, y2;
     private final Set<Square> adjacentSquares;

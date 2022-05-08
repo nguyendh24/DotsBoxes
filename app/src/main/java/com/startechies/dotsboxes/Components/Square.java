@@ -5,7 +5,7 @@ import android.graphics.Color;
 public class Square {
 
     private static float size;
-    private static final int DEFAULT_COLOR = Color.TRANSPARENT;
+    private final int DEFAULT_COLOR = Color.TRANSPARENT;
 
     private final float x, y;
 
@@ -44,7 +44,7 @@ public class Square {
 
     public static float getSize() { return size; }
 
-    public int getSides() { return sides;}
+    public int getSides() { return sides; }
 
     public int getColor() {
         if (isFilled() && player != null) {
